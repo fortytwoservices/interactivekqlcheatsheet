@@ -5,65 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Java Programming popups</title>
+    <title>KQL Interactive Cheatsheet</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-    <h1>Basic java program</h1>
+    <h1>KQL Interactive Cheatsheet</h1>
     <p>This site is meant for you who needs a little more input on how a java program sticks together and this site makes it
         easier for you to do so - in your own pace and on your own requests!</p>
     <p>Try using ctrl+f a lot to find matching words by searching.</p>
-
-    <h3>Hello World!</h3>
-    <div class="codeBox">
-        <pre>
-<div class="tooltip">class Main{<span class="tooltiptext">Declares the "Main" class. Every code wil be run from the Main class' "main" method.
-The "Main" class, may have a name of your imagination, but not the main method.</span></div>
-    <div class="tooltip">public static void main(String[] args){<span class="tooltiptext">Declares the "main" method. Remember the complete line as this has to be part of every program you write.</span></div>
-        <div class="tooltip">System.out.println("Hello World!");<span class="tooltiptext">This prints out "Hello World!" to the console.</span></div>
-    <div class="tooltip">}<span class="tooltiptext">Everything is written in blocks. This curly brace encloses the main methods block.</span></div>
-<div class="tooltip">}<span class="tooltiptext">This one encloses the Main class block which makes up this whole program.</span></div>
-        </pre>
-    </div>
-
-    <!-- Coding example declaring integers -->
-    <h3>Declaring integers, adding variables and commenting.</h3>
-    <div class="codeBox">
-        <pre>
-<div class="tooltip">class<span class="tooltiptext">Declares a class. Note the curly brackets which encloses all your code.</span></div> <div class="tooltip">Main<span class="tooltiptext">Name of the class. Typically the class that contains the main method is calles Main. 
-Classes use uppercase letters from begging of the word.</span></div>{
-    <div class="tooltip">public<span class="tooltiptext">"public" tells the program that this method is accesible to other parts of the program.</span></div> <div class="tooltip">static<span class="tooltiptext">The static keyword denotes that a member variable, or method, can be
-accessed without requiring an instantiation of the class to which it belongs</span></div> <div class="tooltip">void<span class="tooltiptext">The void keyword means that the method has no return value. What this means, will be clearer in later programs.</span></div> main(String[] args){
-        <div class="tooltip">int<span class="tooltiptext">Declares a variable of type integer.</span></div> <div class="tooltip">a = 4;<span class="tooltiptext">Variable "a" is now assigned to the value of 4.</span></div>
-        <div class="tooltip">int<span class="tooltiptext">Declares a variable of type integer.</span></div><div class="tooltip"> b <span class="tooltiptext">The variable is now called "b". You can make any name you want, with few exeptions of names that java already uses.
-How to declare a variable: typeOfVariable variableName = valueAssignedToVariable;</span></div>= 23;
-        int c = a + b;
-        <div class="tooltip">System.out.println(c); <span class="tooltiptext">Prints everything out to the console. </span></div>
-    } <div class="tooltip">//This curly brace completes the main() method block<span class="tooltiptext">Starting with two forward slashes makes the <u>line</u> into a comment.
-You would have to repeat the slasher for each line you would add as comment. 
-The compiler will skip this and not read it as part of your code.</span></div>
-} <div class="tooltip">/*This curly brace completes the Main class.*/<span class="tooltiptext">This is another way of writing comments. This way you only need to open the comment block with "/*" and finish it with "*/".
-This way you wont have to make several repetition of slashes. Faster and easier way if you are not using shortcuts in your editor.</span></div>
-//Commenting in java, or in programming in general is a good practice. Because its a good way of remembering which part is doing what. 
-//It also makes it easier if you are working in teams to let your co programmers understand your code.
-        </pre>
-    </div>
-
+   
     
     
     
-    
-    <!-- SEARCH -----------------------------------------
+<!-- SEARCH -----------------------------------------
 ----------------------------------------------------------->
     <details><summary> search </summary>
-            <div>
-        <div class="codeBox">
-            <pre>
-                <div class="tooltip">search<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
-            </pre>
+        <div>
+            <div class="codeBox">
+                <pre>
+                    <div class="tooltip">search<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
+                </pre>
+                <br/>
+                
+                <pre>
+                    <div class="tooltip">search in<span class="tooltiptext">Search directly in a given database, still on every column.</span></div> <div class="tooltip">SecurityAlert<span class="tooltiptext">Name of the database to search through.</span></div>
+                </pre>
+            </div>
         </div>
-    </div>
+    </details>
+    
+    
+    
+    <!-- WHERE -----------------------------------------
+----------------------------------------------------------->
+    <details><summary> where </summary>
+        <div>
+            <div class="codeBox">
+                <pre>
+                    <div class="tooltip">where<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
+                </pre>
+            </div>
+        </div>
     </details>
     
     
@@ -72,15 +55,16 @@ This way you wont have to make several repetition of slashes. Faster and easier 
     
     
     
-    <!-- Kode mal -->
+    
+    <!-- Kode mal 
     <div>
         <div class="codeBox">
             <pre>
 
-                </pre>
+            </pre>
         </div>
     </div>
-    <!-- Kode mal slutt -->
+     -->
 
 
 
