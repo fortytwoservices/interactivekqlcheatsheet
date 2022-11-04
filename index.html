@@ -1,0 +1,381 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Java Programming popups</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+    <h1>Basic java program</h1>
+    <p>This site is meant for you who needs a little more input on how a java program sticks together and this site makes it
+        easier for you to do so - in your own pace and on your own requests!</p>
+    <p>Try using ctrl+f a lot to find matching words by searching.</p>
+
+    <h3>Hello World!</h3>
+    <div class="codeBox">
+        <pre>
+<div class="tooltip">class Main{<span class="tooltiptext">Declares the "Main" class. Every code wil be run from the Main class' "main" method.
+The "Main" class, may have a name of your imagination, but not the main method.</span></div>
+    <div class="tooltip">public static void main(String[] args){<span class="tooltiptext">Declares the "main" method. Remember the complete line as this has to be part of every program you write.</span></div>
+        <div class="tooltip">System.out.println("Hello World!");<span class="tooltiptext">This prints out "Hello World!" to the console.</span></div>
+    <div class="tooltip">}<span class="tooltiptext">Everything is written in blocks. This curly brace encloses the main methods block.</span></div>
+<div class="tooltip">}<span class="tooltiptext">This one encloses the Main class block which makes up this whole program.</span></div>
+        </pre>
+    </div>
+
+    <!-- Coding example declaring integers -->
+    <h3>Declaring integers, adding variables and commenting.</h3>
+    <div class="codeBox">
+        <pre>
+<div class="tooltip">class<span class="tooltiptext">Declares a class. Note the curly brackets which encloses all your code.</span></div> <div class="tooltip">Main<span class="tooltiptext">Name of the class. Typically the class that contains the main method is calles Main. 
+Classes use uppercase letters from begging of the word.</span></div>{
+    <div class="tooltip">public<span class="tooltiptext">"public" tells the program that this method is accesible to other parts of the program.</span></div> <div class="tooltip">static<span class="tooltiptext">The static keyword denotes that a member variable, or method, can be
+accessed without requiring an instantiation of the class to which it belongs</span></div> <div class="tooltip">void<span class="tooltiptext">The void keyword means that the method has no return value. What this means, will be clearer in later programs.</span></div> main(String[] args){
+        <div class="tooltip">int<span class="tooltiptext">Declares a variable of type integer.</span></div> <div class="tooltip">a = 4;<span class="tooltiptext">Variable "a" is now assigned to the value of 4.</span></div>
+        <div class="tooltip">int<span class="tooltiptext">Declares a variable of type integer.</span></div><div class="tooltip"> b <span class="tooltiptext">The variable is now called "b". You can make any name you want, with few exeptions of names that java already uses.
+How to declare a variable: typeOfVariable variableName = valueAssignedToVariable;</span></div>= 23;
+        int c = a + b;
+        <div class="tooltip">System.out.println(c); <span class="tooltiptext">Prints everything out to the console. </span></div>
+    } <div class="tooltip">//This curly brace completes the main() method block<span class="tooltiptext">Starting with two forward slashes makes the <u>line</u> into a comment.
+You would have to repeat the slasher for each line you would add as comment. 
+The compiler will skip this and not read it as part of your code.</span></div>
+} <div class="tooltip">/*This curly brace completes the Main class.*/<span class="tooltiptext">This is another way of writing comments. This way you only need to open the comment block with "/*" and finish it with "*/".
+This way you wont have to make several repetition of slashes. Faster and easier way if you are not using shortcuts in your editor.</span></div>
+//Commenting in java, or in programming in general is a good practice. Because its a good way of remembering which part is doing what. 
+//It also makes it easier if you are working in teams to let your co programmers understand your code.
+        </pre>
+    </div>
+
+
+    <!-- Algorithm -->
+
+    <div>
+        <h3>Loop algorithm</h3>
+        <p>Sum the numbers from 1 to 100.</p>
+        <div>
+            <div class="codeBox">
+                <pre>
+public class MyProgram {
+    public static void main(String[] args) {
+        int sum = 0;
+        for(int i = 1; i <= 100 ; i++) {
+            sum = sum + i; //same as sum += i;
+        }
+        System.out.println(sum);
+    }
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Loop algorithm</h3>
+        <p>Sum all square numbers that are under 1000.</p>
+        <div>
+            <div class="codeBox">
+                <pre>
+public class MyProgram {
+    public static void main(String[] args) {
+        int sum = 0;
+        for(int i = 1; i*i < 1000 ; i++) {
+            sum += i*i;
+        }
+        System.out.println(sum);
+    }
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Loop algorithm</h3>
+        <p>Calculate how much money you will have if you start with 1000 dollars and receive 5 percent image per year for 100
+            years.</p>
+        <div>
+            <div class="codeBox">
+                <pre>
+    public class MyProgram {
+        public static void main(String[] args) {
+            double money = 1000;
+            for(int i = 0; i < 100 ; i++) { //this loops 100 times
+                money *= 1.05;
+            }
+            System.out.println(money);
+        }
+    }
+                </pre>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Loop algorithm</h3>
+        <p>Calculate how many years it would take to double your money with 5 percent interest</p>
+        <div>
+            <div class="codeBox">
+                <pre>
+    public class MyProgram {
+        public static void main(String[] args) {
+            int year = 0;
+            for(double money = 1; money < 2; year++) {
+                money *= 1.05;
+            }
+            System.out.println(year);
+        }
+    }
+                </pre>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <h3>Double loop algorithm</h3>
+        <p>Print the following grid:</p>
+        <pre class="center-aligned">1 2 3 4 5
+2 4 6 8 10
+3 6 9 12 15
+4 8 12 16 20
+5 10 15 20 25</pre>
+        <div>
+            <div class="codeBox">
+                <pre>
+public class MyProgram {
+    public static void main(String[] args) {
+        for(int i = 1; i <= 5; i++) {
+            for(int j = 1; j <= 5; j++) {
+                System.out.print((i*j)+" ");
+            }
+            System.out.println(""); //Add a new line
+        }
+    }
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="codebox">
+            <pre>
+import java.util.Scanner;
+
+class Main{
+    private static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args){
+        int[] myIntegers = getIntegers(5);
+        int[] sorted = sortIntegers(myIntegers);
+        printArray(sorted);
+    }
+
+    public static int[] getIntegers(int capacity){
+        int[] array = new int[capacity];
+        System.out.println("Enter " + capacity + " integer values \r");
+        for(int i=0; i< array.length; i++){
+            array[i] = scanner.nextInt();
+        }return array;
+    }
+
+    public static void printArray(int[] array){
+        System.out.println("Your array is: ");
+        for(int i=0; i< array.length; i++){
+            System.out.println("At index " + i + " is value: " + array[i]);
+        }
+    }
+
+    public static int[] sortIntegers(int[] array){
+        int[] sortedArray = new int[array.length];
+        for(int i=0; i< array.length; i++){
+            sortedArray[i] = array[i];
+        }
+        int temp;
+        boolean flag = true;
+        while(flag) {
+            flag=false;
+            for (int i = 0; i < sortedArray.length-1; i++) {
+                if(sortedArray[i] < sortedArray[i+1]){
+                    temp = sortedArray[i];
+                    sortedArray[i] = sortedArray[i+1];
+                    sortedArray[i+1] = temp;
+                    flag=true;
+                }
+            }
+        }
+        return sortedArray;
+    }
+}
+            </pre>
+        </div>
+    </div>
+
+
+
+    <h3>Tim Buchalka notes - Complete Java</h3>
+    <div class="multiple-windows">
+        <div class="codeBox">
+            <pre>
+package com.timbuchalka;
+import java.util.Scanner;
+                
+public class Main {
+    private static Scanner scanner = new Scanner(System.in);
+    private static GroceryList groceryList = new GroceryList();
+
+     public static void main(String[] args) {
+         boolean quit = false;
+         int choice = 0;
+         printInstructions();
+         while(!quit) {
+             System.out.println("Enter your choice: " );
+             choice = scanner.nextInt();
+             scanner.nextLine();
+        
+             switch(choice) {
+                 case 0:
+                     printInstructions();
+                     break;
+                 case 1:
+                     groceryList.printGroceryList();
+                     break;
+                 case 2:
+                     addItem();
+                     break;
+                 case 3:
+                     modifyItem();
+                     break;
+                 case 4:
+                     removeItem();
+                     break;
+                 case 5:
+                     searchForItem();
+                     break;
+                 case 6:
+                     quit = true;
+                     break;
+             }
+         }
+    }
+
+    <div class="tooltip">public static void printInstructions() {
+    System.out.println("<div class="tooltip-in">\n<span id="fixed-tooltiptext-in">Adds a new line in the output.</span></div>Press");
+    System.out.println("\t 0 - To print choice options.");
+    System.out.println("\t 1 - To print the list of grocery items.");
+    System.out.println("\t 2 - To add an item to the list.");
+    System.out.println("\t 3 - To modify an item in the list.");
+    System.out.println("\t 4 - To remove an item from the list.");
+    System.out.println("\t 5 - To search for an item in the list.");
+    System.out.println("\t 6 - To quit the application.");
+}<span class="tooltiptext">This block of code print a list of all of your choices. The choices are part of the switch statement.
+To make this, the printInstruction method, run again, you have to choose enter "0".</span></div>
+
+    public static void addItem() {
+        System.out.print("Please enter the grocery item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
+    }
+
+    <div class="tooltip">public static void modifyItem() {
+    System.out.print(<div class="tooltip-in">"Enter item number: "<span id="fixed-tooltiptext-in">This is the text that appears in console when you choose to modify.</span></div>);
+    <div class="tooltip-in">int itemNo = scanner.nextInt();<span id="fixed-tooltiptext-in">This will initialize the scanner for input from user.</span></div>
+    <div class="tooltip-in">scanner.nextLine();<span id="fixed-tooltiptext-in">Remember to use this sentence to clear te buffer once you have an int input from Scanner. 
+Put it after the input sentence.</span></div>
+    System.out.print("Enter replacement item: ");
+    String newItem = scanner.nextLine();
+    <div class="tooltip-in">groceryList<span id="fixed-tooltiptext-in">This calls the groceryList class object we created in Main class, 
+outside of the main() metod.</span></div><div class="tooltip-in">.</div><div class="tooltip-in">modifyGroceryItem<span id="fixed-tooltiptext-in">This is one of the methods in the GroceryList class being called.
+Notice that to reach a method from another class, you have to write "ClassName.methodName()".</span></div>(itemNo-1, newItem);
+}<span class="tooltiptext">This method will first delete the item of your choice and then it will make you add another one on its spot.</span></div>
+
+    public static void removeItem() {
+        System.out.print("Enter item number: ");
+        int itemNo = scanner.nextInt();
+        scanner.nextLine();
+        groceryList.removeGroceryItem(itemNo-1);
+    
+    }
+
+    public static void searchForItem() {
+        System.out.print("Item to search for: ");
+        String searchItem = scanner.nextLine();
+        if(groceryList.findItem(searchItem) != null) {
+            System.out.println("Found " + searchItem + " in  our grocery list");
+        } else {
+            System.out.println(searchItem + " is not in the shopping list");
+        }
+    }                    
+}
+            </pre>
+        </div>
+
+        <div class="codeBox">
+            <pre>
+import java.util.ArrayList;
+
+public class GroceryList {
+    private ArrayList<String> groceryList = new ArrayList< String>();
+
+    public void addGroceryItem(String item) {
+        groceryList.add(item);
+    }
+
+    public void printGroceryList() {
+        System.out.println("You have " + groceryList.size() + " items in your grocery list");
+        for(int i=0; i< groceryList.size(); i++) {
+            System.out.println((i+1) + ". " + groceryList.get(i));
+        }
+    }
+
+    public void modifyGroceryItem(int position, String newItem) {
+        groceryList.set(position, newItem);
+        System.out.println("Grocery item " + (position+1) + " has been modified.");
+    }
+
+    public void removeGroceryItem(int position) {
+        String theItem = groceryList.get(position);
+        groceryList.remove(position);
+    }
+
+    public String findItem(String searchItem) {
+//        boolean exists = groceryList.contains(searchItem);
+
+        int position = groceryList.indexOf(searchItem);
+        if(position >=0) {
+            return groceryList.get(position);
+        }
+
+        return null;
+    }
+}
+                    
+                </pre>
+        </div>
+    </div>
+
+
+
+
+    <!-- Kode mal -->
+    <div>
+        <div class="codeBox">
+            <pre>
+
+                </pre>
+        </div>
+    </div>
+    <!-- Kode mal slutt -->
+
+
+
+   
+</body>
+</html>
