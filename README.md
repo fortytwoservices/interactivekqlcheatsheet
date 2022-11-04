@@ -1,0 +1,2 @@
+# KQL
+KQL Popup guides
