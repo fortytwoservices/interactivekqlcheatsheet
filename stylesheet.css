@@ -1,5 +1,13 @@
+/*Colors https://colorhunt.co/palette/2c3333395b64a5c9cae7f6f2 
+#2C3333
+#395B64
+#A5C9CA
+#E7F6F2
+
+*/
+
 body{
-    background-color:#bcfbdf;
+    background-color:#A5C9CA;
 }
 /* Tooltip inlines which has priority and therefore comes before tooltip outlines */
 #fixed-tooltiptext-in {
@@ -8,7 +16,7 @@ body{
     text-align: center;
     width: fit-content;
     height: fit-content;
-    border: 3px solid #73AD21;
+    border: 3px solid #2C3333;
     border-radius: 6px;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -20,7 +28,7 @@ body{
 }
 .tooltip-in:hover #fixed-tooltiptext-in{
 visibility: visible;
-border: 3px solid #f7c770;
+border: 3px solid #2C3333;
 }
 .tooltip-in {
     position: relative;
@@ -47,7 +55,7 @@ border: 3px solid #f7c770;
     height: auto;
     background-color: #333;
     color: #fff;
-    border: 3px solid #f7c770;
+    border: 3px solid #2C3333;
     border-radius: 6px;
     padding: 5px 5px;
     margin-left: 15px;
@@ -60,20 +68,20 @@ border: 3px solid #f7c770;
 }
 /* Makes the code red when hovering over the code */
 .tooltip:hover{
-    color: red;
+    color: #E7F6F2;
     background-color: #445;
 }
 /* The code box, with black background */
 .codeBox{
     color: #999;
-    background-color: black;
-    border: 2px solid orange;
+    background-color: #395B64;
+    border: 2px solid #2C3333;
     padding: 15px;
     margin-bottom: 20px;
 }
 /* Connecting different classes within a thicker border */
 .multiple-windows{
-    border: 15px solid red;
+    border: 15px solid #E7F6F2;
 }
 h1, p, h3{
     text-align: center;
