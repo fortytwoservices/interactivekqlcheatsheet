@@ -27,7 +27,8 @@
                     <div class="tooltip">search<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
                 </pre>
                 <br/>
-                
+            </div>
+            <div class="codeBox">
                 <pre>
                     <div class="tooltip">search in<span class="tooltiptext">Search directly in a given database, still on every column.</span></div> <div class="tooltip">SecurityAlert<span class="tooltiptext">Name of the database to search through.</span></div>
                 </pre>
@@ -52,7 +53,287 @@
     
     
     
-    
+    dcount
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Let - Statement 
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Description: Let is a statement to set a variable name equal to an expression or a function
+
+Example: 
+
+let timeoffset = 7d; // timeoffset will be called seven days in the upcoming lines  
+let discardEventID = 4688; // discardEvenID will be called 4688
+SecurityEvent //TableName 
+| where TimeGenerated > ago (timeoffset); // displays data from the table that is older than 7 days 
+| where EventID != discardEventID // Displays all security events unless 4688
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Search 
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+
+Descriptions: Search across all tables and columns, or search for a specific value
+
+Note: Search is not case sensitive by default
+
+Examples: 
+
+//search for value across all tables and all columns within the database
+search “err” // will search for “err” across all tables and all columns within each table in the database
+
+//search for a specific value within a table 
+SecurityAlert //TableName
+| search “Description” //Will search all columns in SecurtyAlert table for the value “Description”
+
+//search for a specific value in tables and any table that starts with a specific letter 
+search in (SecurityEvent, SecurityAlert, A*) “err” //will search for “err” in the following tables: securityEvent, SecurityAlert, and any tables starting with A
+
+//proceeding a search as case sensitive 
+SecurityAlert //TableName
+| search kind = case_sensitive “Description" // Will output same result as above, but are case sensitive
+
+//Limit the search - search for a value in specific tables
+search in (SecurityEvent, SecurityAlert, SecurityIncident) “user" //Output the value “user” in the mentioned tables
+
+//limit the data output to a specific number 
+search in (SecurityEvent, SecurityAlert, SecurityIncident) “user” //output the value in stated tables
+| limit 10 //limit the output to ten rows (randomly chosen)
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Where Operator: 
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Descriptions: Similar to the search operator, however it limits the result set.
+
+Note: ago allows for relative date ranges. Ago says “start right now”, then go back in time N quantity. These can be expressed using the following abbreviations: 
+
+d - days 
+h - hours 
+m - minutes 
+s - seconds
+ms - milliseconds
+microsecond - microsecond 
+
+Examples: 
+
+//Display everything in a specific table within a specific timeline
+SecurityEvent //TableName 
+| where TimeGenerated > ago (1d) // Displays events generated more than a day ago in the table SecurityEvent
+
+
+
+
+
+
+
+
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Take/Limit Operator:
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+
+Descriptions: Take is used to grab a random number of rows from the input data and display it. It will usually give a different result every time used in the query
+
+
+Note: The Take and Limit operator works in the same way. There is no guarantee to which rows are returned, and the exact same query run a second time may result in a different set of rows (or it may be the same, depends on various factors) 
+
+
+//Output a certain number of rows from a certain table 
+SecurityAlert //TableName 
+| take 10 // Output 10 randoms rows from the table SecurityAlert
+
+//Take can be combined with other language operator 
+SecurityAlert //TableName
+| where TimeGenerated > ago (99d) //Output data from the table that are up to 99 days old 
+    and VendorName == “Microsoft" //and output VendorName that includes Microsoft 
+    and AlertSeverity == “High" //and output only AlertSeverity that is high  
+| take 10 /output only 10 randomly rows 
+
+
+
+
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Count: 
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Descriptions: Returns the number of rows in the input dataset 
+
+SecurityAlert //TableName
+| where TimeGenerated > ago (7d) // look for data in the SecurityAlert table that is up to seven days old 
+| count // Will count the total rows of data within the defined timeframe mentioned above 
+
+
+
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+Extend Operator: 
+—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+The extend operator adds a new column to the input result set, which does not have an index
+
+//This query will add a new column listing AlertSeverity by number 
+
+SecurityAlert //TableName 
+| where TimeGenerated > ago (7d)
+| extend severity order = case (
+	AlertSeverity = “High”, 3,
+	AlertSeverity = “Medium”, 2,
+	AlertSeverity = “Low”, 1,
+	AlertSeverity = “Informational”, 0,
+	-1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Order/Sort By Usage:
+
+The Order By/ Sort By Operator type enables to sort data columns in the query in an ascending or descending order 
+
+SecurityEvent // TableName
+| where TimeGenerated > ago (7d) // Output data from the table that are older than 7 days 
+| extend ObjectType = case ( 	  // Add a new column With the name: ObjectType 
+	AccountType == "Machine", 1, // If the AccountType equal User, list it as 1 in the ObjectType 
+	AccountType == "User", 0, -1) // If the AccountType equal Machine, list it as 0 in the ObjectType 
+| order by ObjectType asc    // will sort the output of the query in ascending order 
+
+
+Project Operator:
+
+Table 
+| project Computer, Account //Displays the columns Computer, Account fromt the table 
+| project-away Computer, Account //Removes the Computer, Account columns from the results 
+| project-rename NewChannel = Channel // Renames the column-name Channel to NewChannel 
+| project-reorder Task, AccountType, NewChannel, EventSourceName // Reorder the columns in the stated order 
+| project-keep Task, AccountType, NewChannel, EventSourceName //Displays the stated columns in the final output
+
+
+Summarize, Count, DCount Functions 
+
+Summarize: Produces a table that aggregates the content of the input table
+Count (): Returns the number of rows in the input dataset
+Dcount: Returns an estimate for the number of distinct values that are taken by a scalar expression in the summary group 
+
+SecurityEvent //TableName 
+| where EventID == “4688” // Display all data that have EventID 4688 in the table
+| summarize count () by Process, Computer //Will summarize and display the total count of the columns stated 
+
+SecurityEvent //TableName
+| where TimeGenerated > ago (1h) //Filter data by the last hour events 
+| where EventID == “4624” //Display EventID 4624 only
+| summarize cnt = count() by AccountType, Computer //Display the count of AccountType and Computers that was impacted by the EventID 4624
+
+DCount
+
+SecurityEvent //TableName
+| summarize dcount (IpAddress) //Display the unique IP addresses in the SecurityEvent table 
+
+SecurityEvent
+| distinct *
+
+Arg_Max and Arg_Min Functions:
+
+Arg_Max displays the newest data from from a specific column in a specific table as shown below: 
+Arg_Min displays the oldest data from a specific column in a specific table as shown below: 
+
+SecurityEvent //TableName
+| where AccountType == “Machine" //Display data related to “Machine” from the column AccountType
+| summarize arg_max (TimeGenerated, *) by AccountType // Display the newest events related to “Machine” from the AccountType
+
+SecurityEvent //TableName
+| where AccountType == “Machine" //Display data related to “Machine” from the column AccountType
+| summarize arg_min (TimeGenerated, *) by AccountType // Display the oldest events related to “Machine” from the AccountType
+
+
+
+
+
+
+
+
+
+
+
+Make_List and Make_Sets Functions 
+
+Make_list function is returning a decent array of all the values as defined in the expression 
+Make_set function is returning a decent array of all the unique values as defined in the expression 
+
+SecurityEvent //TableName 
+| where EventID == “4624" //Look only for EventID 4624 in the SecurityEvent table 
+| summarize make_list(Account) by Computer //Display all the Accounts inside a JSON output by Computer, Meaning that for each of the computers, the result will be in JSON array of Accounts
+
+Render Operator 
+
+•	The render operator should be the last operator in the query, and used only with the queries that produce a single tabular data stream result 
+•	The render operator does not modify data. It injects an annotation (“Vizualization” into the result’s extended properties. The annotation contains the information provided by the operator in the query
+
+
+SecurityEvent 
+| summarize count() by Account 
+| render barchart 
+
+SecurityEvent 
+| where TimeGenerated > ago (7d) 
+| summarize count() by bin (TimeGenerated, 1d) 
+| render barchart 
+
+
+
+
+
+
+Bin Function
+
+Bin is a function which are used to place the results in smaller brackets 
+
+
+SecurityEvent //TableName
+| summarize count() by bin(TimeGenerated, 2d) //output a summarize of bin and display a count, in addition it will get a timestamps with the time delta of one day and increment the timestamp by two days.    
+
+
+
+SigninLogs //TableName 
+| where TimeGenerated > ago (90d) //Output sign-in logs from the last 90 days
+| summarize dcount(UserPrincipalName) by bin(TimeGenerated, 2d) //summarize by the distinct count (unique login attempts/ not duplicates) by UserPrincipleName. That will display all the unique events from those user accounts and it will increments the timestamp by two days, which will make a 2 day gap in the timestamp output
+
+
+Union Operator 
+
+Union is an operator that will combine data from two or more tables and return the rows of all of them 
+
+SecurityEvent //TableName 
+| union SecurityAlert //Combine the SecurityEvent table data with the SecurityAlert table data
+| summarize count() //Output the total count of all rows of the two tables  
+
+
+union Security* //output anything data/tables that starts with security and merge it together 
+| summarize count() by Type // Output a summarize of type of data and a count of events inside the tables 
+
     
     
     
