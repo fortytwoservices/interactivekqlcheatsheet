@@ -1,125 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KQL Interactive Cheatsheet</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>KQL Interactive Cheatsheet</h1>
-    <p>This site is meant for you who needs a little more input on how a java program sticks together and this site makes it
-        easier for you to do so - in your own pace and on your own requests!</p>
+    <p>This site is meant for you who needs a little more input on how a java
+      program sticks together and this site makes
+      it
+      easier for you to do so - in your own pace and on your own requests!</p>
     <p>Try using ctrl+f a lot to find matching words by searching.</p>
-   
+
+
     
     
-    
-<!-- SEARCH -----------------------------------------
+
+    //proceeding a search as case sensitive
+    SecurityAlert //TableName
+    | search kind = case_sensitive “Description" // Will output same result as
+    above, but are case sensitive
+
+    //Limit the search - search for a value in specific tables
+    search in (SecurityEvent, SecurityAlert, SecurityIncident) “user" //Output
+    the value “user” in the mentioned tables
+
+    //limit the data output to a specific number
+    search in (SecurityEvent, SecurityAlert, SecurityIncident) “user” //output
+    the value in stated tables
+    | limit 10 //limit the output to ten rows (randomly chosen)
+
+    <!-- SEARCH -----------------------------------------
 ----------------------------------------------------------->
-    <details><summary> search </summary>
-        <div>
-            <div class="codeBox">
-                <pre>
-                    <div class="tooltip">search<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
-                </pre>
-                <br/>
-            </div>
-            <div class="codeBox">
-                <pre>
-                    <div class="tooltip">search in<span class="tooltiptext">Search directly in a given database, still on every column.</span></div> <div class="tooltip">SecurityAlert<span class="tooltiptext">Name of the database to search through.</span></div>
-                </pre>
-            </div>
+    <h1>search function</h1>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="false" aria-controls="collapseOne">
+            Description
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>Search across all tables and columns, or search for a specific
+              value. Note! search is not case sensitive -
+              by default.</p>
+          </div>
         </div>
-    </details>
-    
-    
-    
-    <!-- WHERE -----------------------------------------
------------------------------------------------------------>
-    <details><summary> where </summary>
-        <div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            Search far and wide!
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
             <div class="codeBox">
-                <pre>
-                    <div class="tooltip">where<span class="tooltiptext">Searches through every available column.</span></div> <div class="tooltip">"keyword"<span class="tooltiptext">The keyword to be searched for</span></div>
-                </pre>
+              <pre>
+<div class="tippy">search<span class="tippytext">Searches through every available column.</span></div> <div class="tippy">"keyword"<span class="tippytext">The keyword to be searched for</span></div></pre>
+              <br />
             </div>
+          </div>
         </div>
-    </details>
-    
-    
-    
-    
-    dcount
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree" aria-expanded="false"
+            aria-controls="collapseThree">
+            Search for specific content within one or more tables.
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+  <div class="tippy">SecurityAlert<span class="tippytext">Searches through every available column.</span></div> 
+  <div class="tippy">|<span class="tippytext">This is called a pipe - meaning results from everything read before this symbol is "being piped" into the next queries/actions.</span></div>
+
+
+
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour" aria-expanded="false"
+            aria-controls="collapseFour">
+            Case sensitive search
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse"
+          aria-labelledby="headingFour"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+
+
+
+              <pre>
+  <div class="tippy">SecurityAlert<span class="tippytext">Table name.</span></div> 
+  <div class="tippy">| search<span class="tippytext"> piping into search function.</span></div><div class="tippy"> kind = case_sensitive<span class="tippytext">Remember search is not case sensitive? Now it is.</span></div><div class="tippy">"keyword"<span class="tippytext">Keyword to search for.</span></div> 
+
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFive">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive" aria-expanded="false"
+            aria-controls="collapseFive">
+            Search in specific tables
+          </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse"
+          aria-labelledby="headingFive"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+
+
+
+              <pre>
+  <div class="tippy">search in<span class="tippytext"> By using "in", search function expects a table or a list of tables to search through.</span></div><div class="tippy"> (SecurityAlert, Device*)<span class="tippytext">This is a list of tables. What it basically says is SecurityAlert and every table that starts with "Device". * is a regex wildcard.</span></div>
+
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <h1>let</h1>
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Let - Statement
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Description: Let is a statement to set a variable name equal to an
+    expression or a function
+
+    Example:
+
+    let timeoffset = 7d; // timeoffset will be called seven days in the upcoming
+    lines
+    let discardEventID = 4688; // discardEvenID will be called 4688
+    SecurityEvent //TableName
+    | where TimeGenerated > ago (timeoffset); // displays data from the table
+    that is older than 7 days
+    | where EventID != discardEventID // Displays all security events unless
+    4688
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Where Operator:
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Descriptions: Similar to the search operator, however it limits the result
+    set.
+
+    Note: ago allows for relative date ranges. Ago says “start right now”, then
+    go back in time N quantity. These can be
+    expressed using the following abbreviations:
+
+    d - days
+    h - hours
+    m - minutes
+    s - seconds
+    ms - milliseconds
+    microsecond - microsecond
+
+    Examples:
+
+    //Display everything in a specific table within a specific timeline
+    SecurityEvent //TableName
+    | where TimeGenerated > ago (1d) // Displays events generated more than a
+    day ago in the table SecurityEvent
+
+    <h1>take/limit</h1>
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Take/Limit Operator:
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Descriptions: Take is used to grab a random number of rows from the input
+    data and display it. It will usually give a
+    different result every time used in the query
+
+
+    Note: The Take and Limit operator works in the same way. There is no
+    guarantee to which rows are returned, and the
+    exact same query run a second time may result in a different set of rows (or
+    it may be the same, depends on various
+    factors)
+
+
+    //Output a certain number of rows from a certain table
+    SecurityAlert //TableName
+    | take 10 // Output 10 randoms rows from the table SecurityAlert
+
+    //Take can be combined with other language operator
+    SecurityAlert //TableName
+    | where TimeGenerated > ago (99d) //Output data from the table that are up
+    to 99 days old
+    and VendorName == “Microsoft" //and output VendorName that includes
+    Microsoft
+    and AlertSeverity == “High" //and output only AlertSeverity that is high
+    | take 10 /output only 10 randomly rows
+
+
+
+
+    <h1>count()</h1>
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Count:
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Descriptions: Returns the number of rows in the input dataset
+
+    SecurityAlert //TableName
+    | where TimeGenerated > ago (7d) // look for data in the SecurityAlert table
+    that is up to seven days old
+    | count // Will count the total rows of data within the defined timeframe
+    mentioned above
+
+
+    <h1>extend</h1>
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    Extend Operator:
+    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    The extend operator adds a new column to the input result set, which does
+    not have an index
+
+    //This query will add a new column listing AlertSeverity by number
+    SecurityAlert //TableName
+    | where TimeGenerated > ago (7d)
+    | extend severity order = case (
+    AlertSeverity = “High”, 3,
+    AlertSeverity = “Medium”, 2,
+    AlertSeverity = “Low”, 1,
+    AlertSeverity = “Informational”, 0,
+    -1)
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Let - Statement 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Description: Let is a statement to set a variable name equal to an expression or a function
 
-Example: 
+    <h1>order by/sort by</h1>
+    Order/Sort By Usage:
 
-let timeoffset = 7d; // timeoffset will be called seven days in the upcoming lines  
-let discardEventID = 4688; // discardEvenID will be called 4688
-SecurityEvent //TableName 
-| where TimeGenerated > ago (timeoffset); // displays data from the table that is older than 7 days 
-| where EventID != discardEventID // Displays all security events unless 4688
+    The Order By/ Sort By Operator type enables to sort data columns in the
+    query in an ascending or descending order
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Search 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
+    SecurityEvent // TableName
+    | where TimeGenerated > ago (7d) // Output data from the table that are
+    older than 7 days
+    | extend ObjectType = case ( // Add a new column With the name: ObjectType
+    AccountType == "Machine", 1, // If the AccountType equal User, list it as 1
+    in the ObjectType
+    AccountType == "User", 0, -1) // If the AccountType equal Machine, list it
+    as 0 in the ObjectType
+    | order by ObjectType asc // will sort the output of the query in ascending
+    order
+
+    <h1>project</h1>
+    Project Operator:
 
-Descriptions: Search across all tables and columns, or search for a specific value
+    Table
+    | project Computer, Account //Displays the columns Computer, Account fromt
+    the table
+    | project-away Computer, Account //Removes the Computer, Account columns
+    from the results
+    | project-rename NewChannel = Channel // Renames the column-name Channel to
+    NewChannel
+    | project-reorder Task, AccountType, NewChannel, EventSourceName // Reorder
+    the columns in the stated order
+    | project-keep Task, AccountType, NewChannel, EventSourceName //Displays the
+    stated columns in the final output
 
-Note: Search is not case sensitive by default
 
-Examples: 
+    Summarize, Count, DCount Functions
 
-//search for value across all tables and all columns within the database
-search “err” // will search for “err” across all tables and all columns within each table in the database
+    Summarize: Produces a table that aggregates the content of the input table
+    Count (): Returns the number of rows in the input dataset
+    Dcount: Returns an estimate for the number of distinct values that are taken
+    by a scalar expression in the summary
+    group
 
-//search for a specific value within a table 
-SecurityAlert //TableName
-| search “Description” //Will search all columns in SecurtyAlert table for the value “Description”
+    SecurityEvent //TableName
+    | where EventID == “4688” // Display all data that have EventID 4688 in the
+    table
+    | summarize count () by Process, Computer //Will summarize and display the
+    total count of the columns stated
 
-//search for a specific value in tables and any table that starts with a specific letter 
-search in (SecurityEvent, SecurityAlert, A*) “err” //will search for “err” in the following tables: securityEvent, SecurityAlert, and any tables starting with A
+    SecurityEvent //TableName
+    | where TimeGenerated > ago (1h) //Filter data by the last hour events
+    | where EventID == “4624” //Display EventID 4624 only
+    | summarize cnt = count() by AccountType, Computer //Display the count of
+    AccountType and Computers that was impacted
+    by the EventID 4624
 
-//proceeding a search as case sensitive 
-SecurityAlert //TableName
-| search kind = case_sensitive “Description" // Will output same result as above, but are case sensitive
+    DCount
 
-//Limit the search - search for a value in specific tables
-search in (SecurityEvent, SecurityAlert, SecurityIncident) “user" //Output the value “user” in the mentioned tables
+    SecurityEvent //TableName
+    | summarize dcount (IpAddress) //Display the unique IP addresses in the
+    SecurityEvent table
 
-//limit the data output to a specific number 
-search in (SecurityEvent, SecurityAlert, SecurityIncident) “user” //output the value in stated tables
-| limit 10 //limit the output to ten rows (randomly chosen)
+    SecurityEvent
+    | distinct *
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Where Operator: 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Descriptions: Similar to the search operator, however it limits the result set.
+    Arg_Max and Arg_Min Functions:
 
-Note: ago allows for relative date ranges. Ago says “start right now”, then go back in time N quantity. These can be expressed using the following abbreviations: 
+    Arg_Max displays the newest data from from a specific column in a specific
+    table as shown below:
+    Arg_Min displays the oldest data from a specific column in a specific table
+    as shown below:
 
-d - days 
-h - hours 
-m - minutes 
-s - seconds
-ms - milliseconds
-microsecond - microsecond 
+    SecurityEvent //TableName
+    | where AccountType == “Machine" //Display data related to “Machine” from
+    the column AccountType
+    | summarize arg_max (TimeGenerated, *) by AccountType // Display the newest
+    events related to “Machine” from the
+    AccountType
 
-Examples: 
+    SecurityEvent //TableName
+    | where AccountType == “Machine" //Display data related to “Machine” from
+    the column AccountType
+    | summarize arg_min (TimeGenerated, *) by AccountType // Display the oldest
+    events related to “Machine” from the
+    AccountType
 
-//Display everything in a specific table within a specific timeline
-SecurityEvent //TableName 
-| where TimeGenerated > ago (1d) // Displays events generated more than a day ago in the table SecurityEvent
 
 
 
@@ -129,216 +361,84 @@ SecurityEvent //TableName
 
 
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Take/Limit Operator:
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
 
-Descriptions: Take is used to grab a random number of rows from the input data and display it. It will usually give a different result every time used in the query
+    Make_List and Make_Sets Functions
 
+    Make_list function is returning a decent array of all the values as defined
+    in the expression
+    Make_set function is returning a decent array of all the unique values as
+    defined in the expression
 
-Note: The Take and Limit operator works in the same way. There is no guarantee to which rows are returned, and the exact same query run a second time may result in a different set of rows (or it may be the same, depends on various factors) 
+    SecurityEvent //TableName
+    | where EventID == “4624" //Look only for EventID 4624 in the SecurityEvent
+    table
+    | summarize make_list(Account) by Computer //Display all the Accounts inside
+    a JSON output by Computer, Meaning that
+    for each of the computers, the result will be in JSON array of Accounts
+    Render Operator
 
+    • The render operator should be the last operator in the query, and used
+    only with the queries that produce a single
+    tabular data stream result
+    • The render operator does not modify data. It injects an annotation
+    (“Vizualization” into the result’s extended
+    properties. The annotation contains the information provided by the operator
+    in the query
 
-//Output a certain number of rows from a certain table 
-SecurityAlert //TableName 
-| take 10 // Output 10 randoms rows from the table SecurityAlert
 
-//Take can be combined with other language operator 
-SecurityAlert //TableName
-| where TimeGenerated > ago (99d) //Output data from the table that are up to 99 days old 
-    and VendorName == “Microsoft" //and output VendorName that includes Microsoft 
-    and AlertSeverity == “High" //and output only AlertSeverity that is high  
-| take 10 /output only 10 randomly rows 
+    SecurityEvent
+    | summarize count() by Account
+    | render barchart
 
+    SecurityEvent
+    | where TimeGenerated > ago (7d)
+    | summarize count() by bin (TimeGenerated, 1d)
+    | render barchart
 
 
 
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Count: 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Descriptions: Returns the number of rows in the input dataset 
 
-SecurityAlert //TableName
-| where TimeGenerated > ago (7d) // look for data in the SecurityAlert table that is up to seven days old 
-| count // Will count the total rows of data within the defined timeframe mentioned above 
 
+    Bin Function
 
+    Bin is a function which are used to place the results in smaller brackets
+    SecurityEvent //TableName
+    | summarize count() by bin(TimeGenerated, 2d) //output a summarize of bin
+    and display a count, in addition it will get
+    a timestamps with the time delta of one day and increment the timestamp by
+    two days.
 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-Extend Operator: 
-—————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-The extend operator adds a new column to the input result set, which does not have an index
 
-//This query will add a new column listing AlertSeverity by number 
 
-SecurityAlert //TableName 
-| where TimeGenerated > ago (7d)
-| extend severity order = case (
-	AlertSeverity = “High”, 3,
-	AlertSeverity = “Medium”, 2,
-	AlertSeverity = “Low”, 1,
-	AlertSeverity = “Informational”, 0,
-	-1)
+    SigninLogs //TableName
+    | where TimeGenerated > ago (90d) //Output sign-in logs from the last 90
+    days
+    | summarize dcount(UserPrincipalName) by bin(TimeGenerated, 2d) //summarize
+    by the distinct count (unique login
+    attempts/ not duplicates) by UserPrincipleName. That will display all the
+    unique events from those user accounts and
+    it will increments the timestamp by two days, which will make a 2 day gap in
+    the timestamp output
 
 
+    Union Operator
 
+    Union is an operator that will combine data from two or more tables and
+    return the rows of all of them
 
+    SecurityEvent //TableName
+    | union SecurityAlert //Combine the SecurityEvent table data with the
+    SecurityAlert table data
+    | summarize count() //Output the total count of all rows of the two tables
+    union Security* //output anything data/tables that starts with security and
+    merge it together
+    | summarize count() by Type // Output a summarize of type of data and a
+    count of events inside the tables
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Order/Sort By Usage:
-
-The Order By/ Sort By Operator type enables to sort data columns in the query in an ascending or descending order 
-
-SecurityEvent // TableName
-| where TimeGenerated > ago (7d) // Output data from the table that are older than 7 days 
-| extend ObjectType = case ( 	  // Add a new column With the name: ObjectType 
-	AccountType == "Machine", 1, // If the AccountType equal User, list it as 1 in the ObjectType 
-	AccountType == "User", 0, -1) // If the AccountType equal Machine, list it as 0 in the ObjectType 
-| order by ObjectType asc    // will sort the output of the query in ascending order 
-
-
-Project Operator:
-
-Table 
-| project Computer, Account //Displays the columns Computer, Account fromt the table 
-| project-away Computer, Account //Removes the Computer, Account columns from the results 
-| project-rename NewChannel = Channel // Renames the column-name Channel to NewChannel 
-| project-reorder Task, AccountType, NewChannel, EventSourceName // Reorder the columns in the stated order 
-| project-keep Task, AccountType, NewChannel, EventSourceName //Displays the stated columns in the final output
-
-
-Summarize, Count, DCount Functions 
-
-Summarize: Produces a table that aggregates the content of the input table
-Count (): Returns the number of rows in the input dataset
-Dcount: Returns an estimate for the number of distinct values that are taken by a scalar expression in the summary group 
-
-SecurityEvent //TableName 
-| where EventID == “4688” // Display all data that have EventID 4688 in the table
-| summarize count () by Process, Computer //Will summarize and display the total count of the columns stated 
-
-SecurityEvent //TableName
-| where TimeGenerated > ago (1h) //Filter data by the last hour events 
-| where EventID == “4624” //Display EventID 4624 only
-| summarize cnt = count() by AccountType, Computer //Display the count of AccountType and Computers that was impacted by the EventID 4624
-
-DCount
-
-SecurityEvent //TableName
-| summarize dcount (IpAddress) //Display the unique IP addresses in the SecurityEvent table 
-
-SecurityEvent
-| distinct *
-
-Arg_Max and Arg_Min Functions:
-
-Arg_Max displays the newest data from from a specific column in a specific table as shown below: 
-Arg_Min displays the oldest data from a specific column in a specific table as shown below: 
-
-SecurityEvent //TableName
-| where AccountType == “Machine" //Display data related to “Machine” from the column AccountType
-| summarize arg_max (TimeGenerated, *) by AccountType // Display the newest events related to “Machine” from the AccountType
-
-SecurityEvent //TableName
-| where AccountType == “Machine" //Display data related to “Machine” from the column AccountType
-| summarize arg_min (TimeGenerated, *) by AccountType // Display the oldest events related to “Machine” from the AccountType
-
-
-
-
-
-
-
-
-
-
-
-Make_List and Make_Sets Functions 
-
-Make_list function is returning a decent array of all the values as defined in the expression 
-Make_set function is returning a decent array of all the unique values as defined in the expression 
-
-SecurityEvent //TableName 
-| where EventID == “4624" //Look only for EventID 4624 in the SecurityEvent table 
-| summarize make_list(Account) by Computer //Display all the Accounts inside a JSON output by Computer, Meaning that for each of the computers, the result will be in JSON array of Accounts
-
-Render Operator 
-
-•	The render operator should be the last operator in the query, and used only with the queries that produce a single tabular data stream result 
-•	The render operator does not modify data. It injects an annotation (“Vizualization” into the result’s extended properties. The annotation contains the information provided by the operator in the query
-
-
-SecurityEvent 
-| summarize count() by Account 
-| render barchart 
-
-SecurityEvent 
-| where TimeGenerated > ago (7d) 
-| summarize count() by bin (TimeGenerated, 1d) 
-| render barchart 
-
-
-
-
-
-
-Bin Function
-
-Bin is a function which are used to place the results in smaller brackets 
-
-
-SecurityEvent //TableName
-| summarize count() by bin(TimeGenerated, 2d) //output a summarize of bin and display a count, in addition it will get a timestamps with the time delta of one day and increment the timestamp by two days.    
-
-
-
-SigninLogs //TableName 
-| where TimeGenerated > ago (90d) //Output sign-in logs from the last 90 days
-| summarize dcount(UserPrincipalName) by bin(TimeGenerated, 2d) //summarize by the distinct count (unique login attempts/ not duplicates) by UserPrincipleName. That will display all the unique events from those user accounts and it will increments the timestamp by two days, which will make a 2 day gap in the timestamp output
-
-
-Union Operator 
-
-Union is an operator that will combine data from two or more tables and return the rows of all of them 
-
-SecurityEvent //TableName 
-| union SecurityAlert //Combine the SecurityEvent table data with the SecurityAlert table data
-| summarize count() //Output the total count of all rows of the two tables  
-
-
-union Security* //output anything data/tables that starts with security and merge it together 
-| summarize count() by Type // Output a summarize of type of data and a count of events inside the tables 
-
-    
-    
-    
     <!-- Kode mal 
     <div>
         <div class="codeBox">
@@ -348,56 +448,11 @@ union Security* //output anything data/tables that starts with security and merg
         </div>
     </div>
      -->
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"></script>
+  </body>
 
-	
-	<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Collapsible Group Item #1
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
-
-
- <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-</body>
 </html>
