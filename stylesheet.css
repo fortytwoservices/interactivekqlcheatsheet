@@ -6,14 +6,11 @@
 
 */
 
-body{
-    background-color:#A5C9CA;
-}
+
 /* Tooltip inlines which has priority and therefore comes before tooltip outlines */
 #fixed-tooltiptext-in {
     position: fixed;
     bottom: 0;
-    text-align: center;
     width: fit-content;
     height: fit-content;
     border: 3px solid #2C3333;
@@ -33,15 +30,15 @@ border: 3px solid #2C3333;
 .tooltip-in {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dotted #2C3333;
     transition: background-color 0.5s ease;
 }
 .tooltip-in:hover{
-    color: #fff;
-    background-color: #787;
+    color: #E7F6F2;
+    background-color: #2C3333;
 }
 /*Tooltip Outlines*/
-.tooltip {
+.tippy {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
@@ -49,49 +46,31 @@ border: 3px solid #2C3333;
 }
 
 /* tooltip (the box) and the tooltiptext (the text) is styled this way. */
-.tooltip .tooltiptext {
+.tippy .tippytext {
     visibility: hidden;
     width: auto;
     height: auto;
-    background-color: #333;
-    color: #fff;
+    background-color: #2C3333;
+    color: #E7F6F2;
     border: 3px solid #2C3333;
     border-radius: 6px;
     padding: 5px 5px;
-    margin-left: 15px;
+    margin-left: 3px;
     position: absolute;
     z-index: 1;
 }
 /* Hover over tooltip to show tooltiptext */
-.tooltip:hover .tooltiptext {
+.tippy:hover .tippytext {
     visibility: visible;
 }
 /* Makes the code red when hovering over the code */
-.tooltip:hover{
+.tippy:hover{
     color: #E7F6F2;
     background-color: #445;
 }
 /* The code box, with black background */
 .codeBox{
-    color: #999;
-    background-color: #395B64;
-    border: 2px solid #2C3333;
-    padding: 15px;
-    margin-bottom: 20px;
+    border: 2px solid #A5C9CA;
 }
-/* Connecting different classes within a thicker border */
-.multiple-windows{
-    border: 15px solid #E7F6F2;
-}
-h1, p, h3{
-    text-align: center;
-}
-.center-aligned{
-    text-align: center;
-}
-pre{
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    display: block;
-    font-family: monospace;
-}
+
+
