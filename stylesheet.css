@@ -104,7 +104,7 @@ summary {
     border-radius: 12px;
 }
 
-h2, h1 {
+.largetitle {
     text-align: center;
     padding: 40px;
 }
