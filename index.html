@@ -1,59 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>KQL Interactive Cheatsheet</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>KQL Interactive Cheatsheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-  </head>
+</head>
 
-  <body>
-    <h1>KQL Interactive Cheatsheet</h1>   
-    
+<body>
+  <div class="divider-border">
+    <h1>KQL Interactive Cheatsheet</h1>
 
-    Beginng tables with these:   Descriptions: Similar to the search operator, however it limits the result set.
-
-    Note: ago allows for relative date ranges. Ago says “start right now”, then
-    go back in time N quantity. These can be
-    expressed using the following abbreviations:
-
-    d - days
-    h - hours
-    m - minutes
-    s - seconds
-    ms - milliseconds
-    microsecond - microsecond
-
-    Examples:
-
-    <h2>The basics</h2>
+  </div>
 
 
 
-    <!-------------------------------------------------
+  <h2>The basics</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm  divider-border">
+        <h3>Expressing time with shortcuts:</h3>
+        <p>KQL has some easy way to shorten time related statements, especially in use with ago()</p>
+        <table class="table table-dark divider-border">
+          <thead>
+            <tr>
+              <th scope="col">Days</th>
+              <th scope="col">Hours</th>
+              <th scope="col">Minutes</th>
+              <th scope="col">Seconds</th>
+              <th scope="col">Milli Seconds</th>
+              <th scope="col">Micro Seconds</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">d</th>
+              <td>h</td>
+              <td>m</td>
+              <td>s</td>
+              <td>ms</td>
+              <td>microsecond</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <!-------------------------------------------------
     -- SEARCH -----------------------------------------
     -------------------------------------------------->
-    
-    <details><summary> <b>search function</b></summary>
+
+  <details>
+    <summary> <b>search function</b></summary>
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button"
-            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
             aria-expanded="false" aria-controls="collapseOne">
             Description
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse"
-          aria-labelledby="headingOne"
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <p>Search across all tables and columns, or search for a specific
@@ -64,14 +120,12 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-            aria-expanded="false" aria-controls="collapseTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             Search far and wide!
           </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse"
-          aria-labelledby="headingTwo"
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
@@ -84,15 +138,12 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseThree" aria-expanded="false"
-            aria-controls="collapseThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             Search for specific content within one or more tables.
           </button>
         </h2>
-        <div id="collapseThree" class="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
@@ -109,15 +160,12 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseFour" aria-expanded="false"
-            aria-controls="collapseFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
             Case sensitive search
           </button>
         </h2>
-        <div id="collapseFour" class="accordion-collapse collapse"
-          aria-labelledby="headingFour"
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
@@ -136,15 +184,12 @@
 
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFive">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseFive" aria-expanded="false"
-            aria-controls="collapseFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
             Search in specific tables
           </button>
         </h2>
-        <div id="collapseFive" class="accordion-collapse collapse"
-          aria-labelledby="headingFive"
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
@@ -160,15 +205,12 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingSix">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseSix" aria-expanded="false"
-            aria-controls="collapseSix">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
             Limit the search to a number of rows
           </button>
         </h2>
-        <div id="collapseSix" class="accordion-collapse collapse"
-          aria-labelledby="headingSix"
+        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
           data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
@@ -187,125 +229,112 @@
     </div>
   </details>
 
-<br>
+  <br>
 
 
 
-<!---------------------------------------------------
+  <!---------------------------------------------------
     ----- LIMIT/TAKE------------------------------------------
     ---------------------------------------------------->
-    <details><summary><b>limit/take</b></summary>
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="leth1">
-            <button class="accordion-button" type="button"
-              data-bs-toggle="collapse" data-bs-target="#letc1"
-              aria-expanded="false" aria-controls="letc1">
-              Description
-            </button>
-          </h2>
-          <div id="letc1" class="accordion-collapse collapse"
-            aria-labelledby="leth1"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <p>Take is used to grab a random number of rows from the input
-                data and display it. It will usually give a
-                different result every time used in the query. Note: The Take and Limit operator works in the same way. There is no
-                guarantee to which rows are returned, and the
-                exact same query run a second time may result in a different set of rows (or
-                it may be the same, depends on various
-                factors)</p>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="leth2">
-            <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#letc2"
-              aria-expanded="false" aria-controls="letc2">
-              Output a certain number of rows with take
-            </button>
-          </h2>
-          <div id="letc2" class="accordion-collapse collapse"
-            aria-labelledby="leth2"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div class="codeBox">
-                <pre>
-  <div class="tippy">SecurityAlert <br>| take 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
-  
-  
-  </pre>
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="leth3">
-            <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#letc3" aria-expanded="false"
-              aria-controls="letc3">
-              Output a certain number of rows with limit
-            </button>
-          </h2>
-          <div id="letc3" class="accordion-collapse collapse"
-            aria-labelledby="leth3"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div class="codeBox">
-<pre>
-  <div class="tippy">SecurityAlert <br>| limit 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
-
-  
-  
-</pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </details>
-<br>
-
-
-
-    <!---------------------------------------------------
-    ----- LET -------------------------------------------
-    ---------------------------------------------------->
-    <details><summary><b>let</b></summary>
+  <details>
+    <summary><b>limit/take</b></summary>
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="leth1">
-          <button class="accordion-button" type="button"
-            data-bs-toggle="collapse" data-bs-target="#letc1"
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#letc1"
             aria-expanded="false" aria-controls="letc1">
             Description
           </button>
         </h2>
-        <div id="letc1" class="accordion-collapse collapse"
-          aria-labelledby="leth1"
-          data-bs-parent="#accordionExample">
+        <div id="letc1" class="accordion-collapse collapse" aria-labelledby="leth1" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <p>Description: Let is a statement to set a variable name equal to an
-              expression or a function. Creating variables and functions makes your code more readable
-            as well as it makes it reusable.</p>
+            <p>Take is used to grab a random number of rows from the input
+              data and display it. It will usually give a
+              different result every time used in the query. Note: The Take and Limit operator works in the same way.
+              There is no
+              guarantee to which rows are returned, and the
+              exact same query run a second time may result in a different set of rows (or
+              it may be the same, depends on various
+              factors)</p>
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="leth2">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse" data-bs-target="#letc2"
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Output a certain number of rows with take
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+  <div class="tippy">SecurityAlert <br>| take 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
+  
+  
+  </pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc3"
+            aria-expanded="false" aria-controls="letc3">
+            Output a certain number of rows with limit
+          </button>
+        </h2>
+        <div id="letc3" class="accordion-collapse collapse" aria-labelledby="leth3" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+  <div class="tippy">SecurityAlert <br>| limit 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
+
+  
+  
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </details>
+  <br>
+
+
+
+  <!---------------------------------------------------
+    ----- LET -------------------------------------------
+    ---------------------------------------------------->
+  <details>
+    <summary><b>let</b></summary>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#letc1"
+            aria-expanded="false" aria-controls="letc1">
+            Description
+          </button>
+        </h2>
+        <div id="letc1" class="accordion-collapse collapse" aria-labelledby="leth1" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>Description: Let is a statement to set a variable name equal to an
+              expression or a function. Creating variables and functions makes your code more readable
+              as well as it makes it reusable.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
             aria-expanded="false" aria-controls="letc2">
             Timestamp variable
           </button>
         </h2>
-        <div id="letc2" class="accordion-collapse collapse"
-          aria-labelledby="leth2"
-          data-bs-parent="#accordionExample">
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
               <pre>
@@ -320,16 +349,12 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="leth3">
-          <button class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#letc3" aria-expanded="false"
-            aria-controls="letc3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc3"
+            aria-expanded="false" aria-controls="letc3">
             Creating and using a variable
           </button>
         </h2>
-        <div id="letc3" class="accordion-collapse collapse"
-          aria-labelledby="leth3"
-          data-bs-parent="#accordionExample">
+        <div id="letc3" class="accordion-collapse collapse" aria-labelledby="leth3" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="codeBox">
               <pre>
@@ -347,274 +372,376 @@
     </div>
   </details>
   <br>
-    
 
 
 
-      <!---------------------------------------------------
+
+  <!---------------------------------------------------
     ----- WHERE -------------------------------------------
     ---------------------------------------------------->
-    <details><summary><b>where</b></summary>
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="leth1">
-            <button class="accordion-button" type="button"
-              data-bs-toggle="collapse" data-bs-target="#letc1"
-              aria-expanded="false" aria-controls="letc1">
-              Description
-            </button>
-          </h2>
-          <div id="letc1" class="accordion-collapse collapse"
-            aria-labelledby="leth1"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <p>The where operator bring predicates/logic to our queries. following the where operator is a predicate that makes a statement fall into one of two categories: either it matches what you ask for or it don't.</p>
-            </div>
+  <details>
+    <summary><b>where</b></summary>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#letc1"
+            aria-expanded="false" aria-controls="letc1">
+            Description
+          </button>
+        </h2>
+        <div id="letc1" class="accordion-collapse collapse" aria-labelledby="leth1" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>The where operator bring predicates/logic to our queries. following the where operator is a predicate
+              that makes a statement fall into one of two categories: either it matches what you ask for or it don't.
+            </p>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="leth2">
-            <button class="accordion-button collapsed" type="button"
-              data-bs-toggle="collapse" data-bs-target="#letc2"
-              aria-expanded="false" aria-controls="letc2">
-              Timestamp variable
-            </button>
-          </h2>
-          <div id="letc2" class="accordion-collapse collapse"
-            aria-labelledby="leth2"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div class="codeBox">
-                <pre>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Timestamp variable
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
   <div class="tippy">SecurityEvent<span class="tippytext">Specify table(s)</span></div> 
   <div class="tippy">| where <span class="tippytext">Our predicate starts. Now we need to follow up with some logic we want our result to include or exclude.</span></div><div class="tippy"> TimeGenerated > ago(1)<span class="tippytext">Now, we are looking for every entry in the table that satisfies the TimeGenerated to be before 1day ago.</span></div>
   
   
   </pre>
-                <br />
-              </div>
+              <br />
             </div>
           </div>
         </div>
       </div>
-      </div>
-    </details>
-    <br>
+    </div>
+    </div>
+  </details>
+  <br>
 
   <!---------------------------------------
-  ----------Where--------------------------
+  ----------count--------------------------
   ---------------------------------------->
-
-    <h1>count()</h1>
-   Descriptions: Returns the number of rows in the input dataset
-
-    SecurityAlert //TableName
-    | where TimeGenerated > ago (7d) // look for data in the SecurityAlert table
-    that is up to seven days old
-    | count // Will count the total rows of data within the defined timeframe
-    mentioned above
-
-
-    <h1>extend</h1>
-    The extend operator adds a new column to the input result set, which does
-    not have an index
-
-    //This query will add a new column listing AlertSeverity by number
-    SecurityAlert //TableName
-    | where TimeGenerated > ago (7d)
-    | extend severity order = case (
-    AlertSeverity = “High”, 3,
-    AlertSeverity = “Medium”, 2,
-    AlertSeverity = “Low”, 1,
-    AlertSeverity = “Informational”, 0,
-    -1)
-
-
-    <h1>order by/sort by</h1>
-    Order/Sort By Usage:
-
-    The Order By/ Sort By Operator type enables to sort data columns in the
-    query in an ascending or descending order
-
-    SecurityEvent // TableName
-    | where TimeGenerated > ago (7d) // Output data from the table that are
-    older than 7 days
-    | extend ObjectType = case ( // Add a new column With the name: ObjectType
-    AccountType == "Machine", 1, // If the AccountType equal User, list it as 1
-    in the ObjectType
-    AccountType == "User", 0, -1) // If the AccountType equal Machine, list it
-    as 0 in the ObjectType
-    | order by ObjectType asc // will sort the output of the query in ascending
-    order
-
-    <h1>project</h1>
-    Project Operator:
-
-    Table
-    | project Computer, Account //Displays the columns Computer, Account fromt
-    the table
-    | project-away Computer, Account //Removes the Computer, Account columns
-    from the results
-    | project-rename NewChannel = Channel // Renames the column-name Channel to
-    NewChannel
-    | project-reorder Task, AccountType, NewChannel, EventSourceName // Reorder
-    the columns in the stated order
-    | project-keep Task, AccountType, NewChannel, EventSourceName //Displays the
-    stated columns in the final output
+  <details>
+    <summary><b>count</b></summary>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#letc1"
+            aria-expanded="false" aria-controls="letc1">
+            Description
+          </button>
+        </h2>
+        <div id="letc1" class="accordion-collapse collapse" aria-labelledby="leth1" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>There are a few ways of using the count functionality in KQL, one will set the count equal to a variable
+              (not necessary with let), one will just count every row from whatever query you have... TODO: count_</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Counting every row of any given query
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+<div class="tippy">SecurityEvent <br>| TimeGenerated > ago(1)<span class="tippytext">Our current query.</span></div>
+<div class="tippy">| count<span class="tippytext">Pipe whatever query to get the amount of rows printed out to you.</span></div>
 
 
-    Summarize, Count, DCount Functions
+</pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Use count as a variable inside a query
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+<div class="tippy">SecurityEvent<span class="tippytext">Specify table(s)</span></div> 
+<div class="tippy">| summarize<span class="tippytext">Summarize is used when you want to aggregate columns and work on data before moving forward.</span></div> <div class="tippy">countVar<span class="tippytext">This is now our variable name</span></div><div class="tippy"> = count()<span class="tippytext">And we set it to equal count...-></span></div><div class="tippy"> by Account, EventID<span class="tippytext"> ... by matching values in Account and EventID columns. </span></div>
+<div class="tippy">| where countVar > 400<span class="tippytext"> Continue working on getting the wanted results by adding where or anything else. <br>Reading the results will be like: Account X has triggered EventID X amounts of times.</span></div>
 
-    Summarize: Produces a table that aggregates the content of the input table
-    Count (): Returns the number of rows in the input dataset
-    Dcount: Returns an estimate for the number of distinct values that are taken
-    by a scalar expression in the summary
-    group
-
-    SecurityEvent //TableName
-    | where EventID == “4688” // Display all data that have EventID 4688 in the
-    table
-    | summarize count () by Process, Computer //Will summarize and display the
-    total count of the columns stated
-
-    SecurityEvent //TableName
-    | where TimeGenerated > ago (1h) //Filter data by the last hour events
-    | where EventID == “4624” //Display EventID 4624 only
-    | summarize cnt = count() by AccountType, Computer //Display the count of
-    AccountType and Computers that was impacted
-    by the EventID 4624
-
-    DCount
-
-    SecurityEvent //TableName
-    | summarize dcount (IpAddress) //Display the unique IP addresses in the
-    SecurityEvent table
-
-    SecurityEvent
-    | distinct *
-
-    Arg_Max and Arg_Min Functions:
-
-    Arg_Max displays the newest data from from a specific column in a specific
-    table as shown below:
-    Arg_Min displays the oldest data from a specific column in a specific table
-    as shown below:
-
-    SecurityEvent //TableName
-    | where AccountType == “Machine" //Display data related to “Machine” from
-    the column AccountType
-    | summarize arg_max (TimeGenerated, *) by AccountType // Display the newest
-    events related to “Machine” from the
-    AccountType
-
-    SecurityEvent //TableName
-    | where AccountType == “Machine" //Display data related to “Machine” from
-    the column AccountType
-    | summarize arg_min (TimeGenerated, *) by AccountType // Display the oldest
-    events related to “Machine” from the
-    AccountType
+</pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </details>
+  <br>
 
 
+  <!---------------------------------------
+  ----------extend--------------------------
+  ---------------------------------------->
+  <details>
+    <summary><b>Extend - create calculated columns and append to</b></summary>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#letc1"
+            aria-expanded="false" aria-controls="letc1">
+            Description
+          </button>
+        </h2>
+        <div id="letc1" class="accordion-collapse collapse" aria-labelledby="leth1" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>The extend operator adds a new column to the input result set, which does
+              not have an index</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Add a column with calculated time for duration
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+<div class="tippy">SecurityEvent<span class="tippytext">Chosen table to work on.</span></div>
+<div class="tippy">| extend <span class="tippytext">Pipe the table into extend.</span></div><div class="tippy">duration<span class="tippytext">Create a variable name (this will be the column name) - if not specified, <br>a column name will be generated.</span></div><div class="tippy"> = TimeCollected - TimeGenerated<span class="tippytext"> This is basic math - subtraction on the datetime type.</span></div>
+
+
+</pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Use case function to output AlertSeverity as numbers instead of text
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse" aria-labelledby="leth2" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+<div class="tippy">SecurityEvent
+| where TimeGenerated > ago(7d)<span class="tippytext">Specify table and a timelimit</span></div> 
+<div class="tippy">| extend severity order = case (<span class="tippytext">As seen in the previous exmple, we are naming the column "order" and then we're entering a case function...-></span></div>
+<div class="tippy">| AlertSeverity = "High", 3,
+| AlertSeverity = "Medium", 2,
+| AlertSeverity = "Low", 1,
+| AlertSeverity = "Informational", 0,<span class="tippytext"> Each line is basically saying "if AlertSeverity is equal to this, set the new columns row equal to that."</span></div>
+<div class="tippy">-1)<span class="tippytext">The last value could be anything and is what is returned if there is another value in AlertSeverity than "high", "medium" etc.</span></div>
+</pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </details>
+  <br>
+
+  <h1>order by/sort by</h1>
+  Order/Sort By Usage:
+
+  The Order By/ Sort By Operator type enables to sort data columns in the
+  query in an ascending or descending order
+
+  SecurityEvent // TableName
+  | where TimeGenerated > ago (7d) // Output data from the table that are
+  older than 7 days
+  | extend ObjectType = case ( // Add a new column With the name: ObjectType
+  AccountType == "Machine", 1, // If the AccountType equal User, list it as 1
+  in the ObjectType
+  AccountType == "User", 0, -1) // If the AccountType equal Machine, list it
+  as 0 in the ObjectType
+  | order by ObjectType asc // will sort the output of the query in ascending
+  order
+
+  <h1>project</h1>
+  Project Operator:
+
+  Table
+  | project Computer, Account //Displays the columns Computer, Account fromt
+  the table
+  | project-away Computer, Account //Removes the Computer, Account columns
+  from the results
+  | project-rename NewChannel = Channel // Renames the column-name Channel to
+  NewChannel
+  | project-reorder Task, AccountType, NewChannel, EventSourceName // Reorder
+  the columns in the stated order
+  | project-keep Task, AccountType, NewChannel, EventSourceName //Displays the
+  stated columns in the final output
+
+
+  Summarize, Count, DCount Functions
+
+  Summarize: Produces a table that aggregates the content of the input table
+  Count (): Returns the number of rows in the input dataset
+  Dcount: Returns an estimate for the number of distinct values that are taken
+  by a scalar expression in the summary
+  group
+
+  SecurityEvent //TableName
+  | where EventID == “4688” // Display all data that have EventID 4688 in the
+  table
+  | summarize count () by Process, Computer //Will summarize and display the
+  total count of the columns stated
+
+  SecurityEvent //TableName
+  | where TimeGenerated > ago (1h) //Filter data by the last hour events
+  | where EventID == “4624” //Display EventID 4624 only
+  | summarize cnt = count() by AccountType, Computer //Display the count of
+  AccountType and Computers that was impacted
+  by the EventID 4624
+
+  DCount
+
+  SecurityEvent //TableName
+  | summarize dcount (IpAddress) //Display the unique IP addresses in the
+  SecurityEvent table
+
+  SecurityEvent
+  | distinct *
+
+  Arg_Max and Arg_Min Functions:
+
+  Arg_Max displays the newest data from from a specific column in a specific
+  table as shown below:
+  Arg_Min displays the oldest data from a specific column in a specific table
+  as shown below:
+
+  SecurityEvent //TableName
+  | where AccountType == “Machine" //Display data related to “Machine” from
+  the column AccountType
+  | summarize arg_max (TimeGenerated, *) by AccountType // Display the newest
+  events related to “Machine” from the
+  AccountType
+
+  SecurityEvent //TableName
+  | where AccountType == “Machine" //Display data related to “Machine” from
+  the column AccountType
+  | summarize arg_min (TimeGenerated, *) by AccountType // Display the oldest
+  events related to “Machine” from the
+  AccountType
+
+
+
+  Make_List and Make_Sets Functions
+
+  Make_list function is returning a decent array of all the values as defined
+  in the expression
+  Make_set function is returning a decent array of all the unique values as
+  defined in the expression
+
+  SecurityEvent //TableName
+  | where EventID == “4624" //Look only for EventID 4624 in the SecurityEvent
+  table
+  | summarize make_list(Account) by Computer //Display all the Accounts inside
+  a JSON output by Computer, Meaning that
+  for each of the computers, the result will be in JSON array of Accounts
+
+
+
+
+  Render Operator
+
+  • The render operator should be the last operator in the query, and used
+  only with the queries that produce a single
+  tabular data stream result
+  • The render operator does not modify data. It injects an annotation
+  (“Vizualization” into the result’s extended
+  properties. The annotation contains the information provided by the operator
+  in the query
+
+
+  SecurityEvent
+  | summarize count() by Account
+  | render barchart
+
+  SecurityEvent
+  | where TimeGenerated > ago (7d)
+  | summarize count() by bin (TimeGenerated, 1d)
+  | render barchart
 
 
 
 
 
 
+  Bin Function
+
+  Bin is a function which are used to place the results in smaller brackets
+  SecurityEvent //TableName
+  | summarize count() by bin(TimeGenerated, 2d) //output a summarize of bin
+  and display a count, in addition it will get
+  a timestamps with the time delta of one day and increment the timestamp by
+  two days.
 
 
 
-    Make_List and Make_Sets Functions
-
-    Make_list function is returning a decent array of all the values as defined
-    in the expression
-    Make_set function is returning a decent array of all the unique values as
-    defined in the expression
-
-    SecurityEvent //TableName
-    | where EventID == “4624" //Look only for EventID 4624 in the SecurityEvent
-    table
-    | summarize make_list(Account) by Computer //Display all the Accounts inside
-    a JSON output by Computer, Meaning that
-    for each of the computers, the result will be in JSON array of Accounts
-    Render Operator
-
-    • The render operator should be the last operator in the query, and used
-    only with the queries that produce a single
-    tabular data stream result
-    • The render operator does not modify data. It injects an annotation
-    (“Vizualization” into the result’s extended
-    properties. The annotation contains the information provided by the operator
-    in the query
+  SigninLogs //TableName
+  | where TimeGenerated > ago (90d) //Output sign-in logs from the last 90
+  days
+  | summarize dcount(UserPrincipalName) by bin(TimeGenerated, 2d) //summarize
+  by the distinct count (unique login
+  attempts/ not duplicates) by UserPrincipleName. That will display all the
+  unique events from those user accounts and
+  it will increments the timestamp by two days, which will make a 2 day gap in
+  the timestamp output
 
 
-    SecurityEvent
-    | summarize count() by Account
-    | render barchart
+  Union Operator
 
-    SecurityEvent
-    | where TimeGenerated > ago (7d)
-    | summarize count() by bin (TimeGenerated, 1d)
-    | render barchart
+  Union is an operator that will combine data from two or more tables and
+  return the rows of all of them
 
-
-
-
-
-
-    Bin Function
-
-    Bin is a function which are used to place the results in smaller brackets
-    SecurityEvent //TableName
-    | summarize count() by bin(TimeGenerated, 2d) //output a summarize of bin
-    and display a count, in addition it will get
-    a timestamps with the time delta of one day and increment the timestamp by
-    two days.
-
-
-
-    SigninLogs //TableName
-    | where TimeGenerated > ago (90d) //Output sign-in logs from the last 90
-    days
-    | summarize dcount(UserPrincipalName) by bin(TimeGenerated, 2d) //summarize
-    by the distinct count (unique login
-    attempts/ not duplicates) by UserPrincipleName. That will display all the
-    unique events from those user accounts and
-    it will increments the timestamp by two days, which will make a 2 day gap in
-    the timestamp output
-
-
-    Union Operator
-
-    Union is an operator that will combine data from two or more tables and
-    return the rows of all of them
-
-    SecurityEvent //TableName
-    | union SecurityAlert //Combine the SecurityEvent table data with the
-    SecurityAlert table data
-    | summarize count() //Output the total count of all rows of the two tables
-    union Security* //output anything data/tables that starts with security and
-    merge it together
-    | summarize count() by Type // Output a summarize of type of data and a
-    count of events inside the tables
+  SecurityEvent //TableName
+  | union SecurityAlert //Combine the SecurityEvent table data with the
+  SecurityAlert table data
+  | summarize count() //Output the total count of all rows of the two tables
+  union Security* //output anything data/tables that starts with security and
+  merge it together
+  | summarize count() by Type // Output a summarize of type of data and a
+  count of events inside the tables
 
 
 
 
-    <!-- Kode mal 
+  <!-- Kode mal 
     <div>
         <div class="codeBox">
             <pre>
-
+<div class="tippy"><span class="tippytext"></span></div>
             </pre>
         </div>
     </div>
      -->
-    <!-- JavaScript Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"></script>
-  </body>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>
