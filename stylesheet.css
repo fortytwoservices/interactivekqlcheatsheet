@@ -98,3 +98,13 @@ summary {
     right: 6px;
     transform: scaleX(-1);
   }
+
+.divider-border{
+    border: 3px solid  #A5C9CA;
+    border-radius: 12px;
+}
+
+h2, h1 {
+    text-align: center;
+    padding: 40px;
+}
