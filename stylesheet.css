@@ -8,6 +8,8 @@
 
 
 /* Tooltip inlines which has priority and therefore comes before tooltip outlines */
+
+
 #fixed-tooltiptext-in {
     position: fixed;
     bottom: 0;
@@ -30,7 +32,6 @@ border: 3px solid #2C3333;
 .tooltip-in {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted #2C3333;
     transition: background-color 0.5s ease;
 }
 .tooltip-in:hover{
@@ -41,8 +42,7 @@ border: 3px solid #2C3333;
 .tippy {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
-    transition: background-color 0.5s ease;
+    transition: background-color 1s ease;
 }
 
 /* tooltip (the box) and the tooltiptext (the text) is styled this way. */
@@ -50,27 +50,51 @@ border: 3px solid #2C3333;
     visibility: hidden;
     width: auto;
     height: auto;
-    background-color: #2C3333;
+    background-color: #395B64;
     color: #E7F6F2;
-    border: 3px solid #2C3333;
-    border-radius: 6px;
-    padding: 5px 5px;
-    margin-left: 3px;
+    margin-left: 20px;
+    padding-left: 3px;
     position: absolute;
     z-index: 1;
 }
-/* Hover over tooltip to show tooltiptext */
 .tippy:hover .tippytext {
     visibility: visible;
 }
-/* Makes the code red when hovering over the code */
 .tippy:hover{
-    color: #E7F6F2;
-    background-color: #445;
+    background-color: #A5C9CA;
 }
-/* The code box, with black background */
 .codeBox{
     border: 2px solid #A5C9CA;
 }
 
+details{
+    border-radius: 15px 15px;
+}
 
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+
+  }
+  
+  @keyframes sweep {
+    0%    {opacity: 0; margin-left: -10px}
+    100%  {opacity: 1; margin-left: 0px}
+  }
+
+summary {
+    position: relative;
+    border: 3px solid  #A5C9CA;
+    padding: 3px;
+    cursor: pointer;
+    transform: scaleX(-1);
+    border-radius: 12px;
+    background-color: #E7F6F2;
+
+  }
+  
+  summary b {
+    display: inline-block;
+    position: absolute;
+    right: 6px;
+    transform: scaleX(-1);
+  }
