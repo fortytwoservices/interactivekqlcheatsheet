@@ -16,34 +16,33 @@
   </head>
 
   <body>
-    <h1>KQL Interactive Cheatsheet</h1>
-    <p>This site is meant for you who needs a little more input on how a java
-      program sticks together and this site makes
-      it
-      easier for you to do so - in your own pace and on your own requests!</p>
-    <p>Try using ctrl+f a lot to find matching words by searching.</p>
-
-
-    
+    <h1>KQL Interactive Cheatsheet</h1>   
     
 
-    //proceeding a search as case sensitive
-    SecurityAlert //TableName
-    | search kind = case_sensitive “Description" // Will output same result as
-    above, but are case sensitive
+    Beginng tables with these:   Descriptions: Similar to the search operator, however it limits the result set.
 
-    //Limit the search - search for a value in specific tables
-    search in (SecurityEvent, SecurityAlert, SecurityIncident) “user" //Output
-    the value “user” in the mentioned tables
+    Note: ago allows for relative date ranges. Ago says “start right now”, then
+    go back in time N quantity. These can be
+    expressed using the following abbreviations:
 
-    //limit the data output to a specific number
-    search in (SecurityEvent, SecurityAlert, SecurityIncident) “user” //output
-    the value in stated tables
-    | limit 10 //limit the output to ten rows (randomly chosen)
+    d - days
+    h - hours
+    m - minutes
+    s - seconds
+    ms - milliseconds
+    microsecond - microsecond
 
-    <!-- SEARCH -----------------------------------------
------------------------------------------------------------>
-    <h1>search function</h1>
+    Examples:
+
+    <h2>The basics</h2>
+
+
+
+    <!-------------------------------------------------
+    -- SEARCH -----------------------------------------
+    -------------------------------------------------->
+    
+    <details><summary> <b>search function</b></summary>
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -99,7 +98,7 @@
             <div class="codeBox">
               <pre>
   <div class="tippy">SecurityAlert<span class="tippytext">Searches through every available column.</span></div> 
-  <div class="tippy">|<span class="tippytext">This is called a pipe - meaning results from everything read before this symbol is "being piped" into the next queries/actions.</span></div>
+  <div class="tippy">|<span class="tippytext">This is called a pipe - meaning results from everything read before this symbol is "being piped" into the next queries/actions.</span></div><div class="tippy">search "keyword"<span class="tippytext">Everything search is handling now is based on what has been piped along to this step.</span></div> 
 
 
 
@@ -150,10 +149,34 @@
           <div class="accordion-body">
             <div class="codeBox">
 
+              <pre>
 
+  <div class="tippy">search in<span class="tippytext"> By using "in", search function expects a table or a list of tables to search through.</span></div><div class="tippy"> (SecurityAlert, Device*)<span class="tippytext">This is a list of tables. What it basically says is SecurityAlert and every table that starts with "Device". * is a regex wildcard.</span></div>
+
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSix">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSix" aria-expanded="false"
+            aria-controls="collapseSix">
+            Limit the search to a number of rows
+          </button>
+        </h2>
+        <div id="collapseSix" class="accordion-collapse collapse"
+          aria-labelledby="headingSix"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
 
               <pre>
-  <div class="tippy">search in<span class="tippytext"> By using "in", search function expects a table or a list of tables to search through.</span></div><div class="tippy"> (SecurityAlert, Device*)<span class="tippytext">This is a list of tables. What it basically says is SecurityAlert and every table that starts with "Device". * is a regex wildcard.</span></div>
+
+  <div class="tippy">search in (SecurityEvent, SecurityAlert, SecurityIncident) “user"<span class="tippytext"> Searching in multiple tables for "user"</span></div>
+  <div class="tippy">| take 10<span class="tippytext">Limits the number of output rows to 10, randomly chosen. "take" and "limit" are the same, just different words.</span></div>
 
 </pre>
             </div>
@@ -162,86 +185,228 @@
       </div>
     </div>
     </div>
+  </details>
 
-
-    <h1>let</h1>
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Let - Statement
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Description: Let is a statement to set a variable name equal to an
-    expression or a function
-
-    Example:
-
-    let timeoffset = 7d; // timeoffset will be called seven days in the upcoming
-    lines
-    let discardEventID = 4688; // discardEvenID will be called 4688
-    SecurityEvent //TableName
-    | where TimeGenerated > ago (timeoffset); // displays data from the table
-    that is older than 7 days
-    | where EventID != discardEventID // Displays all security events unless
-    4688
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Where Operator:
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Descriptions: Similar to the search operator, however it limits the result
-    set.
-
-    Note: ago allows for relative date ranges. Ago says “start right now”, then
-    go back in time N quantity. These can be
-    expressed using the following abbreviations:
-
-    d - days
-    h - hours
-    m - minutes
-    s - seconds
-    ms - milliseconds
-    microsecond - microsecond
-
-    Examples:
-
-    //Display everything in a specific table within a specific timeline
-    SecurityEvent //TableName
-    | where TimeGenerated > ago (1d) // Displays events generated more than a
-    day ago in the table SecurityEvent
-
-    <h1>take/limit</h1>
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Take/Limit Operator:
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Descriptions: Take is used to grab a random number of rows from the input
-    data and display it. It will usually give a
-    different result every time used in the query
-
-
-    Note: The Take and Limit operator works in the same way. There is no
-    guarantee to which rows are returned, and the
-    exact same query run a second time may result in a different set of rows (or
-    it may be the same, depends on various
-    factors)
-
-
-    //Output a certain number of rows from a certain table
-    SecurityAlert //TableName
-    | take 10 // Output 10 randoms rows from the table SecurityAlert
-
-    //Take can be combined with other language operator
-    SecurityAlert //TableName
-    | where TimeGenerated > ago (99d) //Output data from the table that are up
-    to 99 days old
-    and VendorName == “Microsoft" //and output VendorName that includes
-    Microsoft
-    and AlertSeverity == “High" //and output only AlertSeverity that is high
-    | take 10 /output only 10 randomly rows
+<br>
 
 
 
+<!---------------------------------------------------
+    ----- LIMIT/TAKE------------------------------------------
+    ---------------------------------------------------->
+    <details><summary><b>limit/take</b></summary>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="leth1">
+            <button class="accordion-button" type="button"
+              data-bs-toggle="collapse" data-bs-target="#letc1"
+              aria-expanded="false" aria-controls="letc1">
+              Description
+            </button>
+          </h2>
+          <div id="letc1" class="accordion-collapse collapse"
+            aria-labelledby="leth1"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p>Take is used to grab a random number of rows from the input
+                data and display it. It will usually give a
+                different result every time used in the query. Note: The Take and Limit operator works in the same way. There is no
+                guarantee to which rows are returned, and the
+                exact same query run a second time may result in a different set of rows (or
+                it may be the same, depends on various
+                factors)</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="leth2">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#letc2"
+              aria-expanded="false" aria-controls="letc2">
+              Output a certain number of rows with take
+            </button>
+          </h2>
+          <div id="letc2" class="accordion-collapse collapse"
+            aria-labelledby="leth2"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="codeBox">
+                <pre>
+  <div class="tippy">SecurityAlert <br>| take 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
+  
+  
+  </pre>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="leth3">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#letc3" aria-expanded="false"
+              aria-controls="letc3">
+              Output a certain number of rows with limit
+            </button>
+          </h2>
+          <div id="letc3" class="accordion-collapse collapse"
+            aria-labelledby="leth3"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="codeBox">
+<pre>
+  <div class="tippy">SecurityAlert <br>| limit 10<span class="tippytext">First query the whole table, and then its output is limited to 10 rows.</span></div>
+
+  
+  
+</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </details>
+<br>
+
+
+
+    <!---------------------------------------------------
+    ----- LET -------------------------------------------
+    ---------------------------------------------------->
+    <details><summary><b>let</b></summary>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth1">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse" data-bs-target="#letc1"
+            aria-expanded="false" aria-controls="letc1">
+            Description
+          </button>
+        </h2>
+        <div id="letc1" class="accordion-collapse collapse"
+          aria-labelledby="leth1"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <p>Description: Let is a statement to set a variable name equal to an
+              expression or a function. Creating variables and functions makes your code more readable
+            as well as it makes it reusable.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth2">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse" data-bs-target="#letc2"
+            aria-expanded="false" aria-controls="letc2">
+            Timestamp variable
+          </button>
+        </h2>
+        <div id="letc2" class="accordion-collapse collapse"
+          aria-labelledby="leth2"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+<div class="tippy">let<span class="tippytext">Creating a variable or funtion, always start with "let"</span></div> <div class="tippy"> timeoffset<span class="tippytext">This is our variable name - literally anything you want, except words that already has a meaning in KQL.</span></div><div class="tippy"> = 7d<span class="tippytext">Our variable now equals 7 days - 7d</span></div><div class="tippy">;<span class="tippytext">The let function always ends with a ";" - semicolon. <br>This way you tell the interpreter that it is done adding to the variable name. <br>Consider another case from now and call me if you need me.</span></div>
+
+
+</pre>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="leth3">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#letc3" aria-expanded="false"
+            aria-controls="letc3">
+            Creating and using a variable
+          </button>
+        </h2>
+        <div id="letc3" class="accordion-collapse collapse"
+          aria-labelledby="leth3"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="codeBox">
+              <pre>
+  <div class="tippy">let lookback = 3d;<span class="tippytext">Create the variable named "lookback" and set it to 3d - meaning 3 days.</span></div> 
+  <div class="tippy">AzureActivity <br>| where Timegenerated  between (datetime(2022-07-23) .. lookback) <span class="tippytext">Looking through AzureActivity table for anything that happened between the given date <br>(this could also be a variable) to (..) lookback - which is 3days.</span></div> 
+
+
+
+</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </details>
+  <br>
+    
+
+
+
+      <!---------------------------------------------------
+    ----- WHERE -------------------------------------------
+    ---------------------------------------------------->
+    <details><summary><b>where</b></summary>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="leth1">
+            <button class="accordion-button" type="button"
+              data-bs-toggle="collapse" data-bs-target="#letc1"
+              aria-expanded="false" aria-controls="letc1">
+              Description
+            </button>
+          </h2>
+          <div id="letc1" class="accordion-collapse collapse"
+            aria-labelledby="leth1"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p>The where operator bring predicates/logic to our queries. following the where operator is a predicate that makes a statement fall into one of two categories: either it matches what you ask for or it don't.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="leth2">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#letc2"
+              aria-expanded="false" aria-controls="letc2">
+              Timestamp variable
+            </button>
+          </h2>
+          <div id="letc2" class="accordion-collapse collapse"
+            aria-labelledby="leth2"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="codeBox">
+                <pre>
+  <div class="tippy">SecurityEvent<span class="tippytext">Specify table(s)</span></div> 
+  <div class="tippy">| where <span class="tippytext">Our predicate starts. Now we need to follow up with some logic we want our result to include or exclude.</span></div><div class="tippy"> TimeGenerated > ago(1)<span class="tippytext">Now, we are looking for every entry in the table that satisfies the TimeGenerated to be before 1day ago.</span></div>
+  
+  
+  </pre>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </details>
+    <br>
+
+  <!---------------------------------------
+  ----------Where--------------------------
+  ---------------------------------------->
 
     <h1>count()</h1>
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Count:
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Descriptions: Returns the number of rows in the input dataset
+   Descriptions: Returns the number of rows in the input dataset
 
     SecurityAlert //TableName
     | where TimeGenerated > ago (7d) // look for data in the SecurityAlert table
@@ -251,9 +416,6 @@
 
 
     <h1>extend</h1>
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
-    Extend Operator:
-    —————————————————————-—————————————————————-—————————————————————-—————————————————————-—————————————————————-———
     The extend operator adds a new column to the input result set, which does
     not have an index
 
