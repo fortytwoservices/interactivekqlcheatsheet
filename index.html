@@ -346,25 +346,42 @@
 
 
 "23981": {
-        "name": "Kusto Detective agency 2022 - Onboarding",
+        "name": "Kusto Detective Agency 2022 - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
         "code": [
         ["Onboarding<br>| summarize sum(Score)", "Basic and simple query to sum up all numeric values."]
         ],
         "tags": ["kustodetectiveagency2022", "onboarding"]
 },
 "3214214": {
-        "name": "Kusto Detective Agency 2022 - Rookie - The rarest book is missing",
+        "name": "Kusto Detective Agency 2022 - Rookie - The rarest book is missing. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency2/'>Full writeup</a>",
         "code": [
-        ["Shelves<br>", "Fetching the whole table"],
-        ["| mv-expand rf_id = rf_ids to typeof(string) <br>", "mv-expand takes the array that is in 'rf_ids' and expands the tables records (rows) by adding an entry for each value. This means that the rest of the columns for all of the array elements will remain the same, but we will be able to query them singularily. Each of the element is then converted into a string."],
-        ["| lookup Books on rf_id<br>", ""],
-        ["| project shelf, author, book_title, total_weight, weight_gram<br>", ""],
-        ["summarize bookWeight = sum(weight_gram), claimedWeight = min(total_weight) by shelf<br>", ""],
-        ["extend difference = (claimedWeight - bookWeight)<br>", ""],
-        ["order by difference desc", ""]
+        ["Shelves<br>", "Fetching the whole table. "],
+        ["| mv-expand rf_id = rf_ids to typeof(string) <br>", "mv-expand takes the array that is in 'rf_ids' and expands the table records (rows) by adding an entry for each value. This means that the rest of the columns will remain the same for all of the array values, and get the advantage of individually querying them. Each of the element is then converted into a string with typeof(string)."],
+        ["| lookup Books on rf_id<br>", "lookup has a similar effect like join. It combines two tables: Books and rf_id. The type of lookup here is default, meaning leftouter. lookup differs from join by not having repeating columns from the $right table and it assumes that $left table is the larger table. So what we are doing here is, we are looking up all the information from Books and broadcasting it based on rf_id from $right to $left."],
+        ["| project shelf, author, book_title, total_weight, weight_gram<br>", "Projecting these through the pipe to reduce amount of data and make it more accurate towards what we're aiming for."],
+        ["summarize bookWeight = sum(weight_gram), claimedWeight = min(total_weight) by shelf<br>", "We now know what weight every book weighs and we know the total weight, here we do calculations by each shelf and sums up the weight_gram (the weight of each book) of the shelf. claimed_weight is self-explanatory knowing that there are some values that are slightly off, what makes the accuracy of the weight different."],
+        ["extend difference = (claimedWeight - bookWeight)<br>", "Working further on the previous calculations we now expect to see some output. Most of the books create differences due to the inaccuracy of the measurement, but if a whole book is missing the value will stand out."],
+        ["order by difference desc", "Ordering the output descending makes the largest number arise to the top - and thats out goal!"]
         ],
         "tags": ["kustodetectiveagency2022", "rookie", "mv-expand", "typeof()", "sum()", "min()", "summarize", "extend", "order by"]      
+},
+"32142a14": {
+        "name": "Kusto Detective Agency 2022 - Detective 1 - Election fraud? <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency3/'>Full writeup</a>",
+        "code": [
+        ["Votes<br>", "Fetching the whole table. "],
+        ["| summarize hits = count() by bin(Timestamp, 5s), via_ip, vote<br>", "By summarizing by a timerange of 5 seconds, via_ip and vote we get the value of how many unique entries/votes there are on those columns. The 5 seconds value was figured out by viewing 'by eye' for a pattern on the timestamps, and there was a iterative pattern based on IP addresses every 5 seconds."],
+        ["| where hits < 2<br>", "One could assume that a voting would not take place more than twice in the 5 seconds, from the same ip and for the same candidate. If this is a miss, it will not be a big miss and we might still get to the correct answer as numbers are rounded for the delivery of the task. Less than two is considered to be 'normal' traffic'."],
+        ["| summarize Count = count() by vote<br>", "Next we are counting all of the votes. Note, that summarize only brings on the columns that are being worked on, so only Count and vote are reachable right after this statement."],
+        ["| as hint.materialized=true ", "This part makes you able to store the current dataset you have piped thus far for later retrieval without storing it by using 'let'. The output of this is cached in memory. Also, this acts similar to the function materialize(), which on the other hand often uses the let statement."],
+        [" T <br>", "This is now the variable name of the current state of the query."],
+        ["| extend Total = toscalar(T <br>", ""],
+        ["| summarize sum(Count))<br>", ""],
+        ["| project vote, Percentage = round(Count*100.0 / Total, 1), Count<br>", ""],
+        ["| order by Count", ""]
+        ],
+        "tags": ["kustodetectiveagency2022", "", ""]
 }
+
                 
                 
                 

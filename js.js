@@ -45,27 +45,23 @@ function convert_to_list() {
 }
 
 function findObjectsWithTags(objects) {
-
     const tagsList = convert_to_list();
     const results = [];
   
-    for (let object in objects) {
-      const objectTags = objects[object].tags;
-      if(object == 0){
-        return;
-    }
+    Object.values(objects).forEach(object => {
       let matches = 0;
       tagsList.forEach(tag => {
-          if (objectTags.includes(tag)) {
-              matches++;
-          }
+        if (object.tags.includes(tag)) {
+          matches++;
+        }
       });
-      if (matches > 0) {
-          results.push(objects[object]);
+      if (matches === tagsList.length) {
+        results.push(object);
       }
-    }
+    });
     return renderJSON(results);
   }
+  
 
 function createSetOfTags(data) {
     let tags = new Set();

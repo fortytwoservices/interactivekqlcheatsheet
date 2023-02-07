@@ -1,0 +1,37 @@
+scalar operators
+Ago
+Now
+DateTime_Arithmetic
+StartOf
+EndOf
+Between
+Format_DateTime
+Format_TimeSpan
+DateTime_Part
+IIF
+Case
+IsNull_and_IsEmpty
+StrCat
+Split
+Contains_and_In
+Parse
+Extract
+Parse_JSON
+
+
+
+
+
+Template for creating user snippet:
+{
+	"NewKQL": {
+		"scope": "JSON,javascript",
+		"prefix": "newKQL",
+		"body": [
+			",\n\"$1\": {\n\t\"name\": \"\",\n\t\"code\": [\n\t[\"\", \"\"],\n\t[\"\", \"\"]\n\t],\n\t\"tags\": [\"\", \"\", \"\"]\n}",
+			"$2"
+		],
+		"description": "Creates a new template JSON for inserting new code block"
+	}
+	
+}
