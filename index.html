@@ -1,298 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="stylesheet.css">
-    </head>
-    <body>
-        <div class="autocomplete" style="width:300px;">
-            <input id="myInput" type="text" name="myCountry"
-                placeholder="Country">
-            <button
-                onclick="document.body.appendChild(findObjectsWithTags(json))">Search</button>
-            <button onclick="document.body.appendChild(renderJSON(json))">Show
-                all</button>
-        </div>
-        <script src="js.js"></script>
-
-        <script>
+        <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width,
+                        initial-scale=1.0">
+                <title>Document</title>
+                <link rel="stylesheet" href="stylesheet.css">
+        </head>
+        <body>
+                <div class="autocomplete" style="width:300px;">
+                        <input id="myInput" type="text" name="KQLsearch"
+                                placeholder="KQL query finder">
+                        <button
+                                onclick="document.body.appendChild(findObjectsWithTags(json))">Search</button>
+                        <button
+                                onclick="document.body.appendChild(renderJSON(json))">Show
+                                all queries</button>
+                </div>
+                <script src="js.js"></script>
+                <div class="container">
+                        <script>
         let json = {
-                "1": {
-                        "name": "Query for a table",
-                        "code": [
-                                ["SecurityEvents", "The table name and nothing else makes you see the whole table."]
-                        ],
-                        "tags": ["table"]
-                },
-                "2": {
-                        "name": "Query table and limit output",
-                        "code": [
-                        ["SecurityEvents", "The table name and nothing else makes you see the whole table."],
-                        ["<br>| limit 10", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."]
-                        ],
-                        "tags": ["limit", "triage"]
-                },
-                "3": {
-                        "name": "Search the table for content",
-                        "code": [
-                        ["SecurityEvents", "Current table."],
-                        ["<br>| search \"Windows\"", "the search keyword searches through every column for a given keyword. This is a timeconsuming function, but very valuable. And note that it is not case sensitive."],
-                        ["<br>| limit 10", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."]
-                        ],
-                        "tags": ["limit", "triage", "search", "case-insensitive"]
-                },
-                "4": {
-                        "name": "Searching every table",
-                        "code": [
-                        ["SecurityEvents", "The table name and nothing else makes you see the whole table."],
-                        ["<br>| limit 10", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."]
-                        ],
-                        "tags": ["limit", "triage", "search all tables"]
-                },
-                "5": {
-                        "name": "Search case sensitive",
-                        "code": [
-                        ["Table<br>| search kind = case_sensitive 'searchWord'", "The search keyword is now case sensitive, we've toggled that on by setting case_sensitive to the kind of search."],
-                        ],
-                        "tags": ["case-sensitive", "search", "triage"]
-                },
-                "6": {
-                        "name": "Search through all of the available tables in the current DB",
-                        "code": [
-                        ["search 'KeyWord'", "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform."]
-                        
-                        ],
-                        "tags": ["search", "triage", "everywhere", "everything"]
-                },
-                "7": {
-                        "name": "Limit search to specific tables",
-                        "code": [
-                        ["search in (Table1, Table2, Table3) 'KeyWord'", "Case-insensitive search through thre different tables withing the current database. You choose how many."]
-                        ],
-                        "tags": ["search", "multiple tables", "triage", "specific"]
-                },
-                "8": {
-                        "name": "Search in multiple tables using wildcard",
-                        "code": [
-                        ["search in (Table*) 'KeyWord'", "Searches in all the tables that has a name starting with 'Table' and ends with anything. The star is a wildcard, which has a match with everything."]
-                        ],
-                        "tags": ["search", "wildcard", "triage"]
-                },
-                "9": {
-                        "name": "Search inside a specific columns for a value",
-                        "code": [
-                        ["Table<br>| search ", "Specify the table and that you are going to search within it"],
-                        ["ColumnName=='Any value you need'", "... and directs the search towards a specific column named 'ColumnName' followed by the keyword you're looking for."]
-                        ],
-                        "tags": ["search", "column"]
-                },
-                "10": {
-                        "name": "search for the value anywhere in the text in the specified column",
-                        "code": [
-                        ["Table<br>| search CounterName:'SearchWord'", "NEEDS testing - not familiar"]
-                        ],
-                        "tags": ["search", ""]
-                },
-                "11": {
-                        "name": "Begins with X ends with Y and anything in between",
-                        "code": [
-                        ["Table<br>| search 'Begins*ends'", "The star '*' inbetween the two words signalises that between those words, anything goes."]
-                        ],
-                        "tags": ["search", "regex", "triage"]
-                },
-                "12": {
-                        "name": "Logical queries with 'search'",
-                        "code": [
-                        ["Perf<br>search 'Free*bytes' and ('C:' or 'D:')", ""]
-                        ],
-                        "tags": ["search", "logic", "triage"]
-                },
-                "30": {
-                        "name": "Search with regex",
-                        "code": [
-                        ["Perf <br>| search InstanceName matches regex '[A-Z]:'", ""],
-                        ["", ""]
-                        ],
-                        "tags": ["", ""]
-                },
-                "31": {
-                        "name": "Limit the result set with the 'where' clause",
-                        "code": [
-                        ["Table<br>| where ", "Query the table for a value with the where clause."],
-                        ["TimeGenerated >= ago(2h)", "Now we are looking for data WHERE the TimeGenerated is newer or equal to 2 hours ago."]
-                        ],
-                        "tags": ["where", "limit", "timegenerated", "ago", "hours"]
-                },
-                "32": {
-                        "name": "Logical where-clause with AND and OR.",
-                        "code": [
-                        ["Table<br>| where ColumnName == 'value'", "Query the database where table row has value 'value'."],
-                        ["<br>    and TimeGenerated <= ago(255ms)", "Now we're looking for the second thing basically on the same line"],
-                        ["<br>    and (Column1 == 'something'<br>    or<br>    Column2 == 'something else'<br>    )"]
-                        ],
-                        "tags": ["where", "and","or", "logical", "ago", "where"]
-                },
-                "33": {
-                        "name": "Simulate 'search' using positional matches",
-                        "code": [
-                        ["Table<br>| where * has 'value'", "This way you can simulate the search function."],
-                        ["<br>| where * hasprefix 'startVal'", "Asks where ANY(*) column has the value 'startVal' at the beginning"],
-                        ["<br>| where * hassuffix 'endVal'", "Asks where ANY (*) column has the value 'endVal' at the end."],
-                        ["<br>| where * contains 'anywhere'", "Asks where ANY (*) column contains the value 'anywhere' anywhere in its content."]
-                        ],
-                        "tags": ["where", "hassuffix", "hasprefix", "contains", "wide", "simulate", "search"]
-                },
-                "34": {
-                        "name": "Where-clause with regex",
-                        "code": [
-                        ["Table<br>| where Column matches regex '[A-Za-z]:'", "Using this syntax you can leverage the power of regex! (TBD input the regex motor)"]
-                        ],
-                        "tags": ["", ""]
-                },
-                "35": {
-                        "name": "Count all rows",
-                        "code": [
-                        ["Table<br>| count", "The count keyword works by counting all of the rows in the current table/input and outputs a number."]
-                        ],
-                        "tags": ["count", "occurences"]
-                },
-                "36": {
-                        "name": "Count with summarize on specific column(s)",
-                        "code": [
-                        ["Table<br>| ", "Get the data you need."],
-                        ["summarize", "Summarize is an aggregated function that lets you work on data and pass it down the pipe. Note that only columns/data you use in summarize are passed on, which means that columns not used are not able to be used after summarize."],
-                        ["count() by ", "These keywords tells what you shall count by. Read the whole query like 'From the Table I want to count all the occurences of the Table by ColumnName'"],
-                        ["ColumnName", "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'status', and the status needs to be equal to another to make it increment."]
-                        ],
-                        "tags": ["summarize", "count"]
-                },
-                "37": {
-                        "name": "Change name of the count column",
-                        "code": [
-                        ["Table<br>| summarize myNewColumnName = count() by Column", "By including the 'myNewColumnName =' the result from the count() function will be added to a column you decide the name of."]
-                        ],
-                        "tags": ["change", "name", "summarize", "personalize", "count"]
-                },
-                "38": {
-                        "name": "Aggregate data with summarize and average (avg).",
-                        "code": [
-                        ["Table<br>| summarize myNewColumnName = count(), myAverageCounterColumn = avg(CounterCol) by Column", ""]
-                        ],
-                        "tags": ["", ""]
-                },
-                "39": {
-                        "name": "bin",
-                        "code": [
-                        ["Table<br>| summarize Column by bin(TimeGenerated, 1d)", "Summarizes data into logical groups based on a timerange. This can also be done with numerical values other than dates. The word bin refers to the data being put into their own matching (timegenerated)bin."]
-                        ],
-                        "tags": ["", ""]
-                },
-                "40": {
-                        "name": "Extend",
-                        "code": [
-                        ["Table<br>| extend calculatedWin = Income * 10.2", "Creates a new column based on a value from the current database and multiplies it with 10.2."]
-                        ],
-                        "tags": ["extend", "multiply", "math", "calculate"]
-                },
-                "41": {
-                        "name": "In combination with concatenation, create custom text output",
-                        "code": [
-                        ["Table<br>| extend calculatedWin = strcat('Current income is', Income')", "strcat() makes you able to concatenate strings together, fusing them into a sentence."]
-                        ],
-                        "tags": ["concatenate", "string", "extend" ]
-                },
+"1": {
+        "name": "Query for a table",
+        "code": [
+                ["SecurityEvents", "The table name and nothing else makes you see the whole table."]
+        ],
+        "tags": ["operator","table"]
+},
+"2": {
+        "name": "Query table and limit output",
+        "code": [
+        ["SigninLogs<br>", "The table name and nothing else makes you see the whole table."],
+        ["| ", "The Pipe! This symbol is called a pipe, and does exactly what it sounds like - it sends data through, the data you instruct the query to work further on gets sent into this line. "],
+        ["limit", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."],
+        [" 10", "The number of output - choose any number relevant here. It is recommended to keep a pretty low number if you are gaining insight into the database for triage or to find a way through."]
+        ],
+        "tags": ["operator","limit", "triage"]
+},
+"3": {
+        "name": "Search the table for content",
+        "code": [
+        ["SecurityEvents", "Current table."],
+        ["<br>| search \"Windows\"", "the search keyword searches through every column for a given keyword. This is a timeconsuming function, but very valuable. And note that it is not case sensitive."],
+        ["<br>| limit 10", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."]
+        ],
+        "tags": ["operator","limit", "triage", "search", "case-insensitive"]
+},
+"4": {
+        "name": "Searching every table",
+        "code": [
+        ["SecurityEvents", "The table name and nothing else makes you see the whole table."],
+        ["<br>| limit 10", "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."]
+        ],
+        "tags": ["operator","limit", "triage", "search all tables"]
+},
+"5": {
+        "name": "Search case sensitive",
+        "code": [
+        ["Table<br>| search kind = case_sensitive 'searchWord'", "The search keyword is now case sensitive, we've toggled that on by setting case_sensitive to the kind of search."],
+        ],
+        "tags": ["operator","case-sensitive", "search", "triage"]
+},
+"6": {
+        "name": "Search through all of the available tables in the current DB",
+        "code": [
+        ["search 'KeyWord'", "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform."]
+        
+        ],
+        "tags": ["operator","search", "triage", "everywhere", "everything"]
+},
+"7": {
+        "name": "Limit search to specific tables",
+        "code": [
+        ["search in (Table1, Table2, Table3) 'KeyWord'", "Case-insensitive search through thre different tables withing the current database. You choose how many."]
+        ],
+        "tags": ["operator","search", "multiple tables", "triage", "specific"]
+},
+"8": {
+        "name": "Search in multiple tables using wildcard",
+        "code": [
+        ["search in (Table*) 'KeyWord'", "Searches in all the tables that has a name starting with 'Table' and ends with anything. The star is a wildcard, which has a match with everything."]
+        ],
+        "tags": ["operator","search", "wildcard", "triage"]
+},
+"9": {
+        "name": "Search inside a specific columns for a value",
+        "code": [
+        ["Table<br>| search ", "Specify the table and that you are going to search within it"],
+        ["ColumnName=='Any value you need'", "... and directs the search towards a specific column named 'ColumnName' followed by the keyword you're looking for."]
+        ],
+        "tags": ["operator","search", "column"]
+},
+"10": {
+        "name": "search for the value anywhere in the text in the specified column",
+        "code": [
+        ["Table<br>| search CounterName:'SearchWord'", "NEEDS testing - not familiar"]
+        ],
+        "tags": ["operator","search", ""]
+},
+"11": {
+        "name": "Begins with X ends with Y and anything in between",
+        "code": [
+        ["Table<br>| search 'Begins*ends'", "The star '*' inbetween the two words signalises that between those words, anything goes."]
+        ],
+        "tags": ["operator","search", "regex", "triage"]
+},
+"12": {
+        "name": "Logical queries with 'search'",
+        "code": [
+        ["Perf<br>search 'Free*bytes' and ('C:' or 'D:')", ""]
+        ],
+        "tags": ["operator","search", "logic", "triage"]
+},
+"30": {
+        "name": "Search with regex",
+        "code": [
+        ["Perf <br>| search InstanceName matches regex '[A-Z]:'", ""],
+        ["", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+"31": {
+        "name": "Limit the result set with the 'where' clause",
+        "code": [
+        ["Table<br>| where ", "Query the table for a value with the where clause."],
+        ["TimeGenerated >= ago(2h)", "Now we are looking for data WHERE the TimeGenerated is newer or equal to 2 hours ago."]
+        ],
+        "tags": ["operator","where", "limit", "timegenerated", "ago", "hours"]
+},
+"32": {
+        "name": "Logical where-clause with AND and OR.",
+        "code": [
+        ["Table<br>| where ColumnName == 'value'", "Query the database where table row has value 'value'."],
+        ["<br>    and TimeGenerated <= ago(255ms)", "Now we're looking for the second thing basically on the same line"],
+        ["<br>    and (Column1 == 'something'<br>    or<br>    Column2 == 'something else'<br>    )"]
+        ],
+        "tags": ["operator","where", "and","or", "logical", "ago", "where"]
+},
+"33": {
+        "name": "Simulate 'search' using positional matches",
+        "code": [
+        ["Table<br>| where * has 'value'", "This way you can simulate the search function."],
+        ["<br>| where * hasprefix 'startVal'", "Asks where ANY(*) column has the value 'startVal' at the beginning"],
+        ["<br>| where * hassuffix 'endVal'", "Asks where ANY (*) column has the value 'endVal' at the end."],
+        ["<br>| where * contains 'anywhere'", "Asks where ANY (*) column contains the value 'anywhere' anywhere in its content."]
+        ],
+        "tags": ["operator","where", "hassuffix", "hasprefix", "contains", "wide", "simulate", "search"]
+},
+"34": {
+        "name": "Where-clause with regex",
+        "code": [
+        ["Table<br>| where Column matches regex '[A-Za-z]:'", "Using this syntax you can leverage the power of regex! (TBD input the regex motor)"]
+        ],
+        "tags": ["operator","", ""]
+},
+"35": {
+        "name": "Count all rows",
+        "code": [
+        ["Table<br>| count", "The count keyword works by counting all of the rows in the current table/input and outputs a number."]
+        ],
+        "tags": ["operator","count", "occurences"]
+},
+"36": {
+        "name": "Count with summarize on specific column(s)",
+        "code": [
+        ["Table<br>| ", "Get the data you need."],
+        ["summarize", "Summarize is an aggregated function that lets you work on data and pass it down the pipe. Note that only columns/data you use in summarize are passed on, which means that columns not used are not able to be used after summarize."],
+        ["count() by ", "These keywords tells what you shall count by. Read the whole query like 'From the Table I want to count all the occurences of the Table by ColumnName'"],
+        ["ColumnName", "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'status', and the status needs to be equal to another to make it increment."]
+        ],
+        "tags": ["operator","summarize", "count"]
+},
+"37": {
+        "name": "Change name of the count column",
+        "code": [
+        ["Table<br>| summarize myNewColumnName = count() by Column", "By including the 'myNewColumnName =' the result from the count() function will be added to a column you decide the name of."]
+        ],
+        "tags": ["operator","change", "name", "summarize", "personalize", "count"]
+},
+"38": {
+        "name": "Aggregate data with summarize and average (avg).",
+        "code": [
+        ["Table<br>| summarize myNewColumnName = count(), myAverageCounterColumn = avg(CounterCol) by Column", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+"39": {
+        "name": "bin",
+        "code": [
+        ["Table<br>| summarize Column by bin(TimeGenerated, 1d)", "Summarizes data into logical groups based on a timerange. This can also be done with numerical values other than dates. The word bin refers to the data being put into their own matching (timegenerated)bin."]
+        ],
+        "tags": ["operator","", ""]
+},
+"40": {
+        "name": "Extend",
+        "code": [
+        ["Table<br>| extend calculatedWin = Income * 10.2", "Creates a new column based on a value from the current database and multiplies it with 10.2."]
+        ],
+        "tags": ["operator","extend", "multiply", "math", "calculate"]
+},
+"41": {
+        "name": "In combination with concatenation, create custom text output",
+        "code": [
+        ["Table<br>| extend calculatedWin = strcat('Current income is', Income')", "strcat() makes you able to concatenate strings together, fusing them into a sentence."]
+        ],
+        "tags": ["operator","concatenate", "string", "extend" ]
+},
+
+"42": {
+        "name": "Choose columns to pipe further",
+        "code": [
+        ["Table<br>| project", "Choose table"],
+        ["| project", "'project' lets you choose which columns you want to move furhter down the KQL pipe."],
+        ["Column1<br>,Column2<br>Column3", "Columns that are chosen to be piped further into the query."]
+        ],
+        "tags": ["operator","project", "pipe", "choose"]
+},
+
+"43": {
+        "name": "Calculate data with project",
+        "code": [
+        ["Table<br>", "Choose table"],
+        ["| project myCalc = Column1 * 2", "Calculates whatever value is in Columns1 with 2 and stores it in column named 'myCalc'"]
+        ],
+        "tags": ["operator","calculate", "extend", "simulate", "project"]
+},
+
+"44": {
+        "name": "Remove specific columns from the output with project-away",
+        "code": [
+        ["Table<br>", "Choose table."],
+        ["| project-away ", "This function lets you remove columns from the output."],
+        ["Column1, Column2", "These two columns will not show up in the output now."]
+        ],
+        "tags": ["operator","project-away", "remove", "choose"]
+},
+
+"45": {
+        "name": "Rename a column with project-rename",
+        "code": [
+        ["Table<br>", "Choose table"],
+        ["| project-rename uniqueName = Column1", "Changing the name of Column1 to 'uniueName'."]
+        ],
+        "tags": ["operator","rename", "column"]
+},
+
+"46": {
+        "name": "Deduplicate output.",
+        "code": [
+        ["Table<br>", ""],
+        ["| distinct ", "By piping into the distinct keyword you get to choose what columns you should get unique value combination from."],
+        ["Column1, Column2", "Now, every output row does not contain any duplicates"]
+        ],
+        "tags": ["operator","deduplicate", "distinct", "unique"]
+},
+
+"47": {
+        "name": "Output the top X result",
+        "code": [
+        ["Table<br>", ""],
+        ["| top 10 by Column1 asc", "Sorts the Column1 ascending and outputs only the 10 from the top. Descending is achieved by 'desc'"]
+        ],
+        "tags": ["operator","", ""]
+},
+
+"48": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+
+"49": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+
+"50": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+"51": {
+        "name": "Sorting output",
+        "code": [
+        ["SigninLogs<br>", "Choosing table"],
+        ["sort by", "Sorting by any column or columns is possible. By sorting on multiple columns, the further to the left in the columns listing you go the more precedence they will have. This lets you sort output on the current column where the previous columns has duplicate values. Sorting with this keywords defaults to descending for both text and numeric values, and timestamps goes back in time. You can add values 'asc' or 'desc' to change it or make it explicit respectively."],
+        ["TimeGenerated<br>", "Sorts by TimeGenerated and descends back in time."],
+        [", ResultType<br>", "Every value from 'TimeGenerated' that are duplicates only in that column will now be sorted descending on ResultType."],
+        [", ResultDescription asc", "Now we're mixing the sorting order up. For every duplicate values of the previous colun (ResultType), ResultDescription will be sorted ascending. You may mix this up as you want by adding 'asc' or 'desc' after your columns listing."]],
+        "tags": ["sort", "output", "scalar operator", "order", "sort by", "order by"],
+        "comment": "STARTING SCALAR OPERATORS"
+},
+"52": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["operator","", ""]
+},
+"123": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["", "", ""]
+},
+"12143": {
+        "name": "",
+        "code": [
+        ["", ""],
+        ["", ""]
+        ],
+        "tags": ["", "", ""]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"23981": {
+        "name": "Kusto Detective agency 2022 - Onboarding",
+        "code": [
+        ["Onboarding<br>| summarize sum(Score)", "Basic and simple query to sum up all numeric values."]
+        ],
+        "tags": ["kustodetectiveagency2022", "onboarding"]
+},
+"3214214": {
+        "name": "Kusto Detective Agency 2022 - Rookie - The rarest book is missing",
+        "code": [
+        ["Shelves<br>", "Fetching the whole table"],
+        ["| mv-expand rf_id = rf_ids to typeof(string) <br>", "mv-expand takes the array that is in 'rf_ids' and expands the tables records (rows) by adding an entry for each value. This means that the rest of the columns for all of the array elements will remain the same, but we will be able to query them singularily. Each of the element is then converted into a string."],
+        ["| lookup Books on rf_id<br>", ""],
+        ["| project shelf, author, book_title, total_weight, weight_gram<br>", ""],
+        ["summarize bookWeight = sum(weight_gram), claimedWeight = min(total_weight) by shelf<br>", ""],
+        ["extend difference = (claimedWeight - bookWeight)<br>", ""],
+        ["order by difference desc", ""]
+        ],
+        "tags": ["kustodetectiveagency2022", "rookie", "mv-expand", "typeof()", "sum()", "min()", "summarize", "extend", "order by"]      
+}
                 
-                "42": {
-                        "name": "Choose columns to pipe further",
-                        "code": [
-                        ["Table<br>| project", "Choose table"],
-                        ["| project", "'project' lets you choose which columns you want to move furhter down the KQL pipe."],
-                        ["Column1<br>,Column2<br>Column3", "Columns that are chosen to be piped further into the query."]
-                        ],
-                        "tags": ["project", "pipe", "choose"]
-                },
                 
-                "43": {
-                        "name": "Calculate data with project",
-                        "code": [
-                        ["Table<br>", "Choose table"],
-                        ["| project myCalc = Column1 * 2", "Calculates whatever value is in Columns1 with 2 and stores it in column named 'myCalc'"]
-                        ],
-                        "tags": ["calculate", "extend", "simulate", "project"]
-                },
                 
-                "44": {
-                        "name": "Remove specific columns from the output with project-away",
-                        "code": [
-                        ["Table<br>", "Choose table."],
-                        ["| project-away ", "This function lets you remove columns from the output."],
-                        ["Column1, Column2", "These two columns will not show up in the output now."]
-                        ],
-                        "tags": ["project-away", "remove", "choose"]
-                },
                 
-                "45": {
-                        "name": "Rename a column with project-rename",
-                        "code": [
-                        ["Table<br>", "Choose table"],
-                        ["| project-rename uniqueName = Column1", "Changing the name of Column1 to 'uniueName'."]
-                        ],
-                        "tags": ["rename", "column"]
-                },
-                
-                "46": {
-                        "name": "Deduplicate output.",
-                        "code": [
-                        ["Table<br>", ""],
-                        ["| distinct ", "By piping into the distinct keyword you get to choose what columns you should get unique value combination from."],
-                        ["Column1, Column2", "Now, every output row does not contain any duplicates"]
-                        ],
-                        "tags": ["deduplicate", "distinct", "unique"]
-                },
-                
-                "47": {
-                        "name": "Output the top X result",
-                        "code": [
-                        ["Table<br>", ""],
-                        ["| top 10 by Column1 asc", "Sorts the Column1 ascending and outputs only the 10 from the top. Descending is achieved by 'desc'"]
-                        ],
-                        "tags": ["", ""]
-                },
-                
-                "48": {
-                        "name": "",
-                        "code": [
-                        ["", ""],
-                        ["", ""]
-                        ],
-                        "tags": ["", ""]
-                },
-                
-                "49": {
-                        "name": "",
-                        "code": [
-                        ["", ""],
-                        ["", ""]
-                        ],
-                        "tags": ["", ""]
-                },
-                
-                "50": {
-                        "name": "",
-                        "code": [
-                        ["", ""],
-                        ["", ""]
-                        ],
-                        "tags": ["", ""]
-                }
         }
                 createSetOfTags(json);
                 autocomplete(document.getElementById('myInput'), createSetOfTags(json));
-                console.log(findObjectsWithTags("limit", json));
-
         </script>
-    </body>
+                </div>
+        </body>
 </html>

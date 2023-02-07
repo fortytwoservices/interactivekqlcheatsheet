@@ -1,50 +1,28 @@
-#fixed-tooltiptext-in {
+.tippy {
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.tippy .tippytext {
+    visibility: hidden;
+    background-color: #395B64;
+    color: #E7F6F2;
+    padding: 3px;
+    z-index: 1;
+    display: inline-block;    
+    
     position: fixed;
     bottom: 0;
+    text-align: center;
     width: fit-content;
+    max-width: 800px;
+
     height: fit-content;
-    border: 3px solid #2C3333;
-    border-radius: 6px;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0 auto;
-    padding: 3px;
-    visibility: hidden;
-    background-color: #333;
-    z-index: 1;
-}
-.tooltip-in:hover #fixed-tooltiptext-in{
-visibility: visible;
-border: 3px solid #2C3333;
-}
-.tooltip-in {
-    position: relative;
-    display: inline-block;
-    transition: background-color 0.5s ease;
-}
-.tooltip-in:hover{
-    color: #E7F6F2;
-    background-color: #2C3333;
-}
-/*Tooltip Outlines*/
-.tippy {
-    position: relative;
-    /*display: inline-block;*/
-    transition: background-color 1s ease;
 }
 
-/* tooltip (the box) and the tooltiptext (the text) is styled this way. */
-.tippy .tippytext {
-    visibility: hidden;
-    width: 400px;
-    height: auto;
-    background-color: #395B64;
-    color: #E7F6F2;
-    margin-left: 20px;
-    padding-left: 3px;
-    position: absolute;
-    z-index: 1;
-}
 .tippy:hover .tippytext {
     visibility: visible;
 }
@@ -52,16 +30,21 @@ border: 3px solid #2C3333;
     background-color: #A5C9CA;
 }
 .codeBox{
-    border: 2px solid #A5C9CA;
+    border: 2px solid #0c7074;
     background-color: #DFB;
+    padding: 3px;
 }
 
 details{
-    border-radius: 15px 15px;
+    border-radius: 10px 10px;
+}
+
+details:last-child{
+  margin-bottom: 120px;
 }
 
 details[open] summary ~ * {
-    animation: sweep .5s ease-in-out;
+    animation: sweep .2s ease-in-out;
 
   }
   
@@ -75,9 +58,9 @@ summary {
     border: 3px solid  #A5C9CA;
     padding: 3px;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 6px;
     background-color: #E7F6F2;
-
+    margin: 1px;
   }
   
   summary b {
@@ -86,6 +69,12 @@ summary {
     right: 6px;
     transform: scaleX(-1);
   }
+pre{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    display: block;
+    font-family: monospace;
+}
 
 .divider-border{
     border: 3px solid  #A5C9CA;
@@ -106,18 +95,17 @@ summary {
     display: inline-block;
   }
   input {
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
+    border: 1px solid;
+    border-radius: 6px;
+    background-color: #bcbeba9c;
     padding: 10px;
     font-size: 16px;
+    margin: 4px;
   }
-  input[type=text] {
-    background-color: #f1f1f1;
-    width: 100%;
-  }
+
   button {
-    background-color: DodgerBlue;
-    color: #fff;
+    background-color: rgba(191, 224, 215, 0.737);
+    border-radius: 6px;
   }
   .autocomplete-items {
     position: absolute;
@@ -147,3 +135,10 @@ summary {
   }
   
     
+
+  .container {
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    column-gap: 10px;
+    row-gap: 15px;
+  }

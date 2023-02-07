@@ -1,11 +1,8 @@
 function renderJSON(json) {
     var elem = document.getElementsByClassName("queries");
-    console.log(elem);
     while (elem.length > 0) {
         elem[0].parentNode.removeChild(elem[0]);
     }
-
-
     let container = document.createElement("div");
     container.setAttribute("class", "queries");
 
@@ -27,6 +24,7 @@ function renderJSON(json) {
             div.setAttribute("class", "tippy");
             let span = document.createElement("span");
             span.setAttribute("class", "tippytext");
+            
             span.innerHTML = array[1];
 
             div.innerHTML = array[0];
@@ -34,10 +32,8 @@ function renderJSON(json) {
             codebox.appendChild(div);
             details.appendChild(codebox);
         })
-
         container.appendChild(details);
     }
-    console.log("saodij")
     return container;
 }
 
@@ -49,11 +45,15 @@ function convert_to_list() {
 }
 
 function findObjectsWithTags(objects) {
+
     const tagsList = convert_to_list();
     const results = [];
   
     for (let object in objects) {
       const objectTags = objects[object].tags;
+      if(object == 0){
+        return;
+    }
       let matches = 0;
       tagsList.forEach(tag => {
           if (objectTags.includes(tag)) {
@@ -64,44 +64,8 @@ function findObjectsWithTags(objects) {
           results.push(objects[object]);
       }
     }
-    return renderJSONSearch(results);
+    return renderJSON(results);
   }
-
-
-
-
-
-function renderJSONSearch(json) {
-    var elem = document.getElementsByClassName("queries");
-    while (elem.length > 0) {
-        elem[0].parentNode.removeChild(elem[0]);
-    }
-
-    let container = document.createElement("div");
-    container.setAttribute("class", "queries");
-
-    for (let element in json) {
-
-        let details = document.createElement("details");
-        let summary = document.createElement("summary");
-        summary.innerHTML = json[element].name;
-        details.appendChild(summary);
-
-        json[element].code.forEach(array => {
-            let div = document.createElement("span");
-            div.setAttribute("class", "tippy");
-            let span = document.createElement("span");
-            span.setAttribute("class", "tippytext");
-            span.innerHTML = array[1];
-
-            div.innerHTML = array[0];
-            div.appendChild(span);
-            details.appendChild(div);
-        })
-        container.appendChild(details);
-    }
-    return container;
-}
 
 function createSetOfTags(data) {
     let tags = new Set();
@@ -119,18 +83,17 @@ function createSetOfTags(data) {
 
 
 
+
+
 //SEARCH FUNCTION
 
 
 
 function autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
-        /*close any already open lists of autocompleted values*/
         closeAllLists();
         if (!val) { return false; }
         currentFocus = -1;
