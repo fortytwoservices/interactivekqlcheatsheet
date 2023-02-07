@@ -374,10 +374,9 @@
         ["| summarize Count = count() by vote<br>", "Next we are counting all of the votes. Note, that summarize only brings on the columns that are being worked on, so only Count and vote are reachable right after this statement."],
         ["| as hint.materialized=true ", "This part makes you able to store the current dataset you have piped thus far for later retrieval without storing it by using 'let'. The output of this is cached in memory. Also, this acts similar to the function materialize(), which on the other hand often uses the let statement."],
         [" T <br>", "This is now the variable name of the current state of the query."],
-        ["| extend Total = toscalar(T <br>", ""],
-        ["| summarize sum(Count))<br>", ""],
-        ["| project vote, Percentage = round(Count*100.0 / Total, 1), Count<br>", ""],
-        ["| order by Count", ""]
+        ["| extend Total = toscalar(T <br>| summarize sum(Count))<br>", "Now we are adding a new column that will hold the sum of Count - the total Count."],
+        ["    | project vote, Percentage = round(Count*100.0 / Total, 1), Count<br>", "Project is also usefull for calculation, as well as we reduce the amount of data we are sending through the pipeline. This is basic math to get the percentage."],
+        ["| order by Count", "Order by Count - defaults to descending."]
         ],
         "tags": ["kustodetectiveagency2022", "", ""]
 }
