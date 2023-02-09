@@ -49,11 +49,11 @@
         ]
     },
     "1": {
-        "name": "Query table and limit output",
+        "name": "Query a table and limit output records",
         "code": [
             [
                 "SigninLogs<br>",
-                "The table name and nothing else makes you see the whole table."
+                "Query the whole table."
             ],
             [
                 "| ",
@@ -61,33 +61,34 @@
             ],
             [
                 "limit",
-                "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."
+                "'limit' will reduce the lines of output to 10 lines which makes the query a lot faster.. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ],
             [
                 " 10",
-                "The number of output - choose any number relevant here. It is recommended to keep a pretty low number if you are gaining insight into the database for triage or to find a way through."
+                "The number of output records to be shown - choose any number relevant to your intentions. It is recommended to keep a pretty low number if you are trying to gain some insight into the database for triage purposes."
             ]
         ],
         "tags": [
             "operator",
             "limit",
-            "triage"
+            "triage",
+            "take"
         ]
     },
     "2": {
-        "name": "Search the table for content",
+        "name": "Search the current table for content - far and wide",
         "code": [
             [
-                "SecurityEvents",
-                "Current table."
+                "SigninLogs",
+                "Query the whole table."
             ],
             [
-                "<br>| search \"Windows\"",
-                "the search keyword searches through every column for a given keyword. This is a timeconsuming function, but very valuable. And note that it is not case sensitive."
+                "<br>| search \"50074\"",
+                "the search keyword searches through every column for the string '50074'. This far into the query, we are dealing with a time- and dataconsuming query, but very valuable. Note that 'search' is not case sensitive."
             ],
             [
                 "<br>| limit 10",
-                "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."
+                "'limit' will reduce the lines of output to 10 lines or records. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ]
         ],
         "tags": [
@@ -95,49 +96,56 @@
             "limit",
             "triage",
             "search",
-            "case-insensitive"
+            "case-insensitive",
+            "take"
         ]
     },
     "3": {
         "name": "Searching every table",
         "code": [
             [
-                "SecurityEvents",
-                "The table name and nothing else makes you see the whole table."
+                "SigninLogs",
+                "Querying the table of interest"
             ],
             [
                 "<br>| limit 10",
-                "'limit' will reduce the lines of output to 10 lines = fast search. Note that 'limit' and 'take' are interchangeable. They do the same thing."
+                "'limit' will reduce the lines of output to 10 records. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ]
         ],
         "tags": [
             "operator",
             "limit",
             "triage",
-            "search all tables"
+            "search all tables",
+            "take"
         ]
     },
     "4": {
         "name": "Search case sensitive",
         "code": [
             [
-                "Table<br>| search kind = case_sensitive 'searchWord'",
-                "The search keyword is now case sensitive, we've toggled that on by setting case_sensitive to the kind of search."
+                "SigninLogs<br>",
+                "Query the whole table."
+            ],
+            [
+                "| search kind = case_sensitive 'OSX'",
+                "The search operator is now case sensitive, we've toggled that to 'on' by setting case_sensitive to the 'kind' of search."
             ]
         ],
         "tags": [
             "operator",
             "case-sensitive",
             "search",
-            "triage"
+            "triage",
+            "kind"
         ]
     },
     "5": {
-        "name": "Search through all of the available tables in the current DB",
+        "name": "Search through all of the available tables in the current database",
         "code": [
             [
                 "search 'KeyWord'",
-                "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform."
+                "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform and it may render results at a slow pace."
             ]
         ],
         "tags": [
@@ -149,11 +157,15 @@
         ]
     },
     "6": {
-        "name": "Limit search to specific tables",
+        "name": "Search multiple specific tables",
         "code": [
             [
-                "search in (Table1, Table2, Table3) 'KeyWord'",
+                "search in (SigninLogs, AzureActivity)",
                 "Case-insensitive search through thre different tables withing the current database. You choose how many."
+            ],
+            [
+                " 'example@example.com'",
+                "The searchword string that you are looking for in those tables."
             ]
         ],
         "tags": [
@@ -168,92 +180,133 @@
         "name": "Search in multiple tables using wildcard",
         "code": [
             [
-                "search in (Table*) 'KeyWord'",
-                "Searches in all the tables that has a name starting with 'Table' and ends with anything. The star is a wildcard, which has a match with everything."
+                "search in (Device*) 'Windows'",
+                "Searches in all the tables that has a name starting with 'Device' and ends with anything. The star is a wildcard, which has a match with everything."
             ]
         ],
         "tags": [
             "operator",
             "search",
             "wildcard",
-            "triage"
+            "triage",
+            "regex"
         ]
     },
     "8": {
-        "name": "Search inside a specific columns for a value",
+        "name": "Search inside a specific column for a value",
         "code": [
             [
-                "Table<br>| search ",
-                "Specify the table and that you are going to search within it"
+                "SigninLogs<br>",
+                "Query the whole table."
             ],
             [
-                "ColumnName=='Any value you need'",
-                "... and directs the search towards a specific column named 'ColumnName' followed by the keyword you're looking for."
+                "| search ",
+                "Initialize the searching"
+            ],
+            [
+                "ResultType=='50074'",
+                "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType matches '50074' exactly!"
             ]
         ],
         "tags": [
             "operator",
             "search",
-            "column"
+            "column",
+            "exact",
+            "match"
         ]
     },
     "9": {
         "name": "search for the value anywhere in the text in the specified column",
         "code": [
             [
-                "Table<br>| search CounterName:'SearchWord'",
-                "NEEDS testing - not familiar"
+                "SigninLogs<br>",
+                "Query the whole table."
+            ],
+            [
+                "| search ",
+                "Initialize the searching"
+            ],
+            [
+                "ResultType:'50074'",
+                "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType has a partial match with '50074'."
             ]
         ],
         "tags": [
             "operator",
-            "search"
+            "search",
+            "partial",
+            "match"
         ]
     },
     "10": {
         "name": "Begins with X ends with Y and anything in between",
         "code": [
             [
-                "Table<br>| search 'Begins*ends'",
-                "The star '*' inbetween the two words signalises that between those words, anything goes."
+                "Table<br>",
+                "Query the whole table."
+            ],
+            [
+                "| search 'FirstName*LastName'",
+                "The star '*' inbetween the two words signalises that between those words, anything goes. A usecase for this query is now to look for a full name in signinlogs, where the middlename could be anything."
             ]
         ],
         "tags": [
             "operator",
             "search",
             "regex",
-            "triage"
+            "triage",
+            "wildcard"
         ]
     },
     "11": {
         "name": "Logical queries with 'search'",
         "code": [
             [
-                "Perf<br>search 'Free*bytes' and ('C:' or 'D:')",
-                ""
+                "SigninLogs<br>",
+                "Query the whole table"
+            ],
+            [
+                "| search 'Name'", 
+                "we are now searching for two things to be true - both sides of the 'and' logical statement. 'Name' has to exist in the same record as either or both values in the preceeding 'or' logical statement."
+            ],
+            [
+                " and ",
+                "The keyword 'and' is a logical operator that needs both part of the statement to be true for it to proceed with its current data. In a record, 'Name' has to be existing, and whatever comes after has to be evaluated to true."
+            ],
+            [
+                "('50074' or '50126')",
+                "At least one of these values inside the braces has to be true to make this exact statement return true. That is how the logical operator 'or' works - by making sure that at least one of the values exists beofre it returns its state. This is not an explicit or. Explicit or returns false if both values exists. "
             ]
         ],
         "tags": [
             "operator",
             "search",
             "logic",
-            "triage"
+            "triage",
+            "or",
+            "and",
+            "exclusive",
+            "xor"
         ]
     },
     "12": {
         "name": "Search with regex",
         "code": [
             [
-                "Perf <br>| search InstanceName matches regex '[A-Z]:'",
-                ""
+                "SigninLogs <br>| search AlternateSignInName",
+                "Get your table as usual."
             ],
             [
-                "",
-                ""
+                " matches regex '[A-Z]'",
+                "The syntax for initializing a regex search looks like this. Whatever is inside the quotes (no matter if you use single or double quotes) is the regex. Suggest doing some readup on regex, because regex is really powerfull for looking at patterns!"
             ]
         ],
         "tags": [
-            "operator"
+            "operator",
+            "regex",
+            "match",
+            "pattern"
         ]
     },
     "13": {
@@ -349,7 +402,7 @@
         "name": "Count all rows",
         "code": [
             [
-                "Table<br>| count",
+                "SigninLogs<br>| count",
                 "The count keyword works by counting all of the rows in the current table/input and outputs a number."
             ]
         ],
@@ -596,54 +649,6 @@
             "operator"
         ]
     },
-    "30": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "operator"
-        ]
-    },
-    "31": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "operator"
-        ]
-    },
-    "32": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "operator"
-        ]
-    },
     "33": {
         "name": "Sorting output",
         "code": [
@@ -677,58 +682,6 @@
             "order by"
         ],
         "comment": "STARTING SCALAR OPERATORS"
-    },
-    "34": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "operator"
-        ]
-    },
-    "35": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "",
-            "",
-            ""
-        ]
-    },
-    "36": {
-        "name": "",
-        "code": [
-            [
-                "",
-                ""
-            ],
-            [
-                "",
-                ""
-            ]
-        ],
-        "tags": [
-            "",
-            "",
-            ""
-        ]
     },
     "37": {
         "name": "Kusto Detective Agency 2022 - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
@@ -830,7 +783,83 @@
         "tags": [
             "kustodetectiveagency2022"
         ]
+    },
+    "40": {
+        "name": "Kusto Detective Agency 2022 - Detective 1 - Election fraud? <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
+        "code": [
+        [
+            "let afterRobbery = Traffic<br>", 
+            "The let statement tells KQL to handle everything that comes after up until a semicolong to be treated and stored as a variable for later retrieval and use. And we are starting out by setting the variable equal to the Traffic."],
+        [
+            "| where Timestamp between(datetime(2022-10-16 08:31:00) .. datetime(2022-10-16 08:40:00))<br>", 
+            "Next we are looking for all data that resides in between the given datetimes. The time we are looking at here are the times for when the robbers left the scene and when the police arrived (in other words, when we are sure they have left the scene). The robbers cars has to be between these timedates. But where are they?"
+        ],
+        [
+            "| summarize arg_min(Timestamp, *) by VIN<br>",
+            "Summarizing with the arg_min function, we are able to get the cars that left the scene first within our timerange (first parameter). The second parameter inside arg_min is the star, the wildcard, the everything. It is basically where you tell the function what kind of columns you want to bring on through the query - like it's own internal pipe. And least, we summarize by VIN."
+        ],
+        [
+            "| where Ave == 157<br>",
+            "And up until now, we have only been looking at a timerange (between()), we know that after 08:31:00 and 08:40:00 the robbers left the Avenue 157 and..."
+        ],
+        [
+            "| where Street == 148<br>",
+            "... the street 148. These two last lines could have been combined into a logical 'and'."
+        ],
+        [
+            "| summarize make_list(VIN);<br>",
+            "Next up we need to use summarize to store our output into a list so that we could easily retrieve it afterwards. I like the simplicity KQL gives of asking for occurences inside a list. Lastly for this part of the let statement (variable building), we are telling KQL to stop building the variable by a semicolon. So, to sum this variable up, we have now stored every car that was on a certain avenue and street at the beginning of a very interesting timeframe, and we know that the robbers are among the cars. We have reduced our dataset immensely!"
+        ],
+        [
+            "Traffic<br>",
+            "Let's use the variable to get the related information of the vehicles of interest on the full dataset."
+        ],
+        [
+            "| summarize arg_max(Timestamp, *) by VIN<br>",
+            "Now this is an interesting approach! We know by the text that the cars have stopped, because there aren't any cameras cathing their movement anylonger. Which means that we can look at all the data and see where every car in the whole table was last seen. And we know that there are more than 1 car, they probably had one each, making it 3 cars. arg_max lets us see the latest entry based on Timestamp by VIN. Like arg_min, we're sending through every column."
+        ],
+        [
+            "| where VIN in (afterRobbery)",
+            "And now we're reducing the data to match our previous findings and we can see three cars that has stopped on the same avenue and street! Those are the robbers!"
+        ]
+        ],
+        "tags": [
+            "arg_max", 
+            "arg_min", 
+            "kustodetectiveagency2022", 
+            "let",
+            "make_list"
+        ]
+    },
+    "42": {
+        "name": "Kusto Detective Agency 2022 - Detective 1 - Election fraud? Rendering a path-map! <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
+        "code": [
+        [
+            "Traffic ", 
+            "Get the whole table."
+        ],
+        [
+            "| where VIN in ('XC2952A7FB', 'RI8E6C4294', 'CXDE148D63')<br>", 
+            "Reduce the set to all of the known VIN's of the robbers."
+        ],
+        [
+            "| summarize Ave = make_list(Ave), Street = make_list(Street) by VIN<br>", 
+            "Summarize and make a list to make the colors in the rendering stand out and we're summarizing on the VINs"
+        ],
+        [
+            "| render scatterchart",
+            "This is rendering a scatterchart for vizualisation of data and for this task it proves to be really interesting, because it shows the exact path each driver has made before arriving at the hiding spot."
+        ]
+        ],
+        "tags": 
+        [
+            "render", 
+            "scatterchart", 
+            "summarize",
+        ]
     }
+    
+    
 }
                 createSetOfTags(json);
                 autocomplete(document.getElementById('myInput'), createSetOfTags(json));
