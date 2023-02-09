@@ -1,144 +1,175 @@
+/* Style the navbar */
+#navbar {
+  overflow: hidden;
+  background-color: #fff;
+  z-index: 1;
+}
+
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .tippy {
-    position: relative;
-    transition: background-color 0.2s ease;
+  position: relative;
+  transition: background-color 0.2s ease;
 }
 
 .tippy .tippytext {
-    visibility: hidden;
-    background-color: #395B64;
-    color: #E7F6F2;
-    padding: 3px;
-    z-index: 1;
-    display: inline-block;    
-    
-    position: fixed;
-    bottom: 0;
-    text-align: center;
-    width: fit-content;
-    max-width: 800px;
+  visibility: hidden;
+  background-color: #395B64;
+  color: #E7F6F2;
+  padding: 3px;
+  z-index: 1;
+  display: inline-block;
 
-    height: fit-content;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: fit-content;
+  max-width: 800px;
+
+  height: fit-content;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
 }
 
 .tippy:hover .tippytext {
-    visibility: visible;
-}
-.tippy:hover{
-    background-color: #A5C9CA;
-}
-.codeBox{
-    border: 2px solid #0c7074;
-    background-color: #DFB;
-    padding: 3px;
+  visibility: visible;
 }
 
-details{
-    border-radius: 10px 10px;
+.tippy:hover {
+  background-color: #A5C9CA;
 }
 
-details:last-child{
+.codeBox {
+  border: 2px solid #0c7074;
+  background-color: #DFB;
+  padding: 3px;
+}
+
+details {
+  border-radius: 10px 10px;
+}
+
+details:last-child {
   margin-bottom: 120px;
 }
 
-details[open] summary ~ * {
-    animation: sweep .2s ease-in-out;
+details[open] summary~* {
+  animation: sweep .2s ease-in-out;
 
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-left: -10px
   }
-  
-  @keyframes sweep {
-    0%    {opacity: 0; margin-left: -10px}
-    100%  {opacity: 1; margin-left: 0px}
+
+  100% {
+    opacity: 1;
+    margin-left: 0px
   }
+}
 
 summary {
-    position: relative;
-    border: 3px solid  #A5C9CA;
-    padding: 3px;
-    cursor: pointer;
-    border-radius: 6px;
-    background-color: #E7F6F2;
-    margin: 1px;
-  }
-  
-  summary b {
-    display: inline-block;
-    position: absolute;
-    right: 6px;
-    transform: scaleX(-1);
-  }
-pre{
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    display: block;
-    font-family: monospace;
+  position: relative;
+  border: 3px solid #A5C9CA;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #E7F6F2;
+  margin: 1px;
 }
 
-.divider-border{
-    border: 3px solid  #A5C9CA;
-    border-radius: 12px;
+summary a {
+  display: inline-block;
+  position: absolute;
+  right: 6px;
 }
 
-.largetitle {
-    text-align: center;
-    padding: 40px;
+pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  display: block;
+  font-family: monospace;
 }
-
 
 
 /*SEARCH FUNCTION STYLE */
 .autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
-  }
-  input {
-    border: 1px solid;
-    border-radius: 6px;
-    background-color: #bcbeba9c;
-    padding: 10px;
-    font-size: 16px;
-    margin: 4px;
-  }
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
 
-  button {
-    background-color: rgba(191, 224, 215, 0.737);
-    border-radius: 6px;
-  }
-  .autocomplete-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-  }
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-  }
-  .autocomplete-items div:hover {
-    /*when hovering an item:*/
-    background-color: #e9e9e9;
-  }
-  .autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
-  }
-  
-    
+input {
+  border: 1px solid;
+  border-radius: 6px;
+  background-color: #bcbeba9c;
+  padding: 10px;
+  font-size: 16px;
+  margin: 4px;
+}
 
-  .container {
-    grid-template-columns: 100px 50px 100px;
-    grid-template-rows: 80px auto 80px; 
-    column-gap: 10px;
-    row-gap: 15px;
-  }
+button {
+  background-color: rgba(191, 224, 215, 0.737);
+  border-radius: 6px;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+
+
+.container {
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.navbarlogo {
+  display: inline;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1;
+}
