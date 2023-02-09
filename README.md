@@ -21,7 +21,8 @@ The JSON structure looks like this:
         ["This allows for some HTML input as well, and mostly you'll need to break a line. Use <br> to do so.", "A line break is rendered."]
         ],
         "tags": ["These are search tags", "They Pop up when you ", "start typing"]
-    }
+    } 
+    
 ```
 
 The outermost element of the JSON has a number/index which will tell html the order of rendering on the page, but to overcome this there is a snippet of code located at the bottom to run once in a while to make the numbering act incremental according to how they are present inside the JSON structure. Copy and paste from browser console to update the sequence and push it.
