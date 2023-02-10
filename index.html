@@ -33,6 +33,7 @@
                 </div>
                 <script src="js.js"></script>
                 <div class="container">
+                    <!--If you want to copy a query, start from the beginning and not the end.-->
                         <script>
         let json = {
     "0": {
@@ -106,6 +107,10 @@
             [
                 "SigninLogs",
                 "Querying the table of interest"
+            ],
+            [
+                "<br>| search 'success'",
+                "Now we're scouting for the word 'success' to be in each output record."
             ],
             [
                 "<br>| limit 10",
@@ -313,7 +318,7 @@
         "name": "Limit the result set with the 'where' clause",
         "code": [
             [
-                "Table<br>| where ",
+                "SigninLogs<br>| where ",
                 "Query the table for a value with the where clause."
             ],
             [
@@ -334,15 +339,16 @@
         "name": "Logical where-clause with AND and OR.",
         "code": [
             [
-                "Table<br>| where ColumnName == 'value'",
-                "Query the database where table row has value 'value'."
+                "SigninLogs<br>| where Identity == 'Poppy the Goldfish'",
+                "Query the database where table row has value 'Poppy the Goldfish'."
             ],
             [
-                "<br>    and TimeGenerated <= ago(255ms)",
+                "<br>    and TimeGenerated <= ago(2d)",
                 "Now we're looking for the second thing basically on the same line"
             ],
             [
-                "<br>    and (Column1 == 'something'<br>    or<br>    Column2 == 'something else'<br>    )"
+                "<br>    and (AppDisplayName == 'Azure Portal'<br>    or<br>    AppDisplayName == 'Bing'<br>    )",
+                "All sides of these connected 'and' statements needs to be true to get some output. The 'or' inside the braces, one of these has to be true to send a 'true' back to the 'and', because braces have precedence over non-braced statements - they will be evaluated first."
             ]
         ],
         "tags": [
@@ -359,20 +365,20 @@
         "name": "Simulate 'search' using positional matches",
         "code": [
             [
-                "Table<br>| where * has 'value'",
-                "This way you can simulate the search function."
+                "SigninLogs<br>| where * has 'errorCode'",
+                "This way you can simulate the search function. It basically says 'Give me everything from SigninLogs where everything has a certain value'."
             ],
             [
-                "<br>| where * hasprefix 'startVal'",
-                "Asks where ANY(*) column has the value 'startVal' at the beginning"
+                "<br>| where * hasprefix '87.248'",
+                "Asks where any(*) columns has the value '87.248' at the beginning"
             ],
             [
-                "<br>| where * hassuffix 'endVal'",
-                "Asks where ANY (*) column has the value 'endVal' at the end."
+                "<br>| where * hassuffix '@outlook.com'",
+                "Asks where any(*) column has the value '@gmail.com' at the end."
             ],
             [
-                "<br>| where * contains 'anywhere'",
-                "Asks where ANY (*) column contains the value 'anywhere' anywhere in its content."
+                "<br>| where * contains 'OS X 10'",
+                "Asks where any(*) column contains the value 'OS X 10' anywhere in its content."
             ]
         ],
         "tags": [
@@ -383,19 +389,25 @@
             "contains",
             "wide",
             "simulate",
-            "search"
+            "search",
+            "has"
         ]
     },
     "16": {
         "name": "Where-clause with regex",
         "code": [
             [
-                "Table<br>| where Column matches regex '[A-Za-z]:'",
-                "Using this syntax you can leverage the power of regex! (TBD input the regex motor)"
+                "SigninLogs<br>| where Column matches regex '^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$'",
+                "Using this syntax you can leverage the power of regex! Syntax of this query is equal to generating such a query with search instead of where. The regex used here is looking for IPv4 IPs."
             ]
         ],
         "tags": [
-            "operator"
+            "operator",
+            "where",
+            "matches",
+            "regex",
+            "IP",
+            "IPv4"
         ]
     },
     "17": {
@@ -494,22 +506,6 @@
             "math",
             "calculate"
         ]
-    },
-    "123": {
-        "name": "",
-        "code": [
-        ["", ""],
-        ["", ""]
-        ],
-        "tags": ["", "", ""]
-    },
-    "14142": {
-        "name": "",
-        "code": [
-        ["", ""],
-        ["", ""]
-        ],
-        "tags": ["", "", ""]
     },
     "23": {
         "name": "In combination with concatenation, create custom text output",
@@ -683,6 +679,105 @@
         ],
         "comment": "STARTING SCALAR OPERATORS"
     },
+    "336": {
+        "name": "Extract parts of a string with regex.",
+        "code": 
+            [
+                [
+                    "SigninLogs<br>", 
+                    "Get the table!"
+                ],
+                [
+                    "| project ", 
+                    "Only show the relevant following data, for this query we're working on data extracted with extract()."
+                ],
+                [
+                    "extract(\"([a-z]{1,5})\"",
+                    "The extract scalar function takes three parameters, and the first one being what to search for - here we are using regex. What the regex says is 'any charachter from a to z, lower capital and i want every match with a length of between 1 to 5'."
+                ],
+                [
+                    ", 1, ",
+                    "The second parameter tells 'extract' what to return. '1' means to return only the part of the string that matches. setting it to zero makes it return the whole string where there is a match."
+                ],
+                [
+                    "tostring(LocationDetails))",
+                    "This is the string we are searching through with 'extract', it's the third parameter to the scalar function. Now, since this field in the Sentinel database is not a string, we need to convert it to a string using tostring() and putting the column inside the brackets."
+                ]
+            ],
+        "tags": 
+            [
+                "extract", 
+                "project", 
+                "regex",
+                "tostring"
+            ]
+    },
+    "332": {
+        "name": "Parse longer texts and store output to column <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency6/'>Full writeup</a>",
+        "code": 
+            [
+                [
+                    "ChatLogs",
+                    "Get the table! This query is taken from a writeup of the Kusto Detective series, see the title of the query dropdown to access a link. Here is an example of text in the field we will be parsing: User 'u71fb5058bd' sent message to the channel 'c72cd0fdf88'"
+                ],
+                [
+                    "| parse Message with ", 
+                    "Initializing the 'parse' operator we need to tell it which column we want to parse. In this case, the Message column, 'with' is part of the syntax. Is it here to make it more humanly readable? One could think of parse as a way of telling KQL where to put the cursor to start parsing from."
+                ],
+                [
+                    "'User '", 
+                    "First, we need to set the cursor at the right spot. Knowing where to put it takes some knowledge of the data you want to parse. Here, we know that we will read passed the text 'User ', the next character will now be where the cursor is."
+                ],
+                [
+                    " user ", 
+                    "This is the variable name to store the text we are parsing, and the text that gets stored is the text between the previous cursor set, to the start of the next cursor set..."
+                ],
+                [
+                    "' sent message to the channel '", 
+                    "...which is here. Now we are moving the cursor to the end of the sentence of this and we will parse out whatever is left from the next character. "
+                ],
+                [
+                    " sent_to_channel<br>", 
+                    "And then we store that in this variable."
+                ],
+                [
+                    "| parse Message with 'User ' user1 ' left the channel ' left_channel<br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| parse Message with 'User ' user2 ' logged out from the ' logged_out_from<br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| parse Message with 'User ' user3 ' joined the channel ' joined_channel<br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| parse Message with 'User ' user4 ' logged in from ' loginIP<br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| parse Message with 'User ' user5 ' sent message to the user ' sent_to_user<br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| extend TheUser = strcat(user, user1, user2, user3, user4, user5) <br>", 
+                    "The same procedure here as the first one explained in depth."
+                ],
+                [
+                    "| project-away user, user1, user2, user3, user4, user5", 
+                    "Removed unecessary data with project-away."
+                ]
+            ],
+        "tags": 
+            [
+                "kustodetectiveagency2022", 
+                "parse", 
+                "extend"
+            ]
+    }
+    ,
+    
     "37": {
         "name": "Kusto Detective Agency 2022 - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
         "code": [
@@ -835,7 +930,7 @@
         "name": "Kusto Detective Agency 2022 - Detective 1 - Bank Robbery - Rendering a path-map! <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
         "code": [
         [
-            "Traffic ", 
+            "Traffic<br>", 
             "Get the whole table."
         ],
         [
@@ -857,7 +952,106 @@
             "scatterchart", 
             "summarize",
         ]
+    },
+    "423": {
+        "name": "Kusto Detective Agency 2022 - Detective 3 - Ready to play? - Prime numbers <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency5/'>Full writeup</a>",
+        "code": [
+        [
+            "Primes", 
+            "Fetching the whole Primes table which contains a lot of prime numbers for use in this task. "
+        ],
+        [
+            "| serialize ", 
+            ""
+        ],
+        [
+            "| join Primes on Prime", 
+            ""
+        ],
+        [
+            "     | serialize", 
+            ""
+        ],
+        [
+            "    | extend nextPrime = next(Prime)", 
+            ""
+        ],
+        [
+            "| extend result = nextPrime + Prime + 1", 
+            ""
+        ],
+        [
+            "| join kind=inner Primes on $left.result == $right.Prime",
+            ""
+        ],
+        [
+            "| summarize maxPri = max(result)",
+            ""
+        ],
+        [
+            "| project TheAnswer=strcat(\"https://aka.ms/\", maxPri)",
+            ""
+        ]
+        ],
+        "tags": 
+        [
+            "", 
+            "", 
+            ""
+        ]
+    },   
+
+    "424": {
+        "name": "Kusto Detective Agency 2022 - Detective 3 - Ready to play? <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency5/'>Full writeup</a>",
+        "code": [
+        [
+            "let h3Tree = nyc_trees<br>", 
+            ""
+        ],
+        [
+            "| extend  h3Cell=geo_point_to_h3cell(longitude, latitude, 10);<br>", 
+            ""
+        ],
+        [
+            "let cells = h3Tree| where spc_common has_any ('Schubert', 'Turkish', 'American')<br>",
+            ""
+        ],
+        [
+            "| project h3Cell, spc_common<br>", 
+            ""
+        ],
+        [
+            "| evaluate pivot(spc_common): (h3Cell:string , [\"'Schubert' chokecherry\"]:int, ['Turkish hazelnut']:int, ['American linden']:int)<br>", 
+            ""
+        ],
+        [
+            "| where [\"'Schubert' chokecherry\"] == 4 and ['Turkish hazelnut'] > 0 and ['American linden'] > 0;<br>",
+            ""
+        ],
+        [
+            "h3Tree<br>", 
+            ""
+        ],
+        [
+            "| join kind=inner cells on h3Cell<br>", 
+            ""
+        ],
+        [
+            "| where spc_common == 'American linden'<br>",
+            ""
+        ],
+        [
+            "| summarize arg_min(tree_dbh, *)<br>",
+            ""
+        ],
+        [
+            "| project latitude, longitude<br>",
+            ""
+        ]
+        ],
+        "tags": ["", "", ""]
     }
+    
     
     
 }

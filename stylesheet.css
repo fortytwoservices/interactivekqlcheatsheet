@@ -41,6 +41,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0 auto;
+  border-radius: 3px;
+  box-shadow: 0px 0px 80px #111;
+
 }
 
 .tippy:hover .tippytext {
@@ -102,7 +105,8 @@ pre {
   word-wrap: break-word;
   white-space: pre-wrap;
   display: block;
-  font-family: monospace;
+  font-size: 14px;
+
 }
 
 
