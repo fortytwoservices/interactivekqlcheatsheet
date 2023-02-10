@@ -4,7 +4,7 @@
 		"scope": "JSON,javascript",
 		"prefix": "newKQL",
 		"body": [
-			",\n\"$1\": {\n\t\"name\": \"\",\n\t\"code\": [\n\t[\"\", \"\"],\n\t[\"\", \"\"]\n\t],\n\t\"tags\": [\"\", \"\", \"\"]\n}",
+			",\n\"$1\": {\n\t\"name\": \"\",\n\t\"code\": \n\t\t[\n\t\t\t[\n\t\t\t\t\"\", \n\t\t\t\t\"\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"\", \n\t\t\t\t\"\"\n\t\t\t]\n\t\t],\n\t\"tags\": \n\t\t[\n\t\t\t\"\", \n\t\t\t\"\", \n\t\t\t\"\"\n\t\t]\n}",
 			"$2"
 		],
 		"description": "Creates a new template JSON for inserting new code block"
