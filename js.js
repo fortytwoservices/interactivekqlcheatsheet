@@ -24,7 +24,7 @@ function renderJSON(json) {
             div.setAttribute("class", "tippy data-bs-toggle");
             let span = document.createElement("span");
             span.setAttribute("class", "tippytext data-bs-content");
-            
+
             span.innerHTML = array[1];
 
             div.innerHTML = array[0];
@@ -167,25 +167,6 @@ function autocomplete(inp, arr) {
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
-}
-
-
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-
-// Get the navbar
-var navbar = document.getElementById("navbar");
-
-// Get the offset position of the navbar
-//var sticky = navbar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
 }
 
 // Clearing input text with clear button.
