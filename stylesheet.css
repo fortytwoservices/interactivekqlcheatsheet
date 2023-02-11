@@ -1,6 +1,5 @@
 /* Style the navbar */
 #navbar {
-  overflow: hidden;
   background-color: #3c3f41;
   z-index: 1;
 }
