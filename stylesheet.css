@@ -82,10 +82,6 @@ pre {
 
 /* SEARCH FUNCTION STYLE /
 / the container must be positioned relative: */
-.autocomplete {
-position: relative;
-display: inline-block;
-}
 
 .autocomplete-items {
 position: absolute;
