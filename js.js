@@ -4,7 +4,7 @@ function renderJSON(json) {
         elem[0].parentNode.removeChild(elem[0]);
     }
     let container = document.createElement("div");
-    container.setAttribute("class", "queries");
+    container.setAttribute("class", "queries container-fluid text-break");
 
     for (let element in json) {
 
@@ -18,13 +18,13 @@ function renderJSON(json) {
         details.appendChild(summary);
 
         let codebox = document.createElement("pre");
-        codebox.setAttribute("class", "codeBox");
+        codebox.setAttribute("class", "codeBox text-wrap");
         json[element].code.forEach(array => {
             let div = document.createElement("span");
-            div.setAttribute("class", "tippy");
+            div.setAttribute("class", "tippy data-bs-toggle");
             let span = document.createElement("span");
-            span.setAttribute("class", "tippytext");
-            
+            span.setAttribute("class", "tippytext data-bs-content");
+
             span.innerHTML = array[1];
 
             div.innerHTML = array[0];
@@ -73,18 +73,7 @@ function createSetOfTags(data) {
     return Array.from(tags);
 }
 
-
-
-
-
-
-
-
-
 //SEARCH FUNCTION
-
-
-
 function autocomplete(inp, arr) {
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
@@ -96,7 +85,7 @@ function autocomplete(inp, arr) {
         /*create a DIV element that will contain the items (values):*/
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
+        a.setAttribute("class", "autocomplete-items container-fluid text-break");
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
@@ -180,21 +169,10 @@ function autocomplete(inp, arr) {
     });
 }
 
-
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-
-// Get the navbar
-var navbar = document.getElementById("navbar");
-
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
+// Clearing input text with clear button.
+function clearInput(){
+    var getValue= document.getElementById("myInput");
+      if (getValue.value !="") {
+          getValue.value = "";
+      }
 }
