@@ -1,14 +1,26 @@
 /* Style the navbar */
 #navbar {
   overflow: hidden;
-  background-color: #fff;
+  background-color: #3c3f41;
   z-index: 1;
 }
 
+a {
+  color: #EEEEEE;
+  text-decoration: underline;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #333333;
+  color: #CCCCCC;
+}
 
 /* Page content */
 .content {
   padding: 16px;
+  background-color: #2f2f2f;
+  color: #e7f6f2;
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
@@ -25,9 +37,9 @@
 
 .tippy .tippytext {
   visibility: hidden;
-  background-color: #395B64;
-  color: #E7F6F2;
-  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px;
   z-index: 1;
   display: inline-block;
 
@@ -40,10 +52,10 @@
   height: fit-content;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin: 0 auto;
-  border-radius: 3px;
+  margin: 10px auto;
+  border-radius: 10px;
   box-shadow: 0px 0px 80px #111;
-
+  font-size: 18px;
 }
 
 .tippy:hover .tippytext {
@@ -51,17 +63,18 @@
 }
 
 .tippy:hover {
-  background-color: #A5C9CA;
+  background-color: #395B64;
 }
 
 .codeBox {
-  border: 2px solid #0c7074;
-  background-color: #DFB;
-  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  color: #CCCCCC;
 }
 
 details {
   border-radius: 10px 10px;
+  background-color: #2f2f2f;
 }
 
 details:last-child {
@@ -87,13 +100,14 @@ details[open] summary~* {
 
 summary {
   position: relative;
-  border: 3px solid #A5C9CA;
+  border: 1px solid #333333;
   padding: 3px;
   cursor: pointer;
   border-radius: 6px;
-  background-color: #E7F6F2;
+  background-color: rgba(38, 66, 73, 0.5);
   margin: 1px;
 }
+
 
 summary a {
   display: inline-block;
@@ -106,74 +120,85 @@ pre {
   white-space: pre-wrap;
   display: block;
   font-size: 14px;
-
+  background-color: #2f2f2f;
+  color: #e7f6f2;
+  border-radius: 6px;
+  padding: 10px;
 }
 
-
-/*SEARCH FUNCTION STYLE */
+/* SEARCH FUNCTION STYLE /
+/ the container must be positioned relative: */
 .autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
+position: relative;
+display: inline-block;
 }
 
 input {
-  border: 1px solid;
-  border-radius: 6px;
-  background-color: #bcbeba9c;
-  padding: 10px;
-  font-size: 16px;
-  margin: 4px;
+border: 1px solid #9e9e9e;
+border-radius: 6px;
+background-color: #333;
+color: #fff;
+padding: 5px;
+margin: 4px;
+height: 40px;
+width: 250px;
+font-size: 20px;
 }
 
 button {
-  background-color: rgba(191, 224, 215, 0.737);
-  border-radius: 6px;
+background-color: #333;
+color: #ccc;
+border-radius: 6px;
+border: 1px solid #9e9e9e;
+height: 50px;
+width: 160px;
+font-size: 20px;
 }
 
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
+position: absolute;
+border: 1px solid #9e9e9e;
+border-bottom: none;
+border-top: none;
+z-index: 99;
+/* position the autocomplete items to be the same width as the container: */
+top: 100%;
+left: 0;
+right: 0;
+background-color: #333;
 }
 
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+padding: 10px;
+cursor: pointer;
+background-color: #444;
+color: #fff;
+border-bottom: 1px solid #9e9e9e;
 }
 
 .autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
+/* when hovering an item: */
+background-color: #9e9e9e;
+color: #333;
 }
 
 .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: DodgerBlue !important;
-  color: #ffffff;
+/* when navigating through the items using the arrow keys: */
+background-color: #fff !important;
+color: #333 !important;
 }
 
-
-
 .container {
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px;
-  column-gap: 10px;
-  row-gap: 15px;
+grid-template-columns: 100px 50px 100px;
+grid-template-rows: 80px auto 80px;
+column-gap: 10px;
+row-gap: 15px;
 }
 
 .navbarlogo {
-  display: inline;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  z-index: 1;
+display: inline;
+bottom: 0;
+right: 0;
+position: fixed;
+z-index: 1;
 }
