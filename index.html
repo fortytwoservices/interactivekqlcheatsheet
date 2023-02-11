@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width,
-                        initial-scale=1.0">
-                <title>KQLCheat by Fortytwo</title>
-                <link rel="stylesheet" href="stylesheet.css">
-        </head>
-        <body>
-                <div id="navbar">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,
+            initial-scale=1.0">
+        <title>KQLCheat by Fortytwo</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <script defer data-domain="kqlcheat.byfortytwo.com"
+            src="https://plausible.io/js/script.js"></script>
+    </head>
+    <body>
+        <div id="navbar">
 
-                        <div class="autocomplete">
-                                <input id="myInput" type="text" name="KQLsearch"
-                                        placeholder="KQL query finder">
-                                <button
-                                        onclick="document.body.appendChild(findObjectsWithTags(json))">Search</button>
-                                <button
-                                        onclick="document.body.appendChild(renderJSON(json))">Show
-                                        all queries</button>
+            <div class="autocomplete">
+                <input id="myInput" type="text" name="KQLsearch"
+                    placeholder="KQL query finder">
+                <button
+                    onclick="document.body.appendChild(findObjectsWithTags(json))">Search</button>
+                <button
+                    onclick="document.body.appendChild(renderJSON(json))">Show
+                    all queries</button>
 
 
-                        </div>
-                </div>
-                <div class="navbarbottom">
-                        <div class="navbarlogo">
-                                <a href="https://www.amestofortytwo.com/">
-                                        <img src="logo/42_ikon_circle_Black.png"
-                                                width="40"
-                                                height="40"/></a>
-                        </div>
-                </div>
-                <script src="js.js"></script>
-                <div class="container">
-                    <!--If you want to copy a query, start from the beginning and not the end.-->
-                        <script>
+            </div>
+        </div>
+        <div class="navbarbottom">
+            <div class="navbarlogo">
+                <a href="https://www.amestofortytwo.com/">
+                    <img src="logo/42_ikon_circle_Black.png"
+                        width="40"
+                        height="40"/></a>
+            </div>
+        </div>
+        <script src="js.js"></script>
+        <div class="container">
+            <!--If you want to copy a query, start from the beginning and not the end.-->
+            <script>
         let json = {
     "0": {
         "name": "Query for a table",
@@ -428,11 +430,11 @@
         "name": "Count with summarize on specific column(s)",
         "code": [
             [
-                "Table<br>| ",
-                "Get the data you need."
+                "SigninLogs<br>| ",
+                "Get the table."
             ],
             [
-                "summarize",
+                "summarize ",
                 "Summarize is an aggregated function that lets you work on data and pass it down the pipe. Note that only columns/data you use in summarize are passed on, which means that columns not used are not able to be used after summarize."
             ],
             [
@@ -440,8 +442,8 @@
                 "These keywords tells what you shall count by. Read the whole query like 'From the Table I want to count all the occurences of the Table by ColumnName'"
             ],
             [
-                "ColumnName",
-                "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'status', and the status needs to be equal to another to make it increment."
+                "Identity, Location",
+                "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'state', and the state needs to be equal to another to make the counter increment."
             ]
         ],
         "tags": [
@@ -957,39 +959,39 @@
         "name": "Kusto Detective Agency 2022 - Detective 3 - Ready to play? - Prime numbers <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency5/'>Full writeup</a>",
         "code": [
         [
-            "Primes", 
+            "Primes<br>", 
             "Fetching the whole Primes table which contains a lot of prime numbers for use in this task. "
         ],
         [
-            "| serialize ", 
+            "| serialize <br>", 
             ""
         ],
         [
-            "| join Primes on Prime", 
+            "| join Primes on Prime<br>", 
             ""
         ],
         [
-            "     | serialize", 
+            "     | serialize<br>", 
             ""
         ],
         [
-            "    | extend nextPrime = next(Prime)", 
+            "    | extend nextPrime = next(Prime)<br>", 
             ""
         ],
         [
-            "| extend result = nextPrime + Prime + 1", 
+            "| extend result = nextPrime + Prime + 1<br>", 
             ""
         ],
         [
-            "| join kind=inner Primes on $left.result == $right.Prime",
+            "| join kind=inner Primes on $left.result == $right.Prime<br>",
             ""
         ],
         [
-            "| summarize maxPri = max(result)",
+            "| summarize maxPri = max(result)<br>",
             ""
         ],
         [
-            "| project TheAnswer=strcat(\"https://aka.ms/\", maxPri)",
+            "| project TheAnswer=strcat(\"https://aka.ms/\", maxPri)<br>",
             ""
         ]
         ],
@@ -1073,6 +1075,6 @@ json = newJson;
 console.log(json); */
 
         </script>
-                </div>
-        </body>
+        </div>
+    </body>
 </html>
