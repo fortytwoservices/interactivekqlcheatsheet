@@ -13,7 +13,7 @@ a {
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #333333;
-  color: #ffffff;
+  color: #CCCCCC;
 }
 
 /* Page content */
@@ -69,7 +69,7 @@ body {
 .codeBox {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px;
-  color: #fff;
+  color: #CCCCCC;
 }
 
 details {
@@ -104,9 +104,10 @@ summary {
   padding: 3px;
   cursor: pointer;
   border-radius: 6px;
-  background-color: #264249;
+  background-color: rgba(38, 66, 73, 0.5);
   margin: 1px;
 }
+
 
 summary a {
   display: inline-block;
@@ -146,7 +147,7 @@ font-size: 20px;
 
 button {
 background-color: #333;
-color: #fff;
+color: #ccc;
 border-radius: 6px;
 border: 1px solid #9e9e9e;
 height: 50px;
