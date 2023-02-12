@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Query for a table",
+        "code": [
+            [
+                "SecurityEvents",
+                "The table name and nothing else makes you see the whole table."
+            ]
+        ],
+        "tags": [
+            "operator",
+            "table"
+        ]
+    },
+    {
+        "name": "Query a table and limit output records",
+        "code": [
+            [
+                "SigninLogs<br>",
+                "Query the whole table."
+            ],
+            [
+                "| ",
+                "The Pipe! This symbol is called a pipe, and does exactly what it sounds like - it sends data through, the data you instruct the query to work further on gets sent into this line. "
+            ],
+            [
+                "limit",
+                "'limit' will reduce the lines of output to 10 lines which makes the query a lot faster.. Note that 'limit' and 'take' are interchangeable. They do the same thing."
+            ],
+            [
+                " 10",
+                "The number of output records to be shown - choose any number relevant to your intentions. It is recommended to keep a pretty low number if you are trying to gain some insight into the database for triage purposes."
+            ]
+        ],
+        "tags": [
+            "operator",
+            "limit",
+            "triage",
+            "take"
+        ]
+    }
+]
