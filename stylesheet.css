@@ -14,8 +14,7 @@
   position: fixed;
   bottom: 0;
   text-align: center;
-  width: fit-content;
-  max-width: 800px;
+  width: 100% /* fit-content*/ ;
 
   height: fit-content;
   left: 50%;
