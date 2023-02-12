@@ -6,14 +6,24 @@ function renderJSON(json) {
     let container = document.createElement("div");
     container.setAttribute("class", "queries container-fluid text-break");
 
-    for (let element in json) {
+    let searchContainer = document.createElement("div");
+    searchContainer.setAttribute("class", "search-container d-flex align-items-center");
 
+    let searchInput = document.createElement("input");
+    searchInput.setAttribute("class", "form-control");
+    searchInput.setAttribute("type", "text");
+    searchInput.setAttribute("placeholder", "Filter...");
+    searchInput.addEventListener("input", searchHandler);
+
+    searchContainer.appendChild(searchInput);
+    container.appendChild(searchContainer);
+
+    for (let element in json) {
         let details = document.createElement("details");
         details.setAttribute("class", "queryDetails");
 
         let summary = document.createElement("summary");
         summary.setAttribute("class", "querySummary");
-
         summary.innerHTML = json[element].name;
         details.appendChild(summary);
 
@@ -24,19 +34,30 @@ function renderJSON(json) {
             div.setAttribute("class", "tippy data-bs-toggle");
             let span = document.createElement("span");
             span.setAttribute("class", "tippytext data-bs-content");
-
             span.innerHTML = array[1];
-
             div.innerHTML = array[0];
             div.appendChild(span);
             codebox.appendChild(div);
             details.appendChild(codebox);
-        })
+        });
+        details.dataset.search = json[element].name.toLowerCase();
         container.appendChild(details);
     }
+
+    function searchHandler() {
+        let searchTerm = searchInput.value.toLowerCase();
+        let details = document.querySelectorAll(".queryDetails");
+        details.forEach(detail => {
+            if (detail.dataset.search.includes(searchTerm)) {
+                detail.style.display = "block";
+            } else {
+                detail.style.display = "none";
+            }
+        });
+    }
+
     return container;
 }
-
 
 function convert_to_list() {
     var inputText = document.getElementById('myInput').value;
