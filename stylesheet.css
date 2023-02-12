@@ -30,12 +30,23 @@
 }
 
 .tippy:hover {
-  background-color: #395B64;
+  background-color: #0066fc;
 }
 
 .codeBox {
-  background-color: rgb(33 37 41);
-  padding: 5px;
+  background-color: rgb(33, 37, 41);
+  padding: 10px;
+  color: #CCCCCC;
+  border-radius: 10px;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
+.codeBox::before {
+  content: "Code:";
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
   color: #CCCCCC;
 }
 
@@ -77,40 +88,4 @@ pre {
   color: #e7f6f2;
   border-radius: 6px;
   padding: 10px;
-}
-
-/* SEARCH FUNCTION STYLE /
-/ the container must be positioned relative: */
-
-.autocomplete-items {
-position: absolute;
-border: 1px solid #9e9e9e;
-border-bottom: none;
-border-top: none;
-z-index: 99;
-/* position the autocomplete items to be the same width as the container: */
-top: 100%;
-left: 0;
-right: 0;
-background-color: #333;
-}
-
-.autocomplete-items div {
-padding: 5px;
-cursor: pointer;
-background-color: #212529;
-color: #fff;
-border-bottom: 1px solid #9e9e9e;
-}
-
-.autocomplete-items div:hover {
-/* when hovering an item: */
-background-color: #9e9e9e;
-color: #333;
-}
-
-.autocomplete-active {
-/* when navigating through the items using the arrow keys: */
-background-color: #fff !important;
-color: #333 !important;
 }
