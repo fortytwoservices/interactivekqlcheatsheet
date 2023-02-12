@@ -6,22 +6,66 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>KQLCheat by Fortytwo</title>
         <link rel="stylesheet" href="stylesheet.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/50b53b5d7b.js" crossorigin="anonymous"></script>
-        <script defer data-domain="kqlcheat.byfortytwo.com" src="https://plausible.io/js/script.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/50b53b5d7b.js"
+            crossorigin="anonymous"></script>
+        <script defer data-domain="kqlcheat.byfortytwo.com"
+            src="https://plausible.io/js/script.js"></script>
     </head>
     <body onload="renderJSON()">
         <div class="row">
             <div class="col">
-                <center><a href="https://kqlcheat.byfortytwo.com"><img src="./logo/KQLCheat_byFortytwo_logo.png" class="img-fluid w-50"></a></center>
+                <center><a href="https://kqlcheat.byfortytwo.com"><img
+                            src="./logo/KQLCheat_byFortytwo_logo.png"
+                            class="img-fluid w-50"></a></center>
             </div>
             <div id="navbar" class="navbar bg-body-tertiary">
-                <div class="row autocomplete container-fluid justify-content-start">
+                <div class="row autocomplete container-fluid
+                    justify-content-start">
                     <div id="searchContainer"></div>
                 </div>
             </div>
+
+
+
+            <div>
+                <button class="btn btn-outline-success popup-trigger"
+                    onclick="document.getElementById('popup').style.display=
+                    'block'">Generate JSON</button>
+
+            </div>
+            <div id="popup">
+                <div class="popup-inner">
+                    <div class="popup-content">
+                        <textarea id="input-field" type="text"
+                            placeholder="Query"></textarea>
+                        <button class="btn btn-outline-success" onclick="printText()">Print Text</button>
+                        <div class="codeBox">
+                            <pre id="output"></pre>
+                        </div>
+
+                    </div>
+                    <button class="popup-close-button"
+                        onclick="document.getElementById('popup').style.display=
+                        'none'">&times;</button>
+                </div>
+            </div>
+
+
             <script>
+            
+            // These two lines prohibits the popup to show at start. Not sure why they want to...
+            test = document.getElementById('popup');
+            test.style.display='none';
+
                 function renderJSON(json) {
                 var elem = document.getElementsByClassName("searchContainer");
                 while (elem.length > 0) {
@@ -104,25 +148,110 @@
                     document.getElementById("searchContainer").appendChild(renderJSON(data));
                     });
 
+
+
+
+                    
+                    function getSelectionHtml() {
+                        var html = "";
+                        if (typeof window.getSelection != "undefined") {
+                            var sel = window.getSelection();
+                            if (sel.rangeCount) {
+                                var container = document.createElement("div");
+                                for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                                    container.appendChild(sel.getRangeAt(i).cloneContents());
+                                }
+                                html = container.innerHTML;
+                            }
+                        } else if (typeof document.selection != "undefined") {
+                            if (document.selection.type == "Text") {
+                                html = document.selection.createRange().htmlText;
+                            }
+                        }
+                        return html;
+                    }
+
+                    function highLow(arr) {
+                        // Return the highest and lowest number in an array
+                        return [Math.max(...arr), Math.min(...arr)];
+                    }
+
+                    document.addEventListener("keyup", function (e) {
+                        var selectedHTML,
+                            //key = e.keyCode || e.which; //deprecated
+                            key = e.key;
+                        //if (key == 16) { // part of the depreacated code ^^
+                        if (key == "Shift") {
+                            // if "shift" key was released 
+                            selectedHTML = getSelectionHtml();
+                            if (selectedHTML) {
+                                // get the selected elements
+                                var selectedElements = window
+                                    .getSelection()
+                                    .getRangeAt(0)
+                                    .cloneContents()
+                                    .querySelectorAll("td");
+                                var values = [];
+                                // print the tag ID of each selected element
+                                for (var i = 0; i < selectedElements.length; i++) {
+                                    values.push(parseInt(selectedElements[i].id))
+                                }
+
+                                var highIndex = highLow(values)[0];
+                                var lowIndex = highLow(values)[1];
+
+                                if (highIndex < lowIndex) {
+                                    temp = highIndex;
+                                    highIndex = lowIndex;
+                                    lowIndex = temp;
+                                }
+                                alert("High Index: " + highIndex + "\nLow Index: " + lowIndex);
+
+
+                            }
+                        }
+                    })
+
+                    function printText() {
+                        var input = document.getElementById("input-field").value;
+                        var output = input.replace(/\n/g, "<br>");
+                        document.getElementById("output").textContent = output;
+                    }
+
+
             </script>
             <p></p>
-            <div style="text-align: center;"> 
-                <p>Built with ❤️ using open-source technology. Check out the code on <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">GitHub.</a></p>
+            <div style="text-align: center;">
+                <p>Built with ❤️ using open-source technology. Check out the
+                    code on <a
+                        href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
+                        target="_blank">GitHub.</a></p>
                 <div class="d-flex justify-content-center">
-                  <span class="fa-stack fa-1x">
-                    <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank"><i class="fa-brands fa-square-github fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://twitter.com/amestofortytwo" target="_blank"><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://www.linkedin.com/company/amesto-fortytwo/" target="_blank"><i class="fa-brands fa-linkedin fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://plausible.io/kqlcheat.byfortytwo.com" target="_blank"><i class="fa-solid fa-chart-simple fa-stack-1x fa-inverse"></i></a>
-                  </span>
+                    <span class="fa-stack fa-1x">
+                        <a
+                            href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
+                            target="_blank"><i class="fa-brands fa-square-github
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a href="https://twitter.com/amestofortytwo"
+                            target="_blank"><i class="fab fa-twitter fa-stack-1x
+                                fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a
+                            href="https://www.linkedin.com/company/amesto-fortytwo/"
+                            target="_blank"><i class="fa-brands fa-linkedin
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a href="https://plausible.io/kqlcheat.byfortytwo.com"
+                            target="_blank"><i class="fa-solid fa-chart-simple
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
                 </div>
-              </div>
-              <p></p>      
-    </body>
-</html>
+            </div>
+            <p></p>
+
+        </body>
+    </html>
