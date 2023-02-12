@@ -1,4 +1,4 @@
-![KQL Cheat logo](./logo/KQLCheat_byFortytwo_logo_big.png)
+![KQL Cheat logo](./logo/KQLCheat_byFortytwo_logo.png)
 
 # Interactive KQL CheatSheet
 
@@ -16,7 +16,7 @@ Use the user-snippet for VSCode included in the repo:
 The JSON structure looks like this: 
 
 ```json
-"index": {
+    {
         "name": "Name of the query",
         "code": [
         ["Hover me to get the explanation inside the next quotes visible", "I'm here!"],
@@ -26,5 +26,3 @@ The JSON structure looks like this:
     } 
     
 ```
-
-The outermost element of the JSON has a number/index which will tell html the order of rendering on the page, but to overcome this there is a snippet of code located at the bottom to run once in a while to make the numbering act incremental according to how they are present inside the JSON structure. Copy and paste from browser console to update the sequence and push it.
