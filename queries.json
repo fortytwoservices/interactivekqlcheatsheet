@@ -84,7 +84,7 @@
             "operator",
             "limit",
             "triage",
-            "search all tables",
+            "search",
             "take"
         ]
     },
@@ -919,41 +919,46 @@
             ],
             [
                 "| serialize <br>",
-                ""
+                "As we know, we need to make the one row of primes able to add to it's own neighbour and then plus 1. We therefore need to order the table, for that we use serialize to make it able to apply window functions. Window functions operate on multiple rows at a time. A window is basically a set of rows to work with at the same time, instead of only one row at a time."
             ],
             [
                 "| join Primes on Prime<br>",
-                ""
+                "Next up, we need to join the table with itself, on the same (and only) column."
             ],
             [
                 "     | serialize<br>",
-                ""
+                "This has to be serialized also!"
             ],
             [
                 "    | extend nextPrime = next(Prime)<br>",
-                ""
+                "Next up, and this might be a good answer as to why the order matters - we add (extend) another column where we look ahead at the next() value and outputs that. Remember that we need the neighboring prime number. next() is considered a window function - it works on multiple rows at a time. Other such functions are prev(), row_cumsum(), row_number(), row_rank_dense(), row_rank_min(), row_window_session()."
             ],
             [
                 "| extend result = nextPrime + Prime + 1<br>",
-                ""
+                "And then we do our calculations. Prime + next() prime + 1."
             ],
             [
                 "| join kind=inner Primes on $left.result == $right.Prime<br>",
-                ""
+                "Part of the equation was that a special prime was calculated like above, but also resulted in a prime - and as we have a huge list of primes, we can check against it by joining the columns. This is simple syntax that chooses the kind of join to be inner. In a lot of languages, inner is the default, but with KQL innerunique is the default - therefore we need to specify inner. Joining these two columns and returning with a result only if they match is basically the explanation to 'inner'."
             ],
             [
                 "| summarize maxPri = max(result)<br>",
-                ""
+                "We we're tasked with finding the highest number available - max() does the job for us. Another approach would be to sort the output and piping it into take/limit 1. "
             ],
             [
                 "| project TheAnswer=strcat(\"https://aka.ms/\", maxPri)<br>",
-                ""
+                "The task was to enter into a page with this given string as preceeding the number we found - lets concatenate those with strcat(). strcat() takes two parameters, the first and second strings you want to concatenade - fuse together."
             ]
         ],
         "tags": [
-            "",
-            "",
-            ""
+            "summarize",
+            "max",
+            "strcat",
+            "strcat()",
+            "join",
+            "kind",
+            "inner"
+
         ]
     },
     {
@@ -961,23 +966,23 @@
         "code": [
             [
                 "let h3Tree = nyc_trees<br>",
-                ""
+                "Starting by creating a variable and calling the nyc_trees table."
             ],
             [
                 "| extend  h3Cell=geo_point_to_h3cell(longitude, latitude, 10);<br>",
-                ""
+                "H3cells is a spatial grid system for geo location where the grid basically consist of hexagons. Hexagons share the same distance to all of its closest neighbours and they have the highest number of neighbours if you were to calculate only neighbours where there is an edge-share. Subdivision is also key, where squares are able to subdivide perfectly, hexagons are not. But the system Uber made, subdivide one hexagon into 7 and rotate them slightly. This way they are able to map out large areas in only a handfull of hexagons and also to make the shapes fit into most kind of lansdscape shapes. parameters are longitude, latitude and cellsize (10 aprox 66m)."
             ],
             [
                 "let cells = h3Tree| where spc_common has_any ('Schubert', 'Turkish', 'American')<br>",
-                ""
+                "Next we're making a new variable that will store all the important treetypes within the given radius we need (based on h3cell system)."
             ],
             [
                 "| project h3Cell, spc_common<br>",
-                ""
+                "Let's bring forward only the parts we need to work with."
             ],
             [
                 "| evaluate pivot(spc_common): (h3Cell:string , [\"'Schubert' chokecherry\"]:int, ['Turkish hazelnut']:int, ['American linden']:int)<br>",
-                ""
+                "This is a very interesting and powerfull function. Microsoft has this explanation: pivot() rotates a table by turning the unique values from one column in the input table into multiple columns in the output table and performs aggregations as required on any remaining column values that will appear in the final output.. Which means that for every species we will add a new column and add the data count the matches residing in the same h3Cell - 66 meter radius."
             ],
             [
                 "| where [\"'Schubert' chokecherry\"] == 4 and ['Turkish hazelnut'] > 0 and ['American linden'] > 0;<br>",
@@ -993,7 +998,7 @@
             ],
             [
                 "| where spc_common == 'American linden'<br>",
-                ""
+                ".. and then we want to see if we can find any of the listed word/names inside 'spc_common'. This reduces our dataset."
             ],
             [
                 "| summarize arg_min(tree_dbh, *)<br>",
@@ -1005,9 +1010,104 @@
             ]
         ],
         "tags": [
-            "",
-            "",
-            ""
+            "evaluate",
+            "h3Cell",
+            "pivot",
+            "geo_point_to_h3cell"
+        ]
+    },
+    "name": "Kusto Detective Agency 2022 - Senior Detective - Big Heist <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency6/'>Full writeup</a>",
+        "code": [
+            [
+                "let logs = ChatLogs<br>",
+                ""
+            ],
+            [
+                "| extend user = tostring(split(Message, \"'\")[1]), target = tostring(split(Message, \"'\")[3])<br>",
+                ""
+            ],
+            [
+                "| extend activity = extract(@\"(joined|left|user|channel|logged in|logged out)\", 1, Message);<br>",
+                ""
+            ],
+            [
+                "let joiners = logs<br>",
+                ""
+            ],
+            [
+                "| where activity == \"joined\"<br>",
+                ""
+            ],
+            [
+                "| summarize ts = dcount(tostring(user)) by bin(Timestamp, 1m), target<br>",
+                ""
+            ],
+            [
+                "| where ts == 4<br>",
+                ""
+            ],
+            [
+                "| distinct target<br>",
+                ""
+            ],
+            [
+                "| summarize make_list(target);<br>",
+                ""
+            ],
+            [
+                "let crimChannel = logs<br>",
+                ""
+            ],
+            [
+                "| summarize c = dcount(user) by target<br>",
+                ""
+            ],
+            [
+                "| where c == 4 and target in (joiners)<br>",
+                ""
+            ],
+            [
+                "| summarize make_list(target);<br>",
+                ""
+            ],
+            [
+                "let crimUsers = logs<br>",
+                ""
+            ],
+            [
+                "| where target in (crimChannel)<br>",
+                ""
+            ],
+            [
+                "| distinct user<br>",
+                ""
+            ],
+            [
+                "| summarize make_list(user);<br>",
+                ""
+            ],
+            [
+                "logs<br>",
+                ""
+            ],
+            [
+                "| where activity == \"logged in\" and user in (crimUsers)<br>",
+                ""
+            ],
+            [
+                "| distinct target<br>",
+                ""
+            ],
+            [
+                "| project strcat(\"https://sneakinto.z13.web.core.windows.net/\", target)",
+                ""
+            ]
+        ],
+        "tags": [
+            "distinct",
+            "let",
+            "summarize",
+            "extend"
         ]
     }
 ]
