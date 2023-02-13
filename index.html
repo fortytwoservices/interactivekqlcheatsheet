@@ -35,7 +35,7 @@
             </div>
 
             <div>
-                <button class="btn btn-outline-success popup-trigger"
+                <button class="btn btn-outline-success popup-trigger ms-2 mt-2"
                     onclick="open_generator()">Generate JSON</button>
             </div>
             <div id="overlay">
@@ -54,7 +54,8 @@
                         </div>
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
-                        <button class="btn btn-outline-success"
+                            <div class="text-secondary ms-2 mb-2">Use pointer to select text you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
+                        <button class="btn btn-outline-success ms-2 mb-2"
                             onclick="print_generated_json()">Add description to selected text</button>
                         <div class="code">
                             <pre id="outputGenerated"></pre>
