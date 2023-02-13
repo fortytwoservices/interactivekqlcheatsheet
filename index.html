@@ -53,8 +53,9 @@
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
                             <div class="text-secondary ms-2 mb-2">Use pointer to select text you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
-                        <button class="btn btn-outline-success ms-2 mb-2"
-                            onclick="print_generated_json()">Add description to selected text</button>
+                        <button class="btn btn-outline-success ms-2 mb-2" onclick="print_generated_json()">Add description to selected text</button>
+                        <button class="btn btn-outline-secondary ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
+
                         <div class="code">
                             <pre id="outputGenerated"></pre>
                         </div>
@@ -64,6 +65,14 @@
 
 
             <script>
+            // Clear all input fields for data
+            function clearInputs(className) {
+            const inputs = document.getElementsByClassName(className);
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+            }
+
             // Run printText every time somebody write a query
             document.getElementById("input-field").addEventListener("input", function() {
             printText();
