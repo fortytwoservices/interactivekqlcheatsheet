@@ -23,7 +23,7 @@
     <body onload="renderJSON()">
         <div class="row">
             <div class="col">
-                <center><a href="https://kqlcheat.byfortytwo.com"><img
+                <center><a href="https://www.amestofortytwo.com" target="_blank"><img
                             src="./logo/KQLCheat_byFortytwo_logo.png"
                             class="img-fluid w-50"></a></center>
             </div>
@@ -34,34 +34,28 @@
                 </div>
             </div>
 
-
-
             <div>
                 <button class="btn btn-outline-success popup-trigger"
                     onclick="open_generator()">Generate JSON</button>
-
             </div>
             <div id="overlay">
                 <div id="popup">
                     <div class="popup-inner">
                         <div class="popup-content">
-                            <input type="text" id="query_name"
-                                placeholder="Query name">
-                            <textarea id="input-field" type="text"
-                                placeholder="Query"></textarea>
-                            <input type="text" id="query_tags"
-                                placeholder="Comma-separated tags">
-                            <button class="btn btn-outline-success"
-                                onclick="printText()">Print query</button>
+                            <input class="form-control" type="text" id="query_name"
+                                placeholder="Give your query a name">
+                            <textarea class="form-control" id="input-field" type="text"
+                                placeholder="Query" rows="6" cols="50"></textarea>
+                            <input class="form-control" type="text" id="query_tags"
+                                placeholder="Comma-separated tags ex. tag1,tag2,tag3">
                             <div class="codeBox">
                                 <pre id="output"></pre>
                             </div>
-
                         </div>
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
                         <button class="btn btn-outline-success"
-                            onclick="print_generated_json()">Generate</button>
+                            onclick="print_generated_json()">Add description to selected text</button>
                         <div class="code">
                             <pre id="outputGenerated"></pre>
                         </div>
@@ -71,7 +65,11 @@
 
 
             <script>
-            
+            // Run printText every time somebody write a query
+            document.getElementById("input-field").addEventListener("input", function() {
+            printText();
+            });
+
             // These two lines prohibits the popup to show onload. Not sure why they want to...
             test = document.getElementById('popup');
             test.style.display='none';
@@ -196,13 +194,13 @@
                     output = inputQuery.slice(indexes[0], indexes[1]);
 
                     if (gen_cnt == 0){
-                        var popup_input=prompt('Popuptext for selection');
+                        var popup_input=prompt('Write description of selected text/element.');
                         name = document.getElementById("query_name").value;
                         json_gen[0].name = name;
                         json_gen[0].code[gen_cnt][0] = output;
                         json_gen[0].code[gen_cnt][1] = popup_input;
                     } else {
-                        var popup_input = prompt('Popuptext for selection');
+                        var popup_input = prompt('Write description of selected text/element.');
                         json_gen[0].code.push([output, popup_input]);
                     }
                     
@@ -213,7 +211,6 @@
 
                 }
 
-                
 
                 function printText() {
                     var input = document.getElementById("input-field").value;
