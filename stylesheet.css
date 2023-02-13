@@ -128,33 +128,6 @@ pre {
   margin-right: 1em;
 }
 
-#input-field {
-  position: block;
-  width: 100%;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 1em 3em 1em 1em;
-}
-
-#query_name{
-  position: block;
-  width: 100%;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 1em 3em 1em 1em;
-}
-
-#query_tags{
-  position: block;
-  width: 100%;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 1em 3em 1em 1em;
-}
-
 #overlay {
   display: none;
   position: fixed;
