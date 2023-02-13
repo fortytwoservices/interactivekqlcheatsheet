@@ -23,7 +23,9 @@
     <body onload="renderJSON()">
         <div class="row">
             <div class="col">
-                <center><a href="https://www.amestofortytwo.com"><img src="./logo/KQLCheat_byFortytwo_logo.png" class="img-fluid w-50"></a></center>
+                <center><a href="https://www.amestofortytwo.com"><img
+                            src="./logo/KQLCheat_byFortytwo_logo.png"
+                            class="img-fluid w-50"></a></center>
             </div>
             <div id="navbar" class="navbar bg-body-tertiary">
                 <div class="row autocomplete container-fluid
@@ -40,29 +42,34 @@
                 <div id="popup">
                     <div class="popup-inner">
                         <div class="popup-content">
-                            <input class="form-control" type="text" id="query_name"
+                            <input class="form-control" type="text"
+                                id="query_name"
                                 placeholder="Give your query a name">
-                            <textarea class="form-control" id="input-field" type="text"
+                            <textarea class="form-control" id="input-field"
+                                type="text"
                                 placeholder="Query" rows="6" cols="50"></textarea>
-                            <input class="form-control" type="text" id="query_tags"
-                                placeholder="Comma-separated tags ex. tag1,tag2,tag3">
-                            <div class="codeBox">
-                                <pre id="output"></pre>
-                            </div>
+                            <input class="form-control" type="text"
+                                id="query_tags"
+                                placeholder="Comma-separated tags ex.
+                                tag1,tag2,tag3">
                         </div>
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
-                            <div class="text-secondary ms-2 mb-2">Use pointer to select text you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
-                        <button class="btn btn-outline-success ms-2 mb-2" onclick="print_generated_json()">Add description to selected text</button>
-                        <button class="btn btn-outline-secondary ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
-
+                        <div class="text-secondary ms-2 mb-2">Use pointer to
+                            select text you want to describe and click button
+                            below to make description. Repeat for every thing
+                            you want to describe.</div>
+                        <button class="btn btn-outline-success ms-2 mb-2"
+                            onclick="print_generated_json()">Add description to
+                            selected text</button>
+                        <button class="btn btn-outline-secondary ms-2 mb-2"
+                            onclick="clearInputs('form-control')">Clear data</button>
                         <div class="code">
                             <pre id="outputGenerated"></pre>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <script>
                 
@@ -73,11 +80,6 @@
                 inputs[i].value = "";
             }
             }
-
-            // Run printText every time somebody write a query
-            document.getElementById("input-field").addEventListener("input", function() {
-            printText();
-            });
 
             // These two lines prohibits the popup to show onload. Not sure why they want to...
             test = document.getElementById('popup');
@@ -163,22 +165,13 @@
                     getJSONData().then((data) => {
                     document.getElementById("searchContainer").appendChild(renderJSON(data));
                     });
-                 
-                function getSelectionHtml() {
-                    var html = "";
-                    if (typeof window.getSelection != "undefined") {
-                        var sel = window.getSelection();
-                        startidx = sel.anchorOffset;
-                        endidx = sel.focusOffset;
 
-                    return [startidx, endidx];
-                }}
-
-                function get_indexes(){
-                    var selectedHTML = getSelectionHtml();
-                    if (selectedHTML) {                            
-                        return [getSelectionHtml()[0], getSelectionHtml()[1]];
-                    }
+                function get_selected(){
+                    const textarea = document.getElementById("input-field");
+                    const start = textarea.selectionStart;
+                    const end = textarea.selectionEnd;
+                    const selectedText = textarea.value.substring(start, end);
+                    return selectedText;
                 }
                 
 
@@ -194,37 +187,26 @@
                 ]
                 var gen_cnt = 0;
                 function print_generated_json(){
-                    var indexes = get_indexes();
-                    if (!indexes) {
-                        return;
-                    }
-                    var inputQuery = document.getElementById("output").textContent;
+                    var selected = get_selected();
+                    selected = selected.replace(/\n/g, "<br>");
 
-                    output = inputQuery.slice(indexes[0], indexes[1]);
+
+                    name = document.getElementById("query_name").value;
 
                     if (gen_cnt == 0){
                         var popup_input=prompt('Write description of selected text/element.');
-                        name = document.getElementById("query_name").value;
-                        json_gen[0].name = name;
-                        json_gen[0].code[gen_cnt][0] = output;
+
+                        json_gen[0].code[gen_cnt][0] = selected;
                         json_gen[0].code[gen_cnt][1] = popup_input;
                     } else {
                         var popup_input = prompt('Write description of selected text/element.');
-                        json_gen[0].code.push([output, popup_input]);
+                        json_gen[0].code.push([selected, popup_input]);
                     }
-                    
+
+                    json_gen[0].name = name;
                     json_gen[0].tags = (document.getElementById("query_tags").value).split(",");
-                    console.log(json_gen);
+                    document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
                     gen_cnt++;
-                    document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen).trim("[]");
-
-                }
-
-
-                function printText() {
-                    var input = document.getElementById("input-field").value;
-                    var output = input.replace(/\n/g, "<br>");
-                    document.getElementById("output").textContent = output;
                 }
 
                 function open_generator(){

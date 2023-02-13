@@ -87,14 +87,12 @@ pre {
 
 .popup {
   display: none;
-  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  max-height: 70%;
+  max-height: 90%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 123128;
-  overflow: scroll;
+  z-index: 100;
   pointer-events: none;
 }
 
@@ -109,6 +107,8 @@ pre {
   background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
   min-height: 180px;
+  overflow-y: scroll;
+  max-height: 75%;
 }
 
 .popup-content {
@@ -137,4 +137,5 @@ pre {
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
+
 }
