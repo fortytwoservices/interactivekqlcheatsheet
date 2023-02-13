@@ -38,31 +38,33 @@
 
             <div>
                 <button class="btn btn-outline-success popup-trigger"
-                    onclick="document.getElementById('popup').style.display=
-                    'block'">Generate JSON</button>
+                    onclick="open_generator()">Generate JSON</button>
 
             </div>
-            <div id="popup">
-                <div class="popup-inner">
-                    <div class="popup-content">
-                        <textarea id="input-field" type="text"
-                            placeholder="Query"></textarea>
-                        <button class="btn btn-outline-success" onclick="printText()">Print Text</button>
-                        <div class="codeBox">
-                            <pre id="output"></pre>
-                        </div>
+            <div id="overlay">
+                <div id="popup">
+                    <div class="popup-inner">
+                        <div class="popup-content">
+                            <textarea id="input-field" type="text"
+                                placeholder="Query"></textarea>
+                            <button class="btn btn-outline-success"
+                                onclick="printText()">Print Text</button>
+                            <div class="codeBox">
+                                <pre id="output"></pre>
+                            </div>
 
+                        </div>
+                        <button class="popup-close-button"
+                            onclick="close_generator()">&times;</button>
+                        <button class="btn btn-outline-success" onclick="get_indexes()">Generate</button>
                     </div>
-                    <button class="popup-close-button"
-                        onclick="document.getElementById('popup').style.display=
-                        'none'">&times;</button>
                 </div>
             </div>
 
 
             <script>
             
-            // These two lines prohibits the popup to show at start. Not sure why they want to...
+            // These two lines prohibits the popup to show onload. Not sure why they want to...
             test = document.getElementById('popup');
             test.style.display='none';
 
@@ -143,80 +145,51 @@
                         console.error(error);
                     }
                     }
-
                     getJSONData().then((data) => {
                     document.getElementById("searchContainer").appendChild(renderJSON(data));
                     });
+                 
+                function getSelectionHtml() {
+                    var html = "";
+                    if (typeof window.getSelection != "undefined") {
+                        var sel = window.getSelection();
+                        startidx = sel.anchorOffset;
+                        endidx = sel.focusOffset;
+
+                    return [startidx, endidx];
+                }}
+
+                function get_indexes(){
+                    var selectedHTML = getSelectionHtml();
+                        if (selectedHTML) {
+                            console.log(typeof(selectedHTML[0]));
+                            
+                            var values = [selectedHTML];
+                            console.log("dsaoidasj" + typeof(values))
+                            
+                            alert("High Index: " + getSelectionHtml()[1] + "\nLow Index: " + getSelectionHtml()[0]);
 
 
-
-
-                    
-                    function getSelectionHtml() {
-                        var html = "";
-                        if (typeof window.getSelection != "undefined") {
-                            var sel = window.getSelection();
-                            if (sel.rangeCount) {
-                                var container = document.createElement("div");
-                                for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-                                    container.appendChild(sel.getRangeAt(i).cloneContents());
-                                }
-                                html = container.innerHTML;
-                            }
-                        } else if (typeof document.selection != "undefined") {
-                            if (document.selection.type == "Text") {
-                                html = document.selection.createRange().htmlText;
-                            }
                         }
-                        return html;
                     }
+                
 
-                    function highLow(arr) {
-                        // Return the highest and lowest number in an array
-                        return [Math.max(...arr), Math.min(...arr)];
-                    }
+                function printText() {
+                    var input = document.getElementById("input-field").value;
+                    var output = input.replace(/\n/g, "<br>");
+                    document.getElementById("output").textContent = output;
+                }
 
-                    document.addEventListener("keyup", function (e) {
-                        var selectedHTML,
-                            //key = e.keyCode || e.which; //deprecated
-                            key = e.key;
-                        //if (key == 16) { // part of the depreacated code ^^
-                        if (key == "Shift") {
-                            // if "shift" key was released 
-                            selectedHTML = getSelectionHtml();
-                            if (selectedHTML) {
-                                // get the selected elements
-                                var selectedElements = window
-                                    .getSelection()
-                                    .getRangeAt(0)
-                                    .cloneContents()
-                                    .querySelectorAll("td");
-                                var values = [];
-                                // print the tag ID of each selected element
-                                for (var i = 0; i < selectedElements.length; i++) {
-                                    values.push(parseInt(selectedElements[i].id))
-                                }
+                function open_generator(){
+                    unresponsive_bg = document.getElementById('overlay');
+                    unresponsive_bg.style.display="block";
+                    set_popup = document.getElementById('popup');
+                    set_popup.style.display='block';
+                }
 
-                                var highIndex = highLow(values)[0];
-                                var lowIndex = highLow(values)[1];
-
-                                if (highIndex < lowIndex) {
-                                    temp = highIndex;
-                                    highIndex = lowIndex;
-                                    lowIndex = temp;
-                                }
-                                alert("High Index: " + highIndex + "\nLow Index: " + lowIndex);
-
-
-                            }
-                        }
-                    })
-
-                    function printText() {
-                        var input = document.getElementById("input-field").value;
-                        var output = input.replace(/\n/g, "<br>");
-                        document.getElementById("output").textContent = output;
-                    }
+                function close_generator(){
+                    document.getElementById('popup').style.display='none';
+                    document.getElementById('overlay').style.display='none';                    }
 
 
             </script>
