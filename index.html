@@ -45,10 +45,14 @@
                 <div id="popup">
                     <div class="popup-inner">
                         <div class="popup-content">
+                            <input type="text" id="query_name"
+                                placeholder="Query name">
                             <textarea id="input-field" type="text"
                                 placeholder="Query"></textarea>
+                            <input type="text" id="query_tags"
+                                placeholder="Comma-separated tags">
                             <button class="btn btn-outline-success"
-                                onclick="printText()">Print Text</button>
+                                onclick="printText()">Print query</button>
                             <div class="codeBox">
                                 <pre id="output"></pre>
                             </div>
@@ -56,7 +60,11 @@
                         </div>
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
-                        <button class="btn btn-outline-success" onclick="get_indexes()">Generate</button>
+                        <button class="btn btn-outline-success"
+                            onclick="print_generated_json()">Generate</button>
+                        <div class="code">
+                            <pre id="outputGenerated"></pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,17 +169,50 @@
 
                 function get_indexes(){
                     var selectedHTML = getSelectionHtml();
-                        if (selectedHTML) {
-                            console.log(typeof(selectedHTML[0]));
-                            
-                            var values = [selectedHTML];
-                            console.log("dsaoidasj" + typeof(values))
-                            
-                            alert("High Index: " + getSelectionHtml()[1] + "\nLow Index: " + getSelectionHtml()[0]);
-
-
-                        }
+                    if (selectedHTML) {                            
+                        return [getSelectionHtml()[0], getSelectionHtml()[1]];
                     }
+                }
+                
+
+                var json_gen = [
+                    {
+                        "name": "",
+                        "code": 
+                        [
+                            ["", ""]
+                        ],
+                        "tags": ""
+                    }
+                ]
+                var gen_cnt = 0;
+                function print_generated_json(){
+                    var indexes = get_indexes();
+                    if (!indexes) {
+                        return;
+                    }
+                    var inputQuery = document.getElementById("output").textContent;
+
+                    output = inputQuery.slice(indexes[0], indexes[1]);
+
+                    if (gen_cnt == 0){
+                        var popup_input=prompt('Popuptext for selection');
+                        name = document.getElementById("query_name").value;
+                        json_gen[0].name = name;
+                        json_gen[0].code[gen_cnt][0] = output;
+                        json_gen[0].code[gen_cnt][1] = popup_input;
+                    } else {
+                        var popup_input = prompt('Popuptext for selection');
+                        json_gen[0].code.push([output, popup_input]);
+                    }
+                    
+                    json_gen[0].tags = (document.getElementById("query_tags").value).split(",");
+                    console.log(json_gen);
+                    gen_cnt++;
+                    document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen).trim("[]");
+
+                }
+
                 
 
                 function printText() {
@@ -181,10 +222,8 @@
                 }
 
                 function open_generator(){
-                    unresponsive_bg = document.getElementById('overlay');
-                    unresponsive_bg.style.display="block";
-                    set_popup = document.getElementById('popup');
-                    set_popup.style.display='block';
+                    document.getElementById('overlay').style.display="block";
+                    document.getElementById('popup').style.display='block';
                 }
 
                 function close_generator(){
