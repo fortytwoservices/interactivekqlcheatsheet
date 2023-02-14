@@ -1110,5 +1110,57 @@
             "summarize",
             "extend"
         ]
-    }
+    },
+    {
+        "name": "Filter records from a table",
+        "code": [
+            [
+                "MyTable | where Field1 == 'value1'",
+                "Filter records from MyTable where Field1 is equal to 'value1'"
+            ]
+        ],
+        "tags": [
+            "operator",
+            "table"
+        ]
+    },
+    {
+        "name": "Summarize data from a table",
+        "code": [
+            [
+                "MyTable | summarize count() by Field1",
+                "Count the number of records in MyTable for each unique value of Field1"
+            ]
+        ],
+        "tags": [
+            "operator",
+            "table"
+        ]
+    },
+    {
+        "name": "Join data from two tables",
+        "code": [
+            [
+                "Table1 | join kind=inner Table2 on Field1",
+                "Join records from Table1 and Table2 where Field1 matches"
+            ]
+        ],
+        "tags": [
+            "operator",
+            "table"
+        ]
+    },
+    {
+        "name": "Extract fields from a table",
+        "code": [
+            [
+                "MyTable | project Field1, Field2",
+                "Select only Field1 and Field2 from MyTable"
+            ]
+        ],
+        "tags": [
+            "operator",
+            "table"
+        ]
+    }    
 ]
