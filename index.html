@@ -6,22 +6,99 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>KQLCheat by Fortytwo</title>
         <link rel="stylesheet" href="stylesheet.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/50b53b5d7b.js" crossorigin="anonymous"></script>
-        <script defer data-domain="kqlcheat.byfortytwo.com" src="https://plausible.io/js/script.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/50b53b5d7b.js"
+            crossorigin="anonymous"></script>
+        <script defer data-domain="kqlcheat.byfortytwo.com"
+            src="https://plausible.io/js/script.js"></script>
     </head>
     <body onload="renderJSON()">
         <div class="row">
             <div class="col">
-                <center><a href="https://www.amestofortytwo.com"><img src="./logo/KQLCheat_byFortytwo_logo.png" class="img-fluid w-50"></a></center>
+                <center><a href="https://kqlcheat.byfortytwo.com"><img
+                            src="./logo/KQLCheat_byFortytwo_logo.png"
+                            class="img-fluid w-50"></a></center>
             </div>
+            <ul class="nav justify-content-end nav-pills">
+                <li class="nav-item ms-2 mb-2">
+                  <a class="nav-link link-secondary" onclick="open_generator()" aria-current="page" href="#">Generate JSON</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-secondary" href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">Github repo</a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link link-secondary" href="https://www.amestofortytwo.com/" target="_blank">About Fortytwo</a>
+                </li>
+              </ul>
             <div id="navbar" class="navbar bg-body-tertiary">
-                <div class="row autocomplete container-fluid justify-content-start">
+                <div class="row autocomplete container-fluid
+                    justify-content-start">
                     <div id="searchContainer"></div>
                 </div>
             </div>
+            <div id="overlay">
+                <div id="popup">
+                    <div class="popup-inner">
+                        <div class="popup-content">
+                            <input class="form-control" type="text"
+                                id="query_name"
+                                placeholder="Give your query a name">
+                            <textarea class="form-control" id="input-field"
+                                type="text"
+                                placeholder="Query" rows="6" cols="50"></textarea>
+                            <input class="form-control" type="text"
+                                id="query_tags"
+                                placeholder="Comma-separated tags ex.
+                                tag1,tag2,tag3">
+                        </div>
+                        <button class="popup-close-button"
+                            onclick="close_generator()">&times;</button>
+                        <div class="text-secondary ms-2 mb-2">Use mouse pointer to
+                            select text directly in your query that you want to describe and click button
+                            below to make description. <br>Repeat for every thing
+                            you want to describe. See how its done <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">here</a></div>
+                        <button class="btn btn-outline-success ms-2 mb-2"
+                            onclick="print_generated_json()">Add description to
+                            selected text</button>
+                        <div class="code">
+                            <pre id="outputGenerated"></pre>
+                            <button class="btn btn-outline-info ms-2 mb-2" id="copyButton">Copy to clipboard</button>
+                            <button class="btn btn-outline-danger ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <script>
+            
+            // Copy json to clipboard when button is clicked.
+            function copyOutputGenerated() {
+                const outputGenerated = document.getElementById("outputGenerated").innerText;
+                navigator.clipboard.writeText(outputGenerated).then(function() {});
+            }
+
+            document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
+                
+            // Clear all data from all form-control classes.
+            function clearInputs(className) {
+            const inputs = document.getElementsByClassName(className);
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+            }
+
+            // These two lines prohibits the popup to show onload. Not sure why they want to...
+            test = document.getElementById('popup');
+            test.style.display='none';
+
                 function renderJSON(json) {
                 var elem = document.getElementsByClassName("searchContainer");
                 while (elem.length > 0) {
@@ -99,30 +176,97 @@
                         console.error(error);
                     }
                     }
-
                     getJSONData().then((data) => {
                     document.getElementById("searchContainer").appendChild(renderJSON(data));
                     });
 
+                function get_selected(){
+                    const textarea = document.getElementById("input-field");
+                    const start = textarea.selectionStart;
+                    const end = textarea.selectionEnd;
+                    const selectedText = textarea.value.substring(start, end);
+                    return selectedText;
+                }
+                
+
+                var json_gen = [
+                    {
+                        "name": "",
+                        "code": 
+                        [
+                            ["", ""]
+                        ],
+                        "tags": ""
+                    }
+                ]
+                var gen_cnt = 0;
+                
+                function print_generated_json(){
+                    var selected = get_selected();
+                    selected = selected.replace(/\n/g, "<br>");
+
+
+                    name = document.getElementById("query_name").value;
+
+                    if (gen_cnt == 0){
+                        var popup_input=prompt('Write description of selected text/element.');
+
+                        json_gen[0].code[gen_cnt][0] = selected;
+                        json_gen[0].code[gen_cnt][1] = popup_input;
+                    } else {
+                        var popup_input = prompt('Write description of selected text/element.');
+                        json_gen[0].code.push([selected, popup_input]);
+                    }
+
+                    json_gen[0].name = name;
+                    json_gen[0].tags = (document.getElementById("query_tags").value).split(",");
+                    document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
+                    gen_cnt++;
+                }
+
+                function open_generator(){
+                    document.getElementById('overlay').style.display="block";
+                    document.getElementById('popup').style.display='block';
+                }
+
+                function close_generator(){
+                    document.getElementById('popup').style.display='none';
+                    document.getElementById('overlay').style.display='none';                    }
+
+
             </script>
             <p></p>
-            <div style="text-align: center;"> 
-                <p>Built with ❤️ using open-source technology. Check out the code on <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">GitHub.</a></p>
+            <div style="text-align: center;">
+                <p>Built with ❤️ using open-source technology. Check out the
+                    code on <a
+                        href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
+                        target="_blank">GitHub.</a></p>
                 <div class="d-flex justify-content-center">
-                  <span class="fa-stack fa-1x">
-                    <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank"><i class="fa-brands fa-square-github fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://twitter.com/amestofortytwo" target="_blank"><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://www.linkedin.com/company/amesto-fortytwo/" target="_blank"><i class="fa-brands fa-linkedin fa-stack-1x fa-inverse"></i></a>
-                  </span>
-                  <span class="fa-stack fa-1x">
-                    <a href="https://plausible.io/kqlcheat.byfortytwo.com" target="_blank"><i class="fa-solid fa-chart-simple fa-stack-1x fa-inverse"></i></a>
-                  </span>
+                    <span class="fa-stack fa-1x">
+                        <a
+                            href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
+                            target="_blank"><i class="fa-brands fa-square-github
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a href="https://twitter.com/amestofortytwo"
+                            target="_blank"><i class="fab fa-twitter fa-stack-1x
+                                fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a
+                            href="https://www.linkedin.com/company/amesto-fortytwo/"
+                            target="_blank"><i class="fa-brands fa-linkedin
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
+                    <span class="fa-stack fa-1x">
+                        <a href="https://plausible.io/kqlcheat.byfortytwo.com"
+                            target="_blank"><i class="fa-solid fa-chart-simple
+                                fa-stack-1x fa-inverse"></i></a>
+                    </span>
                 </div>
-              </div>
-              <p></p>      
-    </body>
-</html>
+            </div>
+            <p></p>
+
+        </body>
+    </html>

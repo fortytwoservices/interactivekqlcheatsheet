@@ -14,7 +14,7 @@
   position: fixed;
   bottom: 0;
   text-align: center;
-  width: 100% /* fit-content*/ ;
+  width: 100%;
 
   height: fit-content;
   left: 50%;
@@ -56,12 +56,7 @@ details {
 }
 
 details:last-child {
-  margin-bottom: 120px;
-}
-
-details[open] summary~* {
-  animation: sweep .2s ease-in-out;
-
+  margin-bottom: 10em;
 }
 
 summary {
@@ -71,6 +66,11 @@ summary {
   border-radius: 6px;
   background-color: rgba(38, 66, 73, 0.5);
   margin: 1px;
+  transition: background-color 0.5s ease;
+}
+
+summary:hover {
+  background-color: rgba(38, 66, 73, 0.9);
 }
 
 summary a {
@@ -78,6 +78,7 @@ summary a {
   position: absolute;
   right: 6px;
 }
+
 
 pre {
   word-wrap: break-word;
@@ -88,4 +89,59 @@ pre {
   color: #e7f6f2;
   border-radius: 6px;
   padding: 10px;
+}
+
+.popup {
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 90%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.popup-inner {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  min-height: 180px;
+  overflow-y: scroll;
+  max-height: 75%;
+}
+
+.popup-content {
+  padding: 5px;
+  text-align: left;
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #ccc;
+  outline: 0;
+  border: 1px solid #000;
+  z-index: 42;
+  margin-right: 1em;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+
 }
