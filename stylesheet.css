@@ -66,6 +66,11 @@ summary {
   border-radius: 6px;
   background-color: rgba(38, 66, 73, 0.5);
   margin: 1px;
+  transition: background-color 0.5s ease;
+}
+
+summary:hover {
+  background-color: rgba(38, 66, 73, 0.9);
 }
 
 summary a {
@@ -73,6 +78,7 @@ summary a {
   position: absolute;
   right: 6px;
 }
+
 
 pre {
   word-wrap: break-word;
