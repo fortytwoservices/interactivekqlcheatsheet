@@ -55,23 +55,31 @@
                         </div>
                         <button class="popup-close-button"
                             onclick="close_generator()">&times;</button>
-                        <div class="text-secondary ms-2 mb-2">Use pointer to
-                            select text you want to describe and click button
-                            below to make description. Repeat for every thing
-                            you want to describe.</div>
+                        <div class="text-secondary ms-2 mb-2">Use mouse pointer to
+                            select text directly in your query that you want to describe and click button
+                            below to make description. <br>Repeat for every thing
+                            you want to describe. See how its done <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">here</a></div>
                         <button class="btn btn-outline-success ms-2 mb-2"
                             onclick="print_generated_json()">Add description to
                             selected text</button>
-                        <button class="btn btn-outline-secondary ms-2 mb-2"
-                            onclick="clearInputs('form-control')">Clear data</button>
                         <div class="code">
                             <pre id="outputGenerated"></pre>
+                            <button class="btn btn-outline-info ms-2 mb-2" id="copyButton">Copy to clipboard</button>
+                            <button class="btn btn-outline-danger ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <script>
+            
+            // Copy json to clipboard when button is clicked.
+            function copyOutputGenerated() {
+                const outputGenerated = document.getElementById("outputGenerated").innerText;
+                navigator.clipboard.writeText(outputGenerated).then(function() {});
+            }
+
+            document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
                 
             // Clear all data from all form-control classes.
             function clearInputs(className) {
