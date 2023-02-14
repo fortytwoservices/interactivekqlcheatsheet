@@ -18,7 +18,6 @@ Another more manual approach to contribute to the KQL queries, is to use this "u
 
 ```json
 {
-	// Type "newKQL" to fill in a new query entry
 	"NewKQL": {
 		"scope": "JSON,javascript",
 		"prefix": "newKQL",
