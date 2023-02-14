@@ -1,5 +1,4 @@
 scalar operators
-Ago
 Now
 DateTime_Arithmetic
 StartOf
@@ -14,6 +13,5 @@ IsNull_and_IsEmpty
 StrCat
 Split
 Contains_and_In
-Parse
 Extract
 Parse_JSON

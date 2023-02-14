@@ -7,22 +7,28 @@ Looking for a specific problem in KQL? Search for keywords of what you're lookin
 
 ## Contribute
 
-To contribute to the KQL queries, you can use the "user-snippet" vscode included in this repo. The outermost element is a number or ID, which is being printed to the DOM in order from low to high. Put the snippet you want anywhere in the code, but please consider it kept somewhat organized. I have tried to keep the most simple queries at the beginning building up to more advanced towards the bottom. And for a future update these will be grouped (basic, intermediate, advanced and probably some large examples and specific use cases).
+We have done some effort to make it easier to contribute with relevant code with little to no knowledge of coding by creating a JSON template from GUI. Once on the [page](https://kqlcheat.byfortytwo.com/) click "Generate JSON". A window pops up. Fill in everything you need and mark the text you first want to write a description about, then click "add description to selected text". This will start to populate the JSON you need. Repeat the marking of the text selection ***from where you left off previous**, remember to mark lineshifts as well, because these will be converted to the correct HTML format in the background. Once you have marked and written about all the selections click the copy to clipboard button. Next up, you can paste the JSON into you local copy of the repo and do a pull request or even easier - add a issue with the JSON pasted in as comment - this gif shows the process. (Click the link in the text below the text inputs "here" to go directly to the git repo).
 
-## Adding a new query
-Use the user-snippet for VSCode included in the repo:
-![UserSnippet](media/usersnippet.gif) 
 
-The JSON structure looks like this: 
+![The process of adding new query](media/addjson.gif)
+
+
+
+Another more manual approach to contribute to the KQL queries, is to use this "user-snippet" in vscode:
 
 ```json
-    {
-        "name": "Name of the query",
-        "code": [
-        ["Hover me to get the explanation inside the next quotes visible", "I'm here!"],
-        ["This allows for some HTML input as well, and mostly you'll need to break a line. Use <br> to do so.", "A line break is rendered."]
-        ],
-        "tags": ["These are search tags", "They Pop up when you ", "start typing"]
-    } 
-    
+{
+	// Type "newKQL" to fill in a new query entry
+	"NewKQL": {
+		"scope": "JSON,javascript",
+		"prefix": "newKQL",
+		"body": [
+			",{\n\t\"name\": \"\",\n\t\"code\": \n\t\t[\n\t\t\t[\n\t\t\t\t\"\", \n\t\t\t\t\"\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"\", \n\t\t\t\t\"\"\n\t\t\t]\n\t\t],\n\t\"tags\": \n\t\t[\n\t\t\t\"\", \n\t\t\t\"\", \n\t\t\t\"\"\n\t\t]\n}",
+			"$2"
+		],
+		"description": "Creates a new template JSON for inserting new code block"
+	}
+}
 ```
+
+To use this snippet, click File -> Preferences -> Configure User Snippets and search for JSON. Paste the above code. When done, you can type the "prefix" keyword "newKQL" ant TAB to auto generate the new template for your KQL query.
