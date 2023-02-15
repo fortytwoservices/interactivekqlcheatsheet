@@ -161,37 +161,72 @@ var json_gen = [
 var gen_cnt = 0;
 
 // Function to print the generated JSON
-function print_generated_json(){
+function print_generated_json() {
 
     // Get selected text and replace newlines with <br> tags
     var selected = get_selected();
     selected = selected.replace(/\n/g, "<br>");
-
+  
     // Get name and popup input values from form
     var name = document.getElementById("query_name").value;
+    var author = document.getElementById("query_author").value;
     var popup_input = prompt('Write description of selected text/element.');
-
+  
     // If this is the first generated code block, update existing array values
-    if (gen_cnt == 0){
-        json_gen[0].code[gen_cnt][0] = selected;
-        json_gen[0].code[gen_cnt][1] = popup_input;
+    if (gen_cnt == 0) {
+      json_gen[0].code[gen_cnt][0] = selected;
+      json_gen[0].code[gen_cnt][1] = popup_input;
     } 
     // Otherwise, add a new array to the code property
     else {
-        json_gen[0].code.push([selected, popup_input]);
+      json_gen[0].code.push([selected, popup_input]);
     }
-
+  
+    // Get selected categories
+    var selectedCategories = [];
+    var categorySelect = document.getElementById("category-select");
+    for (var i = 0; i < categorySelect.options.length; i++) {
+      if (categorySelect.options[i].selected) {
+        selectedCategories.push(categorySelect.options[i].value);
+      }
+    }
+  
     // Update name, category, and author properties with form values
     json_gen[0].name = name;
-    json_gen[0].category = (document.getElementById("").value).split(",");
-    json_gen[0].author = ""; // Author informationquery_category
-
+    json_gen[0].category = selectedCategories;
+    json_gen[0].author = author;
+  
     // Update the output text with the generated JSON string
     document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
-
+  
     // Increment the code block counter
     gen_cnt++;
+  }
+
+
+// Load categories from newQueries.json and add them as options to the dropdown
+getJSONData().then((data) => {
+    let categories = new Set();
+    for (let element in data) {
+        let category = data[element].category;
+        for (let i = 0; i < category.length; i++) {
+            categories.add(category[i]);
+        }
+    }
+    let categorySelect = document.getElementById("category-select");
+    for (let category of categories) {
+        let option = document.createElement("option");
+        option.innerHTML = category;
+        categorySelect.appendChild(option);
+    }
+});
+
+// Function to apply selected categories to the current query
+function selectCategories() {
+    let selectedCategories = Array.from(document.getElementById("category-select").selectedOptions).map(option => option.value);
+    json_gen[0].category = selectedCategories;
 }
+
 
 // Function to display the popup window
 function open_generator(){
@@ -220,25 +255,3 @@ function clearInputs(className) {
         inputs[i].value = "";
     }
 }
-
-getJSONData().then((data) => {
-    let categories = new Set();
-    for (let element in data) {
-      let category = data[element].category;
-      for (let i = 0; i < category.length; i++) {
-        categories.add(category[i]);
-      }
-    }
-    let categorySelect = document.getElementById("category-select");
-    for (let category of categories) {
-      let option = document.createElement("option");
-      option.innerHTML = category;
-      categorySelect.appendChild(option);
-    }
-  });
-  
-  // Function to apply selected categories to the current query
-  function selectCategories() {
-    let selectedCategories = Array.from(document.getElementById("category-select").selectedOptions).map(option => option.value);
-    json_gen[0].category = selectedCategories;
-  }
