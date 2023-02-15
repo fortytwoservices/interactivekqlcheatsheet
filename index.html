@@ -52,22 +52,21 @@
                   <textarea class="form-control" id="input-field" type="text" placeholder="Query" rows="6" cols="50"></textarea>
                   <div class="form-group">
                     <input class="form-control" type="text" id="query_author" placeholder="Github username">
-                    <small id="authorHelp" class="form-text text-muted">We'll never share your Github username with anyone else.</small>
                   </div>
                   <div class="form-group">
-                    <label for="category-select">Select categories (use Ctrl/Cmd for multiple):</label>
+                    <label for="category-select" class="ms-2 mb-2 mt-2 text-secondary">Select categories (use Ctrl/Cmd for multiple):</label>
                     <select id="category-select" class="form-control" multiple>
                       <!-- Options will be added dynamically via JavaScript -->
                     </select>
                   </div>
                 </div>
                 <button class="popup-close-button" onclick="close_generator()">&times;</button>
-                <div class="text-secondary mb-2">Use mouse pointer to select text directly in your query that you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
-                <button class="btn btn-outline-success mb-2" onclick="print_generated_json()">Add description to selected text</button>
+                <div class="text-secondary ms-2 mb-2">Use mouse pointer to select text directly in your query that you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
+                <button class="btn btn-outline-success ms-2 mb-2" onclick="print_generated_json()">Add description to selected text</button>
                 <div class="code">
                   <pre id="outputGenerated"></pre>
-                  <button class="btn btn-outline-info mb-2" id="copyButton">Copy to clipboard</button>
-                  <button class="btn btn-outline-danger mb-2" onclick="clearInputs('form-control')">Clear data</button>
+                  <button class="btn btn-outline-info ms-2 mb-2" id="copyButton">Copy to clipboard</button>
+                  <button class="btn btn-outline-danger ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
                 </div>
               </div>
             </div>
