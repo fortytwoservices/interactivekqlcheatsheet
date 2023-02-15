@@ -90,7 +90,7 @@ function renderJSON(json) {
         // Add author and category information
         let author = document.createElement("div");
         author.setAttribute("class", "authorInfo ms-2 mb-2 mt-2 mb-2");
-        author.innerHTML = "Author: " + json[element].author;
+        author.innerHTML = `Author: <a href="https://github.com/${json[element].author}">${json[element].author}</a>`;
         details.appendChild(author);
 
         let categoryInfo = document.createElement("div");
