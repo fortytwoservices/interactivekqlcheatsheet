@@ -248,10 +248,10 @@ function copyOutputGenerated() {
 
 document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
     
-// Clear all data from all form-control classes.
 function clearInputs(className) {
     const inputs = document.getElementsByClassName(className);
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
     }
+    document.getElementById("outputGenerated").textContent = "";
 }
