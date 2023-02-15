@@ -11,7 +11,50 @@
             "operator",
             "table"
         ]
-    },
+    },{
+		"name": "Query building blocks",
+		"code": [
+			[
+				"SigninLogs<br>",
+				"Choose the table"
+			],
+			[
+				"<br>| ",
+				"pipe current data selection further into the next part of the query"
+			],
+			[
+				"where TimeGenerated > ago(2d)",
+				"Filtering"
+			],
+			[
+				"<br>| ",
+				"pipe current data selection further into the next part of the query"
+			],
+			[
+				"summarize cnt = count() by IPAddress",
+				"Aggregating data"
+			],
+			[
+				"<br>| ",
+				"pipe current data selection further into the next part of the query"
+			],
+			[
+				"project IPAddress, cnt",
+				"Data reduction/specification"
+			],
+			[
+				"<br>| ",
+				"pipe current data selection further into the next part of the query"
+			],
+			[
+				"order by TimeGenerated",
+				"Sort data in the output"
+			]
+		],
+		"tags": [
+			"basic"
+		]
+	},
     {
         "name": "Query a table and limit output records",
         "code": [
