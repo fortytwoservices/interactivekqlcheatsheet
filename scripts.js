@@ -31,6 +31,7 @@ function renderJSON(json) {
     let searchContainer = document.createElement("div");
     searchContainer.setAttribute("class", "search-container d-flex align-items-center");
 
+    // Create search input field
     let searchInput = document.createElement("input");
     searchInput.setAttribute("class", "form-control");
     searchInput.setAttribute("type", "text");
@@ -39,13 +40,18 @@ function renderJSON(json) {
 
     searchContainer.appendChild(searchInput);
 
+    // Create category select dropdown
     let categorySelect = document.createElement("select");
     categorySelect.setAttribute("class", "form-select");
     categorySelect.setAttribute("aria-label", "Select category");
+
+    // Create default option
     let defaultOption = document.createElement("option");
     defaultOption.setAttribute("selected", "selected");
     defaultOption.innerHTML = "All categories";
     categorySelect.appendChild(defaultOption);
+
+    // Extract categories from JSON data and add them to category select dropdown
     let categories = new Set();
     for (let element in json) {
         let category = json[element].category;
@@ -53,6 +59,8 @@ function renderJSON(json) {
             categories.add(category[i]);
         }
     }
+
+    // Loop through JSON data and create details and summary tags with codebox, author and category information
     for (let category of categories) {
         let option = document.createElement("option");
         option.innerHTML = category;
@@ -109,93 +117,105 @@ function renderJSON(json) {
         container.appendChild(details);
     }
 
-    // Missing description
-    function searchHandler() {
-        let searchTerm = searchInput.value.toLowerCase();
-        let selectedCategory = categorySelect.value;
-        let details = document.querySelectorAll(".queryDetails");
-        details.forEach(detail => {
-            if ((detail.dataset.search.includes(searchTerm) || searchTerm === "") &&
-                (selectedCategory === "All categories" || detail.dataset.category.includes(selectedCategory))) {
-                detail.style.display = "block";
-            } else {
-                detail.style.display = "none";
-            }
-        });
+// Handle search input and category select changes
+function searchHandler() {
+    let searchTerm = searchInput.value.toLowerCase();
+    let selectedCategory = categorySelect.value;
+    let details = document.querySelectorAll(".queryDetails");
+    details.forEach(detail => {
+        if ((detail.dataset.search.includes(searchTerm) || searchTerm === "") &&
+            (selectedCategory === "All categories" || detail.dataset.category.includes(selectedCategory))) {
+            detail.style.display = "block";
+        } else {
+            detail.style.display = "none";
+        }
+    });
     }
     
     return container;
 }
 
 
-    // Missing
-    async function getJSONData() {
-        try {
-            const response = await fetch('newQueries.json');
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error(error);
-        }
-        }
-        getJSONData().then((data) => {
-        document.getElementById("searchContainer").appendChild(renderJSON(data));
-        });
-
-    // Missing description
-    function get_selected(){
-        const textarea = document.getElementById("input-field");
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const selectedText = textarea.value.substring(start, end);
-        return selectedText;
+// Async function to fetch JSON data from newQueries.json file
+async function getJSONData() {
+    try {
+      const response = await fetch('newQueries.json'); 
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
     }
-    
+  }
+  
+  // Call the getJSONData function to fetch and load the JSON data to the search container
+  getJSONData().then((data) => {
+    document.getElementById("searchContainer").appendChild(renderJSON(data));
+  });  
 
-    var json_gen = [
-        {
-            "name": "",
-            "code": 
-            [
-                ["", ""]
-            ],
-            "category": "",
-            "author": ""
-        }
-    ]
-    var gen_cnt = 0;
+// Function to get the selected text from the input field
+function get_selected(){
+    const textarea = document.getElementById("input-field");
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    return selectedText;
+}
 
-// Missing description
+// Initialize an empty array to store the generated JSON
+var json_gen = [
+    {
+        "name": "",
+        "code": 
+        [
+            ["", ""]
+        ],
+        "category": "",
+        "author": ""
+    }
+]
+
+var gen_cnt = 0;
+
+// Function to print the generated JSON
 function print_generated_json(){
+    // Get selected text and replace newlines with <br> tags
     var selected = get_selected();
     selected = selected.replace(/\n/g, "<br>");
 
-    name = document.getElementById("query_name").value;
+    // Get name and popup input values from form
+    var name = document.getElementById("query_name").value;
+    var popup_input = prompt('Write description of selected text/element.');
 
+    // If this is the first generated code block, update existing array values
     if (gen_cnt == 0){
-        var popup_input = prompt('Write description of selected text/element.');
-
         json_gen[0].code[gen_cnt][0] = selected;
         json_gen[0].code[gen_cnt][1] = popup_input;
-    } else {
-        var popup_input = prompt('Write description of selected text/element.');
+    } 
+    // Otherwise, add a new array to the code property
+    else {
         json_gen[0].code.push([selected, popup_input]);
     }
 
+    // Update name, category, and author properties with form values
     json_gen[0].name = name;
     json_gen[0].category = (document.getElementById("query_category").value).split(",");
     json_gen[0].author = ""; // Author information
+
+    // Update the output text with the generated JSON string
     document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
+
+    // Increment the code block counter
     gen_cnt++;
 }
 
-// Missing description
+
+// Function to display the popup window
 function open_generator(){
     document.getElementById('overlay').style.display="block";
     document.getElementById('popup').style.display='block';
 }
 
-// Missing description
+// Function to close the popup window
 function close_generator(){
     document.getElementById('popup').style.display='none';
     document.getElementById('overlay').style.display='none';                    
