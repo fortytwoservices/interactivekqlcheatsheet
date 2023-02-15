@@ -1,22 +1,6 @@
-// Copy json to clipboard when button is clicked.
-function copyOutputGenerated() {
-    const outputGenerated = document.getElementById("outputGenerated").innerText;
-    navigator.clipboard.writeText(outputGenerated).then(function() {});
-}
-
-document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
-    
-// Clear all data from all form-control classes.
-function clearInputs(className) {
-    const inputs = document.getElementsByClassName(className);
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = "";
-    }
-}
-
-    // These two lines prohibits the popup to show onload. Not sure why they want to...
-    test = document.getElementById('popup');
-    test.style.display='none';
+// These two lines prohibits the popup to show onload. Not sure why they want to...
+test = document.getElementById('popup');
+test.style.display='none';
 
 
 // Render search results and build table
@@ -178,6 +162,7 @@ var gen_cnt = 0;
 
 // Function to print the generated JSON
 function print_generated_json(){
+
     // Get selected text and replace newlines with <br> tags
     var selected = get_selected();
     selected = selected.replace(/\n/g, "<br>");
@@ -198,8 +183,8 @@ function print_generated_json(){
 
     // Update name, category, and author properties with form values
     json_gen[0].name = name;
-    json_gen[0].category = (document.getElementById("query_category").value).split(",");
-    json_gen[0].author = ""; // Author information
+    json_gen[0].category = (document.getElementById("").value).split(",");
+    json_gen[0].author = ""; // Author informationquery_category
 
     // Update the output text with the generated JSON string
     document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
@@ -207,7 +192,6 @@ function print_generated_json(){
     // Increment the code block counter
     gen_cnt++;
 }
-
 
 // Function to display the popup window
 function open_generator(){
@@ -220,3 +204,41 @@ function close_generator(){
     document.getElementById('popup').style.display='none';
     document.getElementById('overlay').style.display='none';                    
 }
+
+// Copy json to clipboard when button is clicked.
+function copyOutputGenerated() {
+    const outputGenerated = document.getElementById("outputGenerated").innerText;
+    navigator.clipboard.writeText(outputGenerated).then(function() {});
+}
+
+document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
+    
+// Clear all data from all form-control classes.
+function clearInputs(className) {
+    const inputs = document.getElementsByClassName(className);
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = "";
+    }
+}
+
+getJSONData().then((data) => {
+    let categories = new Set();
+    for (let element in data) {
+      let category = data[element].category;
+      for (let i = 0; i < category.length; i++) {
+        categories.add(category[i]);
+      }
+    }
+    let categorySelect = document.getElementById("category-select");
+    for (let category of categories) {
+      let option = document.createElement("option");
+      option.innerHTML = category;
+      categorySelect.appendChild(option);
+    }
+  });
+  
+  // Function to apply selected categories to the current query
+  function selectCategories() {
+    let selectedCategories = Array.from(document.getElementById("category-select").selectedOptions).map(option => option.value);
+    json_gen[0].category = selectedCategories;
+  }
