@@ -18,79 +18,120 @@ function clearInputs(className) {
     test = document.getElementById('popup');
     test.style.display='none';
 
-    function renderJSON(json) {
-        var elem = document.getElementsByClassName("searchContainer");
-        while (elem.length > 0) {
-            elem[0].parentNode.removeChild(elem[0]);
-        }
-        let container = document.createElement("div");
-        container.setAttribute("class", "queries container-fluid text-break");
 
-        let searchContainer = document.createElement("div");
-        searchContainer.setAttribute("class", "search-container d-flex align-items-center");
-
-        let searchInput = document.createElement("input");
-        searchInput.setAttribute("class", "form-control");
-        searchInput.setAttribute("type", "text");
-        searchInput.setAttribute("placeholder", "Search...");
-        searchInput.addEventListener("input", searchHandler);
-
-        searchContainer.appendChild(searchInput);
-        container.appendChild(searchContainer);
-
-            for (let element in json) {
-                let details = document.createElement("details");
-                details.setAttribute("class", "queryDetails");
-
-                let summary = document.createElement("summary");
-                summary.setAttribute("class", "querySummary");
-                summary.innerHTML = json[element].name;
-                details.appendChild(summary);
-
-                let codebox = document.createElement("pre");
-                codebox.setAttribute("class", "codeBox text-wrap");
-                json[element].code.forEach(array => {
-                let div = document.createElement("span");
-                div.setAttribute("class", "tippy data-bs-toggle");
-                let span = document.createElement("span");
-                span.setAttribute("class", "tippytext data-bs-content");
-                span.innerHTML = array[1];
-                div.innerHTML = array[0];
-                div.appendChild(span);
-                codebox.appendChild(div);
-                });
-
-                let searchString = json[element].name.toLowerCase();
-                let tags = json[element].tags;
-                for (let i = 0; i < tags.length; i++) {
-                searchString += " " + tags[i].toLowerCase();
-                }
-
-                details.dataset.search = searchString;
-                details.appendChild(codebox);
-                container.appendChild(details);
+// Render search results and build table
+function renderJSON(json) {
+    var elem = document.getElementsByClassName("searchContainer");
+    while (elem.length > 0) {
+        elem[0].parentNode.removeChild(elem[0]);
     }
+    let container = document.createElement("div");
+    container.setAttribute("class", "queries container-fluid text-break");
 
+    let searchContainer = document.createElement("div");
+    searchContainer.setAttribute("class", "search-container d-flex align-items-center");
+
+    let searchInput = document.createElement("input");
+    searchInput.setAttribute("class", "form-control");
+    searchInput.setAttribute("type", "text");
+    searchInput.setAttribute("placeholder", "Search...");
+    searchInput.addEventListener("input", searchHandler);
+
+    searchContainer.appendChild(searchInput);
+
+    let categorySelect = document.createElement("select");
+    categorySelect.setAttribute("class", "form-select");
+    categorySelect.setAttribute("aria-label", "Select category");
+    let defaultOption = document.createElement("option");
+    defaultOption.setAttribute("selected", "selected");
+    defaultOption.innerHTML = "All categories";
+    categorySelect.appendChild(defaultOption);
+    let categories = new Set();
+    for (let element in json) {
+        let category = json[element].category;
+        for (let i = 0; i < category.length; i++) {
+            categories.add(category[i]);
+        }
+    }
+    for (let category of categories) {
+        let option = document.createElement("option");
+        option.innerHTML = category;
+        categorySelect.appendChild(option);
+    }
+    categorySelect.addEventListener("change", searchHandler);
+    searchContainer.appendChild(categorySelect);
+
+    container.appendChild(searchContainer);
+
+    for (let element in json) {
+        let details = document.createElement("details");
+        details.setAttribute("class", "queryDetails");
+
+        let summary = document.createElement("summary");
+        summary.setAttribute("class", "querySummary");
+        summary.innerHTML = json[element].name;
+        details.appendChild(summary);
+
+        let codebox = document.createElement("pre");
+        codebox.setAttribute("class", "codeBox text-wrap");
+        json[element].code.forEach(array => {
+            let div = document.createElement("span");
+            div.setAttribute("class", "tippy data-bs-toggle");
+            let span = document.createElement("span");
+            span.setAttribute("class", "tippytext data-bs-content");
+            span.innerHTML = array[1];
+            div.innerHTML = array[0];
+            div.appendChild(span);
+            codebox.appendChild(div);
+        });
+
+        let searchString = json[element].name.toLowerCase();
+        let category = json[element].category;
+        for (let i = 0; i < category.length; i++) {
+            searchString += " " + category[i].toLowerCase();
+        }
+
+        details.dataset.search = searchString;
+        details.dataset.category = category.join(",");
+        details.appendChild(codebox);
+
+        // Add author and category information
+        let author = document.createElement("div");
+        author.setAttribute("class", "authorInfo");
+        author.innerHTML = "Author: " + json[element].author;
+        details.appendChild(author);
+
+        let categoryInfo = document.createElement("div");
+        categoryInfo.setAttribute("class", "categoryInfo");
+        categoryInfo.innerHTML = "Category: " + category.join(", ");
+        details.appendChild(categoryInfo);
+
+        container.appendChild(details);
+    }
+    
     // Missing description
     function searchHandler() {
         let searchTerm = searchInput.value.toLowerCase();
+        let selectedCategory = categorySelect.value;
         let details = document.querySelectorAll(".queryDetails");
         details.forEach(detail => {
-        if (detail.dataset.search.includes(searchTerm)) {
-            detail.style.display = "block";
-        } else {
-            detail.style.display = "none";
-        }
+            if ((detail.dataset.search.includes(searchTerm) || searchTerm === "") &&
+                (selectedCategory === "All categories" || detail.dataset.category.includes(selectedCategory))) {
+                detail.style.display = "block";
+            } else {
+                detail.style.display = "none";
+            }
         });
     }
-
+    
     return container;
-    }
+}
 
-    // Missing description
+
+    // Missing
     async function getJSONData() {
         try {
-            const response = await fetch('queries.json');
+            const response = await fetch('newQueries.json');
             const data = await response.json();
             return data;
         } catch (error) {
@@ -118,7 +159,7 @@ function clearInputs(className) {
             [
                 ["", ""]
             ],
-            "tags": ""
+            "category": ""
         }
     ]
     var gen_cnt = 0;
@@ -142,7 +183,7 @@ function clearInputs(className) {
         }
 
         json_gen[0].name = name;
-        json_gen[0].tags = (document.getElementById("query_tags").value).split(",");
+        json_gen[0].category = (document.getElementById("query_category").value).split(",");
         document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
         gen_cnt++;
     }
