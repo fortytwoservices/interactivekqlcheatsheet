@@ -89,12 +89,12 @@ function renderJSON(json) {
 
         // Add author and category information
         let author = document.createElement("div");
-        author.setAttribute("class", "authorInfo");
+        author.setAttribute("class", "authorInfo ms-2 mb-2 mt-2 mb-2");
         author.innerHTML = "Author: " + json[element].author;
         details.appendChild(author);
 
         let categoryInfo = document.createElement("div");
-        categoryInfo.setAttribute("class", "categoryInfo");
+        categoryInfo.setAttribute("class", "categoryInfo ms-2 mb-2 mt-2 mb-2");
         categoryInfo.innerHTML = "Category: " + category.join(", ");
         details.appendChild(categoryInfo);
 
@@ -123,7 +123,7 @@ function searchHandler() {
 // Async function to fetch JSON data from newQueries.json file
 async function getJSONData() {
     try {
-      const response = await fetch('newQueries.json'); 
+      const response = await fetch('queries.json'); 
       const data = await response.json();
       return data;
     } catch (error) {
