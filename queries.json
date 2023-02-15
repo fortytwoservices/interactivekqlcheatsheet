@@ -15,7 +15,7 @@
 		"name": "Query building blocks",
 		"code": [
 			[
-				"SigninLogs<br>",
+				"SigninLogs",
 				"Choose the table"
 			],
 			[
