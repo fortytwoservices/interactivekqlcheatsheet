@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.0.0...v1.0.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* fixed category in queries ([af74e04](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/af74e04f8d3be14ea31eeced6ae1f19418d25d69))
+
 ## 1.0.0 (2023-02-15)
 
 
