@@ -17,7 +17,7 @@ function renderJSON(json) {
 
     // Create search input field
     let searchInput = document.createElement("input");
-    searchInput.setAttribute("class", "form-control");
+    searchInput.setAttribute("class", "form-control mt-2 mb-2");
     searchInput.setAttribute("type", "text");
     searchInput.setAttribute("placeholder", "Search...");
     searchInput.addEventListener("input", searchHandler);
@@ -26,7 +26,7 @@ function renderJSON(json) {
 
     // Create category select dropdown
     let categorySelect = document.createElement("select");
-    categorySelect.setAttribute("class", "form-select");
+    categorySelect.setAttribute("class", "form-select ms-2 mb-2 mt-2 w-25");
     categorySelect.setAttribute("aria-label", "Select category");
 
     // Create default option
