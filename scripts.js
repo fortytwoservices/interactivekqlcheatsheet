@@ -194,7 +194,7 @@ function print_generated_json() {
     // Update name, category, and author properties with form values
     json_gen[0].name = name;
     json_gen[0].category = selectedCategories;
-    json_gen[0].author = author;
+    json_gen[0].author = "https://github.com/" + author;
   
     // Update the output text with the generated JSON string
     document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
