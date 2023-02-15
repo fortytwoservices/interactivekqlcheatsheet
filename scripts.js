@@ -108,7 +108,7 @@ function renderJSON(json) {
 
         container.appendChild(details);
     }
-    
+
     // Missing description
     function searchHandler() {
         let searchTerm = searchInput.value.toLowerCase();
@@ -159,43 +159,44 @@ function renderJSON(json) {
             [
                 ["", ""]
             ],
-            "category": ""
+            "category": "",
+            "author": ""
         }
     ]
     var gen_cnt = 0;
-    
-    // Missing description
-    function print_generated_json(){
-        var selected = get_selected();
-        selected = selected.replace(/\n/g, "<br>");
 
+// Missing description
+function print_generated_json(){
+    var selected = get_selected();
+    selected = selected.replace(/\n/g, "<br>");
 
-        name = document.getElementById("query_name").value;
+    name = document.getElementById("query_name").value;
 
-        if (gen_cnt == 0){
-            var popup_input=prompt('Write description of selected text/element.');
+    if (gen_cnt == 0){
+        var popup_input = prompt('Write description of selected text/element.');
 
-            json_gen[0].code[gen_cnt][0] = selected;
-            json_gen[0].code[gen_cnt][1] = popup_input;
-        } else {
-            var popup_input = prompt('Write description of selected text/element.');
-            json_gen[0].code.push([selected, popup_input]);
-        }
-
-        json_gen[0].name = name;
-        json_gen[0].category = (document.getElementById("query_category").value).split(",");
-        document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
-        gen_cnt++;
+        json_gen[0].code[gen_cnt][0] = selected;
+        json_gen[0].code[gen_cnt][1] = popup_input;
+    } else {
+        var popup_input = prompt('Write description of selected text/element.');
+        json_gen[0].code.push([selected, popup_input]);
     }
 
-    // Missing description
-    function open_generator(){
-        document.getElementById('overlay').style.display="block";
-        document.getElementById('popup').style.display='block';
-    }
+    json_gen[0].name = name;
+    json_gen[0].category = (document.getElementById("query_category").value).split(",");
+    json_gen[0].author = ""; // Author information
+    document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
+    gen_cnt++;
+}
 
-    // Missing description
-    function close_generator(){
-        document.getElementById('popup').style.display='none';
-        document.getElementById('overlay').style.display='none';                    
-    }
+// Missing description
+function open_generator(){
+    document.getElementById('overlay').style.display="block";
+    document.getElementById('popup').style.display='block';
+}
+
+// Missing description
+function close_generator(){
+    document.getElementById('popup').style.display='none';
+    document.getElementById('overlay').style.display='none';                    
+}
