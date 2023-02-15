@@ -57,20 +57,20 @@ function renderJSON(json) {
 
     for (let element in json) {
         let details = document.createElement("details");
-        details.setAttribute("class", "queryDetails");
+        details.setAttribute("class", "queryDetails bg-body-tertiary");
 
         let summary = document.createElement("summary");
-        summary.setAttribute("class", "querySummary");
+        summary.setAttribute("class", "querySummary ");
         summary.innerHTML = json[element].name;
         details.appendChild(summary);
 
         let codebox = document.createElement("pre");
-        codebox.setAttribute("class", "codeBox text-wrap");
+        codebox.setAttribute("class", "codeBox text-wrap bg-body-tertiary");
         json[element].code.forEach(array => {
             let div = document.createElement("span");
-            div.setAttribute("class", "tippy data-bs-toggle");
+            div.setAttribute("class", "tippy");
             let span = document.createElement("span");
-            span.setAttribute("class", "tippytext data-bs-content");
+            span.setAttribute("class", "tippytext");
             span.innerHTML = array[1];
             div.innerHTML = array[0];
             div.appendChild(span);
@@ -89,12 +89,12 @@ function renderJSON(json) {
 
         // Add author and category information
         let author = document.createElement("div");
-        author.setAttribute("class", "authorInfo ms-2 mb-2 mt-2 mb-2");
+        author.setAttribute("class", "authorInfo bg-body-tertiary ms-2 mb-2 mt-2 mb-2");
         author.innerHTML = `Author: <a href="https://github.com/${json[element].author}">${json[element].author}</a>`;
         details.appendChild(author);
 
         let categoryInfo = document.createElement("div");
-        categoryInfo.setAttribute("class", "categoryInfo ms-2 mb-2 mt-2 mb-2");
+        categoryInfo.setAttribute("class", "categoryInfo bg-body-tertiary ms-2 mb-2 mt-2 mb-2");
         categoryInfo.innerHTML = "Category: " + category.join(", ");
         details.appendChild(categoryInfo);
 
