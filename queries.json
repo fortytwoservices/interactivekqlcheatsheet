@@ -7,7 +7,7 @@
                 "The table name and nothing else makes you see the whole table."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "table"
         ]
@@ -75,7 +75,7 @@
                 "The number of output records to be shown - choose any number relevant to your intentions. It is recommended to keep a pretty low number if you are trying to gain some insight into the database for triage purposes."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "limit",
             "triage",
@@ -98,7 +98,7 @@
                 "'limit' will reduce the lines of output to 10 lines or records. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "limit",
             "triage",
@@ -123,7 +123,7 @@
                 "'limit' will reduce the lines of output to 10 records. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "limit",
             "triage",
@@ -143,7 +143,7 @@
                 "The search operator is now case sensitive, we've toggled that to 'on' by setting case_sensitive to the 'kind' of search."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "case-sensitive",
             "search",
@@ -159,7 +159,7 @@
                 "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform and it may render results at a slow pace."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "triage",
@@ -179,7 +179,7 @@
                 "The searchword string that you are looking for in those tables."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "multiple tables",
@@ -195,7 +195,7 @@
                 "Searches in all the tables that has a name starting with 'Device' and ends with anything. The star is a wildcard, which has a match with everything."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "wildcard",
@@ -219,7 +219,7 @@
                 "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType matches '50074' exactly!"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "column",
@@ -243,7 +243,7 @@
                 "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType has a partial match with '50074'."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "partial",
@@ -262,7 +262,7 @@
                 "The star '*' inbetween the two words signalises that between those words, anything goes. A usecase for this query is now to look for a full name in signinlogs, where the middlename could be anything."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "regex",
@@ -290,7 +290,7 @@
                 "At least one of these values inside the braces has to be true to make this exact statement return true. That is how the logical operator 'or' works - by making sure that at least one of the values exists beofre it returns its state. This is not an explicit or. Explicit or returns false if both values exists. "
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "search",
             "logic",
@@ -313,7 +313,7 @@
                 "The syntax for initializing a regex search looks like this. Whatever is inside the quotes (no matter if you use single or double quotes) is the regex. Suggest doing some readup on regex, because regex is really powerfull for looking at patterns!"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "regex",
             "match",
@@ -332,7 +332,7 @@
                 "Now we are looking for data WHERE the TimeGenerated is newer or equal to 2 hours ago."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "where",
             "limit",
@@ -357,7 +357,7 @@
                 "All sides of these connected 'and' statements needs to be true to get some output. The 'or' inside the braces, one of these has to be true to send a 'true' back to the 'and', because braces have precedence over non-braced statements - they will be evaluated first."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "where",
             "and",
@@ -387,7 +387,7 @@
                 "Asks where any(*) column contains the value 'OS X 10' anywhere in its content."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "where",
             "hassuffix",
@@ -407,7 +407,7 @@
                 "Using this syntax you can leverage the power of regex! Syntax of this query is equal to generating such a query with search instead of where. The regex used here is looking for IPv4 IPs."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "where",
             "matches",
@@ -424,7 +424,7 @@
                 "The count keyword works by counting all of the rows in the current table/input and outputs a number."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "count",
             "occurences"
@@ -450,7 +450,7 @@
                 "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'state', and the state needs to be equal to another to make the counter increment."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "summarize",
             "count"
@@ -464,7 +464,7 @@
                 "By including the 'myNewColumnName =' the result from the count() function will be added to a column you decide the name of."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "change",
             "name",
@@ -481,7 +481,7 @@
                 ""
             ]
         ],
-        "category": [
+        "tags": [
             "operator"
         ]
     },
@@ -493,7 +493,7 @@
                 "Summarizes data into logical groups based on a timerange. This can also be done with numerical values other than dates. The word bin refers to the data being put into their own matching (timegenerated)bin."
             ]
         ],
-        "category": [
+        "tags": [
             "operator"
         ]
     },
@@ -505,7 +505,7 @@
                 "Creates a new column based on a value from the current database and multiplies it with 10.2."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "extend",
             "multiply",
@@ -521,7 +521,7 @@
                 "strcat() makes you able to concatenate strings together, fusing them into a sentence."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "concatenate",
             "string",
@@ -544,7 +544,7 @@
                 "Columns that are chosen to be piped further into the query."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "project",
             "pipe",
@@ -563,7 +563,7 @@
                 "Calculates whatever value is in Columns1 with 2 and stores it in column named 'myCalc'"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "calculate",
             "extend",
@@ -587,7 +587,7 @@
                 "These two columns will not show up in the output now."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "project-away",
             "remove",
@@ -606,7 +606,7 @@
                 "Changing the name of Column1 to 'uniueName'."
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "rename",
             "column"
@@ -628,7 +628,7 @@
                 "Now, every output row does not contain any duplicates"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "deduplicate",
             "distinct",
@@ -647,7 +647,7 @@
                 "Sorts the Column1 ascending and outputs only the 10 from the top. Descending is achieved by 'desc'"
             ]
         ],
-        "category": [
+        "tags": [
             "operator"
         ]
     },
@@ -675,7 +675,7 @@
                 "Now we're mixing the sorting order up. For every duplicate values of the previous colun (ResultType), ResultDescription will be sorted ascending. You may mix this up as you want by adding 'asc' or 'desc' after your columns listing."
             ]
         ],
-        "category": [
+        "tags": [
             "sort",
             "output",
             "scalar operator",
@@ -709,7 +709,7 @@
                 "This is the string we are searching through with 'extract', it's the third parameter to the scalar function. Now, since this field in the Sentinel database is not a string, we need to convert it to a string using tostring() and putting the column inside the brackets."
             ]
         ],
-        "category": [
+        "tags": [
             "extract",
             "project",
             "regex",
@@ -772,7 +772,7 @@
                 "Removed unecessary data with project-away."
             ]
         ],
-        "category": [
+        "tags": [
             "kustodetectiveagency2022",
             "parse",
             "extend"
@@ -786,7 +786,7 @@
                 "Basic and simple query to sum up all numeric values."
             ]
         ],
-        "category": [
+        "tags": [
             "kustodetectiveagency2022",
             "onboarding"
         ]
@@ -823,7 +823,7 @@
                 "Ordering the output descending makes the largest number arise to the top - and thats out goal!"
             ]
         ],
-        "category": [
+        "tags": [
             "kustodetectiveagency2022",
             "rookie",
             "mv-expand",
@@ -875,7 +875,7 @@
                 "Order by Count - defaults to descending."
             ]
         ],
-        "category": [
+        "tags": [
             "kustodetectiveagency2022"
         ]
     },
@@ -919,7 +919,7 @@
                 "And now we're reducing the data to match our previous findings and we can see three cars that has stopped on the same avenue and street! Those are the robbers!"
             ]
         ],
-        "category": [
+        "tags": [
             "arg_max",
             "arg_min",
             "kustodetectiveagency2022",
@@ -947,7 +947,7 @@
                 "This is rendering a scatterchart for vizualisation of data and for this task it proves to be really interesting, because it shows the exact path each driver has made before arriving at the hiding spot."
             ]
         ],
-        "category": [
+        "tags": [
             "render",
             "scatterchart",
             "summarize"
@@ -993,7 +993,7 @@
                 "The task was to enter into a page with this given string as preceeding the number we found - lets concatenate those with strcat(). strcat() takes two parameters, the first and second strings you want to concatenade - fuse together."
             ]
         ],
-        "category": [
+        "tags": [
             "summarize",
             "max",
             "strcat",
@@ -1052,7 +1052,7 @@
                 ""
             ]
         ],
-        "category": [
+        "tags": [
             "evaluate",
             "h3Cell",
             "pivot",
@@ -1147,7 +1147,7 @@
                 ""
             ]
         ],
-        "category": [
+        "tags": [
             "distinct",
             "let",
             "summarize",
@@ -1162,7 +1162,7 @@
                 "Filter records from MyTable where Field1 is equal to 'value1'"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "table"
         ]
@@ -1175,7 +1175,7 @@
                 "Count the number of records in MyTable for each unique value of Field1"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "table"
         ]
@@ -1188,7 +1188,7 @@
                 "Join records from Table1 and Table2 where Field1 matches"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "table"
         ]
@@ -1201,7 +1201,7 @@
                 "Select only Field1 and Field2 from MyTable"
             ]
         ],
-        "category": [
+        "tags": [
             "operator",
             "table"
         ]
