@@ -1,115 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>KQLCheat by Fortytwo - Interactive KQL Cheatsheet</title>
-        <meta name="description" content="KQLCheat by Fortytwo is an interactive KQL cheatsheet with helpful tips and tricks for writing KQL queries.">
-        <link rel="stylesheet" href="stylesheet.css">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-            crossorigin="anonymous">
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/50b53b5d7b.js"
-            crossorigin="anonymous"></script>
-        <script defer data-domain="kqlcheat.byfortytwo.com"
-            src="https://plausible.io/js/script.js"></script>
-        <link rel="canonical" href="https://kqlcheat.byfortytwo.com">
-    </head>
-    <body onload="renderJSON()">
-        <div class="row">
-            <div class="col">
-                <center><a href="https://kqlcheat.byfortytwo.com"><img
-                            src="./logo/KQLCheat_byFortytwo_logo.png"
-                            class="img-fluid w-50"></a></center>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KQLCheat by Fortytwo - Interactive KQL Cheatsheet</title>
+    <meta name="description" content="KQLCheat by Fortytwo is an interactive KQL cheatsheet with helpful tips and tricks for writing KQL queries.">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/50b53b5d7b.js" crossorigin="anonymous"></script>
+    <script defer data-domain="kqlcheat.byfortytwo.com" src="https://plausible.io/js/script.js"></script>
+    <link rel="canonical" href="https://kqlcheat.byfortytwo.com">
+</head>
+
+<body onload="renderJSON()">
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            <div class="col-md-5">
+                <a href="https://kqlcheat.byfortytwo.com"><img src="./logo/KQLCheat_byFortytwo_logo.png" class="img-fluid w-80"></a>
             </div>
-            <ul class="nav justify-content-end nav-pills">
-                <li class="nav-item ms-2 mb-2">
-                  <a class="nav-link link-secondary" onclick="open_generator()" aria-current="page" href="#">Generate JSON</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link-secondary" href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">Github repo</a>
-                  </li>
-                <li class="nav-item">
-                    <a class="nav-link link-secondary" href="https://www.amestofortytwo.com/" target="_blank">About Fortytwo</a>
-                </li>
-              </ul>
-            <div id="navbar" class="navbar bg-body-tertiary">
-                <div class="row autocomplete container-fluid
-                    justify-content-start">
-                    <div id="searchContainer"></div>
+            <div class="col-md-7">
+                <ul class="nav justify-content-end nav-pills ">
+                    <li class="nav-item ms-2 mb-2">
+                        <a class="nav-link link-secondary" onclick="open_generator()" aria-current="page" href="#">Generate JSON</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-secondary" href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">Github</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-secondary" href="https://www.amestofortytwo.com/" target="_blank">Fortytwo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+
+        <div id="navbar" class="navbar">
+            <div class="row autocomplete container-fluid justify-content-start">
+                <div id="searchContainer"></div>
+            </div>
+        </div>
+        <div id="overlay">
+            <div id="popup">
+              <div class="popup-inner">
+                <div class="popup-content">
+                  <input class="form-control" type="text" id="query_name" placeholder="Give your query a name">
+                  <textarea class="form-control" id="input-field" type="text" placeholder="Query" rows="6" cols="50"></textarea>
+                  <div class="form-group">
+                    <input class="form-control" type="text" id="query_author" placeholder="Github username">
+                  </div>
+                  <div class="form-group">
+                    <label for="category-select" class="ms-2 mb-2 mt-2 text-secondary">Select categories (use Ctrl/Cmd for multiple):</label>
+                    <select id="category-select" class="form-control" multiple>
+                      <!-- Options will be added dynamically via JavaScript -->
+                    </select>
+                  </div>
                 </div>
-            </div>
-            <div id="overlay">
-                <div id="popup">
-                    <div class="popup-inner">
-                        <div class="popup-content">
-                            <input class="form-control" type="text"
-                                id="query_name"
-                                placeholder="Give your query a name">
-                            <textarea class="form-control" id="input-field"
-                                type="text"
-                                placeholder="Query" rows="6" cols="50"></textarea>
-                            <input class="form-control" type="text"
-                                id="query_tags"
-                                placeholder="Comma-separated tags ex.
-                                tag1,tag2,tag3">
-                        </div>
-                        <button class="popup-close-button"
-                            onclick="close_generator()">&times;</button>
-                        <div class="text-secondary ms-2 mb-2">Use mouse pointer to
-                            select text directly in your query that you want to describe and click button
-                            below to make description. <br>Repeat for every thing
-                            you want to describe. See how its done <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">here</a></div>
-                        <button class="btn btn-outline-success ms-2 mb-2"
-                            onclick="print_generated_json()">Add description to
-                            selected text</button>
-                        <div class="code">
-                            <pre id="outputGenerated"></pre>
-                            <button class="btn btn-outline-info ms-2 mb-2" id="copyButton">Copy to clipboard</button>
-                            <button class="btn btn-outline-danger ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
-                        </div>
-                    </div>
+                <button class="popup-close-button" onclick="close_generator()">&times;</button>
+                <div class="text-secondary ms-2 mb-2">Use mouse pointer to select text directly in your query that you want to describe and click button below to make description. Repeat for every thing you want to describe.</div>
+                <button class="btn btn-outline-success ms-2 mb-2" onclick="print_generated_json()">Add description to selected text</button>
+                <div class="code">
+                  <pre id="outputGenerated"></pre>
+                  <button class="btn btn-outline-info ms-2 mb-2" id="copyButton">Copy to clipboard</button>
+                  <button class="btn btn-outline-danger ms-2 mb-2" onclick="clearInputs('form-control')">Clear data</button>
                 </div>
+              </div>
             </div>
-            <p></p>
-            <div style="text-align: center;">
-                <p>Built with ❤️ using open-source technology. Check out the
-                    code on <a
-                        href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
-                        target="_blank">GitHub.</a></p>
-                <div class="d-flex justify-content-center">
-                    <span class="fa-stack fa-1x">
-                        <a
-                            href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet"
-                            target="_blank"><i class="fa-brands fa-square-github
-                                fa-stack-1x fa-inverse"></i></a>
-                    </span>
-                    <span class="fa-stack fa-1x">
-                        <a href="https://twitter.com/amestofortytwo"
-                            target="_blank"><i class="fab fa-twitter fa-stack-1x
-                                fa-inverse"></i></a>
-                    </span>
-                    <span class="fa-stack fa-1x">
-                        <a
-                            href="https://www.linkedin.com/company/amesto-fortytwo/"
-                            target="_blank"><i class="fa-brands fa-linkedin
-                                fa-stack-1x fa-inverse"></i></a>
-                    </span>
-                    <span class="fa-stack fa-1x">
-                        <a href="https://plausible.io/kqlcheat.byfortytwo.com"
-                            target="_blank"><i class="fa-solid fa-chart-simple
-                                fa-stack-1x fa-inverse"></i></a>
-                    </span>
-                </div>
+          </div>          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 text-center mb-3">
+                <p>Built with ❤️ using open-source technology.<br>Check out the code on <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank">GitHub.</a></p>
+              </div>
+              <div class="col-12 d-flex justify-content-center mb-4">
+                <span class="fa-stack fa-1x me-3">
+                  <a href="https://github.com/amestofortytwo/InteractiveKQLCheatsheet" target="_blank"><i class="fa-brands fa-square-github fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-1x me-3">
+                  <a href="https://twitter.com/amestofortytwo" target="_blank"><i class="fab fa-twitter fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-1x me-3">
+                  <a href="https://www.linkedin.com/company/amesto-fortytwo/" target="_blank"><i class="fa-brands fa-linkedin fa-stack-1x fa-inverse"></i></a>
+                </span>
+                <span class="fa-stack fa-1x">
+                  <a href="https://plausible.io/kqlcheat.byfortytwo.com" target="_blank"><i class="fa-solid fa-chart-simple fa-stack-1x fa-inverse"></i></a>
+                </span>
+              </div>
             </div>
-            <p></p>
+          </div>
+          
             <script src="scripts.js"></script>
         </body>
     </html>

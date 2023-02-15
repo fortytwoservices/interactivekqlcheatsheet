@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Query for a table",
+        "code": [
+            [
+                "SecurityEvents",
+                "The table name and nothing else makes you see the whole table."
+            ]
+        ],
+        "category": [
+            "Sentinel",
+            "Intune"
+        ],
+        "author": "Unknown"
+    } 
+]
