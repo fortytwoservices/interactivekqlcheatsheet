@@ -8,8 +8,10 @@
             ]
         ],
         "category": [
-            "operator",
-            "table"
+            
+            "table",
+            "Sentinel",
+            "beginner"
         ]
     },{
 		"name": "Query building blocks",
@@ -52,7 +54,8 @@
 			]
 		],
 		"category": [
-			"basic"
+            "sentinel",
+            "beginner"
 		]
 	},
     {
@@ -76,10 +79,11 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "limit",
-            "triage",
-            "take"
+            "take",
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -99,12 +103,12 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "limit",
-            "triage",
             "search",
             "case-insensitive",
-            "take"
+            "take",
+            "beginner"
         ]
     },
     {
@@ -124,11 +128,12 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "limit",
-            "triage",
             "search",
-            "take"
+            "take",
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -144,11 +149,12 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "case-sensitive",
             "search",
-            "triage",
-            "kind"
+            "kind",
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -160,11 +166,10 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
-            "triage",
-            "everywhere",
-            "everything"
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -180,11 +185,11 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
             "multiple tables",
-            "triage",
-            "specific"
+            "beginner",
+            "sentinel"
         ]
     },
     {
@@ -196,11 +201,11 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
             "wildcard",
-            "triage",
-            "regex"
+            "regex",
+            "beginner"
         ]
     },
     {
@@ -220,11 +225,10 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
-            "column",
-            "exact",
-            "match"
+            "beginner",
+            "sentinel"
         ]
     },
     {
@@ -244,10 +248,10 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
-            "partial",
-            "match"
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -263,11 +267,11 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
             "regex",
-            "triage",
-            "wildcard"
+            "wildcard",
+            "sentinel"
         ]
     },
     {
@@ -291,14 +295,15 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "search",
             "logic",
-            "triage",
             "or",
             "and",
             "exclusive",
-            "xor"
+            "xor",
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -314,10 +319,11 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "regex",
-            "match",
-            "pattern"
+            "matches",
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -333,12 +339,13 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "where",
             "limit",
             "timegenerated",
             "ago",
-            "hours"
+            "sentinel",
+            "beginner"
         ]
     },
     {
@@ -358,13 +365,14 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "where",
             "and",
             "or",
             "logical",
             "ago",
-            "where"
+            "beginner",
+            "sentinel"
         ]
     },
     {
@@ -388,15 +396,15 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "where",
             "hassuffix",
             "hasprefix",
             "contains",
-            "wide",
-            "simulate",
             "search",
-            "has"
+            "has",
+            "beginner",
+            "sentinel"
         ]
     },
     {
@@ -408,12 +416,14 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "where",
             "matches",
             "regex",
-            "IP",
-            "IPv4"
+            "ip",
+            "beginner",
+            "sentinel",
+            "intermediate"
         ]
     },
     {
@@ -425,9 +435,9 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "count",
-            "occurences"
+            "beginner"
         ]
     },
     {
@@ -451,9 +461,10 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "summarize",
-            "count"
+            "count() by",
+            "beginner"
         ]
     },
     {
@@ -465,36 +476,59 @@
             ]
         ],
         "category": [
-            "operator",
-            "change",
-            "name",
+            
             "summarize",
-            "personalize",
-            "count"
+            "count()",
+            "beginner"
         ]
     },
     {
         "name": "Aggregate data with summarize and average (avg).",
         "code": [
             [
-                "Table<br>| summarize myNewColumnName = count(), myAverageCounterColumn = avg(CounterCol) by Column",
-                ""
+                "SigninLogs<br>",
+                "Fetching data"
+            ],
+            [
+                "| summarize myNewColumnName = count(), ",
+                "Aggregating the data with summarize gives us the possibility to use different aggregation functions like count(), which counts the each occurence of the specified data on the 'by' statement at the end."
+            ],
+            [
+                "myAverageCounterColumn = avg(CounterCol) ",
+                "Summarize has also the possibility to calculate the average value of the input with the avg() function."
+            ],
+            [
+                "by Column",
+                "This is the column that will determine the outcome. Everything is calculated by this column."
             ]
         ],
         "category": [
-            "operator"
+            "avg()",
+            "count()",
+            "beginner",
+            "summarize"
         ]
     },
     {
-        "name": "bin",
+        "name": "Group timestamps",
         "code": [
             [
-                "Table<br>| summarize Column by bin(TimeGenerated, 1d)",
+                "Table<br>",
+                "Fetch the table."
+            ],
+            [
+                "| summarize Column by ",
                 "Summarizes data into logical groups based on a timerange. This can also be done with numerical values other than dates. The word bin refers to the data being put into their own matching (timegenerated)bin."
+            ],
+            [
+                "bin(TimeGenerated, 1d)",
+                "The bin function takes two parameters, the input timestamp (in this case, bin also works with other numerical values and not just time) and what value to use as a grouping size. Here, everything within 1 day is grouped together."
             ]
         ],
         "category": [
-            "operator"
+            "bin()",
+            "summarize",
+            "beginner"
         ]
     },
     {
@@ -506,11 +540,9 @@
             ]
         ],
         "category": [
-            "operator",
+            
             "extend",
-            "multiply",
-            "math",
-            "calculate"
+            "beginner"
         ]
     },
     {
@@ -522,10 +554,10 @@
             ]
         ],
         "category": [
-            "operator",
-            "concatenate",
-            "string",
-            "extend"
+            
+            "strcat()",
+            "extend",
+            "beginner"
         ]
     },
     {
@@ -541,14 +573,13 @@
             ],
             [
                 "Column1<br>,Column2<br>Column3",
-                "Columns that are chosen to be piped further into the query."
+                "Columns that are chosen to be piped further into the query. Notice the coding style here, which is very helpful when you need to remove an element. It makes it more clean to remove the comma at the same line."
             ]
         ],
         "category": [
-            "operator",
+            
             "project",
-            "pipe",
-            "choose"
+            "beginner"
         ]
     },
     {
@@ -564,11 +595,8 @@
             ]
         ],
         "category": [
-            "operator",
-            "calculate",
-            "extend",
-            "simulate",
-            "project"
+            "project",
+            "beginner"
         ]
     },
     {
@@ -588,10 +616,8 @@
             ]
         ],
         "category": [
-            "operator",
             "project-away",
-            "remove",
-            "choose"
+            "beginner"
         ]
     },
     {
@@ -603,13 +629,14 @@
             ],
             [
                 "| project-rename uniqueName = Column1",
-                "Changing the name of Column1 to 'uniueName'."
+                "Changing the name of Column1 to 'uniqueName'."
             ]
         ],
         "category": [
-            "operator",
-            "rename",
-            "column"
+            
+            "project-rename",
+            "column",
+            "beginner"
         ]
     },
     {
@@ -629,10 +656,9 @@
             ]
         ],
         "category": [
-            "operator",
-            "deduplicate",
+            
             "distinct",
-            "unique"
+            "beginner"
         ]
     },
     {
@@ -648,7 +674,8 @@
             ]
         ],
         "category": [
-            "operator"
+            "top",
+            "beginner"
         ]
     },
     {
@@ -676,14 +703,11 @@
             ]
         ],
         "category": [
-            "sort",
-            "output",
-            "scalar operator",
-            "order",
             "sort by",
-            "order by"
-        ],
-        "comment": "STARTING SCALAR OPERATORS"
+            "scalar",
+            "order by",
+            "beginner"
+        ]
     },
     {
         "name": "Extract parts of a string with regex.",
@@ -710,10 +734,11 @@
             ]
         ],
         "category": [
-            "extract",
+            "extract()",
             "project",
             "regex",
-            "tostring"
+            "tostring()",
+            "intermediate"
         ]
     },
     {
@@ -775,11 +800,16 @@
         "category": [
             "kustodetectiveagency2022",
             "parse",
-            "extend"
-        ]
+            "extend",
+            "project-away",
+            "strcat()",
+            "with",
+            "intermediate"
+        ],
+        "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 (1) - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
         "code": [
             [
                 "Onboarding<br>| summarize sum(Score)",
@@ -788,11 +818,14 @@
         ],
         "category": [
             "kustodetectiveagency2022",
-            "onboarding"
-        ]
+            "beginner",
+            "summarize",
+            "sum()"
+        ],
+        "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 - Rookie - The rarest book is missing. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency2/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 (2) - Rookie - The rarest book is missing. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency2/'>Full writeup</a>",
         "code": [
             [
                 "Shelves<br>",
@@ -832,8 +865,10 @@
             "min()",
             "summarize",
             "extend",
-            "order by"
-        ]
+            "order by",
+            "advanced"
+        ],
+        "author": "bittib010"
     },
     {
         "name": "Kusto Detective Agency 2022 - Detective 1 - Election fraud? <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency3/'>Full writeup</a>",
@@ -877,10 +912,11 @@
         ],
         "category": [
             "kustodetectiveagency2022"
-        ]
+        ],
+        "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 - Detective 1 - Bank Robbery <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Detective 2 - Bank Robbery <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
         "code": [
             [
                 "let afterRobbery = Traffic<br>",
@@ -928,7 +964,7 @@
         ]
     },
     {
-        "name": "Kusto Detective Agency 2022 - Detective 1 - Bank Robbery - Rendering a path-map! <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Detective 2 - Bank Robbery - Rendering a path-map! <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency4/'>Full writeup</a>",
         "code": [
             [
                 "Traffic<br>",
@@ -1002,10 +1038,11 @@
             "kind",
             "inner"
 
-        ]
+        ],
+        "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 - Detective 3 - Ready to play? <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency5/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Detective 3 - Ready to play? Mapping trees.<a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency5/'>Full writeup</a>",
         "code": [
             [
                 "let h3Tree = nyc_trees<br>",
@@ -1029,15 +1066,15 @@
             ],
             [
                 "| where [\"'Schubert' chokecherry\"] == 4 and ['Turkish hazelnut'] > 0 and ['American linden'] > 0;<br>",
-                ""
+                "The last part pivoted the data around and counter occurences of trees within the given h3cell, now we are looking up that info to see where it matches our task. And then we're closing the let statement with a semicolon."
             ],
             [
                 "h3Tree<br>",
-                ""
+                "Calling the variable h3Tree."
             ],
             [
                 "| join kind=inner cells on h3Cell<br>",
-                ""
+                "And now we're doing an inner join on the other variabel(table) we created 'cells' on h3Cell. "
             ],
             [
                 "| where spc_common == 'American linden'<br>",
@@ -1053,11 +1090,17 @@
             ]
         ],
         "category": [
-            "evaluate",
             "h3Cell",
-            "pivot",
-            "geo_point_to_h3cell"
-        ]
+            "evaluate pivot()",
+            "geo_point_to_h3cell()",
+            "project",
+            "summarize",
+            "where",
+            "join",
+            "inner",
+            "advanced"
+        ],
+        "author": "bittib010"
     },
     {
     "name": "Kusto Detective Agency 2022 - Senior Detective - Big Heist <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency6/'>Full writeup</a>",
@@ -1151,8 +1194,20 @@
             "distinct",
             "let",
             "summarize",
-            "extend"
-        ]
+            "extend",
+            "project",
+            "where",
+            "strcat()",
+            "make_list()",
+            "in",
+            "dcount()",
+            "bin()",
+            "extract()",
+            "tostring()",
+            "split()",
+            "advanced"
+        ],
+        "author": "bittib010"
     },
     {
         "name": "Filter records from a table",
@@ -1163,9 +1218,11 @@
             ]
         ],
         "category": [
-            "operator",
-            "table"
-        ]
+            
+            "where",
+            "beginner"
+        ],
+        "author": "remiks"
     },
     {
         "name": "Summarize data from a table",
@@ -1176,9 +1233,11 @@
             ]
         ],
         "category": [
-            "operator",
-            "table"
-        ]
+            
+            "summarize",
+            "beginner"
+        ],
+        "author": "remiks"
     },
     {
         "name": "Join data from two tables",
@@ -1189,9 +1248,12 @@
             ]
         ],
         "category": [
-            "operator",
-            "table"
-        ]
+            
+            "join",
+            "inner",
+            "beginner"
+        ],
+        "author": "remiks"
     },
     {
         "name": "Extract fields from a table",
@@ -1202,8 +1264,10 @@
             ]
         ],
         "category": [
-            "operator",
-            "table"
-        ]
+            
+            "project",
+            "beginner"
+        ],
+        "author": "remiks"
     }    
 ]
