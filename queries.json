@@ -1269,5 +1269,56 @@
             "beginner"
         ],
         "author": "remiks"
-    }    
+    },
+	[
+	{
+		"name": "Onenote execution (embedded file abuse) <a target='_blank' href='https://blog.nvisio.eu/2023/02/27/onenote-embedded-file-abuse/'>Source </a>,
+		"code": [
+			[
+				"union DeviceProcessEvents, DeviceFileEvents",
+				"These two tables will be combined into the same output - no deduplication happens - everything spits out."
+			],
+			[
+				"<br>| where ProcessCommandLine",
+				"Lets start with this column and then check to see if it contains whatever we specify next."
+			],
+			[
+				" matches regex",
+				"These keywords are used to initiate a regex search. Sentinel uses RE2 regex engine."
+			],
+			[
+				"@\"",
+				"... which also has to start with the @ symbol to treat it like regex."
+			],
+			[
+				".",
+				"A simple punctuation means that the value of this exact spot is set to be any character. "
+			],
+			[
+				"*",
+				"The star * tells the regex enginve to treat the punctuation (or any other preceding operator)operator to be repeated. The start means to repeat it zero or more. These types of operators are called repetition operators and there are two others: + (one or more) and ? (zero or one). Translated into the query this means that whatever comes before C:\\\\ is anything in length as long as they are character (or to say, until anything else is met which is not a character)."
+			],
+			[
+				"C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
+				"And as you can see, this is being repeated a few times inside this string. "
+			],
+			[
+				" or ",
+				"Logical operator. This tells to see for another match. When KQL reads a row it checks for both matches, at least one of them has to match to be sent further through any pipe or printed."
+			],
+			[
+				"FolderPath matches regex @\".*C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
+				"Everything is repeated once more for the other column of interest."
+			]
+		],
+		"category": [
+			"advanced",
+			"sentinel",
+			"union",
+			"regex"
+			
+		],
+		"author": "https://github.com/"
+	}
+]
 ]
