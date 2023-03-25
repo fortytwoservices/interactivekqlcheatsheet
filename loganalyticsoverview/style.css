@@ -32,9 +32,16 @@ summary {
     cursor: pointer;
     border-radius: 6px;
     background-color: rgba(38, 66, 73, 0.5);
-    margin: 1px;
+    margin: 2px;
     color: #CCCCCC;
 
+}
+
+.content{
+    margin-left: 10px;
+    border: #ccc solid 1px;
+    border-radius: 6px;
+    padding: 4px;
 }
 
 summary:hover {
