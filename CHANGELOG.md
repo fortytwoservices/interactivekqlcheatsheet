@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.0.2...v1.1.0) (2023-03-26)
+
+
+### Features
+
+* forcing new release ([200ade2](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/200ade2448ced3c56bd6cb618da6f5696cc54677))
+
 ## [1.0.2](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.0.1...v1.0.2) (2023-02-19)
 
 
