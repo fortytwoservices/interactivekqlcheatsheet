@@ -8,56 +8,56 @@
             ]
         ],
         "category": [
-            
             "table",
             "Sentinel",
             "beginner"
         ]
-    },{
-		"name": "Query building blocks",
-		"code": [
-			[
-				"SigninLogs",
-				"Choose the table"
-			],
-			[
-				"<br>| ",
-				"pipe current data selection further into the next part of the query"
-			],
-			[
-				"where TimeGenerated > ago(2d)",
-				"Filtering"
-			],
-			[
-				"<br>| ",
-				"pipe current data selection further into the next part of the query"
-			],
-			[
-				"summarize cnt = count() by IPAddress",
-				"Aggregating data"
-			],
-			[
-				"<br>| ",
-				"pipe current data selection further into the next part of the query"
-			],
-			[
-				"project IPAddress, cnt",
-				"Data reduction/specification"
-			],
-			[
-				"<br>| ",
-				"pipe current data selection further into the next part of the query"
-			],
-			[
-				"order by TimeGenerated",
-				"Sort data in the output"
-			]
-		],
-		"category": [
+    },
+    {
+        "name": "Query building blocks",
+        "code": [
+            [
+                "SigninLogs",
+                "Choose the table"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "where TimeGenerated > ago(2d)",
+                "Filtering"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "summarize cnt = count() by IPAddress",
+                "Aggregating data"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "project IPAddress, cnt",
+                "Data reduction/specification"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "order by TimeGenerated",
+                "Sort data in the output"
+            ]
+        ],
+        "category": [
             "sentinel",
             "beginner"
-		]
-	},
+        ]
+    },
     {
         "name": "Query a table and limit output records",
         "code": [
@@ -79,7 +79,6 @@
             ]
         ],
         "category": [
-            
             "limit",
             "take",
             "sentinel",
@@ -103,7 +102,6 @@
             ]
         ],
         "category": [
-            
             "limit",
             "search",
             "case-insensitive",
@@ -128,7 +126,6 @@
             ]
         ],
         "category": [
-            
             "limit",
             "search",
             "take",
@@ -149,7 +146,6 @@
             ]
         ],
         "category": [
-            
             "case-sensitive",
             "search",
             "kind",
@@ -166,7 +162,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "sentinel",
             "beginner"
@@ -185,7 +180,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "multiple tables",
             "beginner",
@@ -201,7 +195,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "wildcard",
             "regex",
@@ -225,7 +218,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "beginner",
             "sentinel"
@@ -248,7 +240,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "sentinel",
             "beginner"
@@ -267,7 +258,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "regex",
             "wildcard",
@@ -295,7 +285,6 @@
             ]
         ],
         "category": [
-            
             "search",
             "logic",
             "or",
@@ -319,7 +308,6 @@
             ]
         ],
         "category": [
-            
             "regex",
             "matches",
             "sentinel",
@@ -339,7 +327,6 @@
             ]
         ],
         "category": [
-            
             "where",
             "limit",
             "timegenerated",
@@ -365,7 +352,6 @@
             ]
         ],
         "category": [
-            
             "where",
             "and",
             "or",
@@ -396,7 +382,6 @@
             ]
         ],
         "category": [
-            
             "where",
             "hassuffix",
             "hasprefix",
@@ -416,7 +401,6 @@
             ]
         ],
         "category": [
-            
             "where",
             "matches",
             "regex",
@@ -435,7 +419,6 @@
             ]
         ],
         "category": [
-            
             "count",
             "beginner"
         ]
@@ -461,7 +444,6 @@
             ]
         ],
         "category": [
-            
             "summarize",
             "count() by",
             "beginner"
@@ -476,7 +458,6 @@
             ]
         ],
         "category": [
-            
             "summarize",
             "count()",
             "beginner"
@@ -540,7 +521,6 @@
             ]
         ],
         "category": [
-            
             "extend",
             "beginner"
         ]
@@ -554,7 +534,6 @@
             ]
         ],
         "category": [
-            
             "strcat()",
             "extend",
             "beginner"
@@ -577,7 +556,6 @@
             ]
         ],
         "category": [
-            
             "project",
             "beginner"
         ]
@@ -633,7 +611,6 @@
             ]
         ],
         "category": [
-            
             "project-rename",
             "column",
             "beginner"
@@ -656,7 +633,6 @@
             ]
         ],
         "category": [
-            
             "distinct",
             "beginner"
         ]
@@ -1037,7 +1013,6 @@
             "join",
             "kind",
             "inner"
-
         ],
         "author": "bittib010"
     },
@@ -1103,7 +1078,7 @@
         "author": "bittib010"
     },
     {
-    "name": "Kusto Detective Agency 2022 - Senior Detective - Big Heist <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency6/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Senior Detective - Big Heist <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency6/'>Full writeup</a>",
         "code": [
             [
                 "let logs = ChatLogs<br>",
@@ -1218,7 +1193,6 @@
             ]
         ],
         "category": [
-            
             "where",
             "beginner"
         ],
@@ -1233,7 +1207,6 @@
             ]
         ],
         "category": [
-            
             "summarize",
             "beginner"
         ],
@@ -1248,7 +1221,6 @@
             ]
         ],
         "category": [
-            
             "join",
             "inner",
             "beginner"
@@ -1264,59 +1236,57 @@
             ]
         ],
         "category": [
-            
             "project",
             "beginner"
         ],
         "author": "remiks"
     },
-	{
-		"name": "Onenote execution (embedded file abuse) <a target='_blank' href='https://blog.nvisio.eu/2023/02/27/onenote-embedded-file-abuse/'>Source </a>",
-		"code": [
-			[
-				"union DeviceProcessEvents, DeviceFileEvents",
-				"These two tables will be combined into the same output - no deduplication happens - everything spits out."
-			],
-			[
-				"<br>| where ProcessCommandLine",
-				"Lets start with this column and then check to see if it contains whatever we specify next."
-			],
-			[
-				" matches regex",
-				"These keywords are used to initiate a regex search. Sentinel uses RE2 regex engine."
-			],
-			[
-				"@\"",
-				"... which also has to start with the @ symbol to treat it like regex."
-			],
-			[
-				".",
-				"A simple punctuation means that the value of this exact spot is set to be any character. "
-			],
-			[
-				"*",
-				"The star * tells the regex enginve to treat the punctuation (or any other preceding operator)operator to be repeated. The start means to repeat it zero or more. These types of operators are called repetition operators and there are two others: + (one or more) and ? (zero or one). Translated into the query this means that whatever comes before C:\\\\ is anything in length as long as they are character (or to say, until anything else is met which is not a character)."
-			],
-			[
-				"C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
-				"And as you can see, this is being repeated a few times inside this string. "
-			],
-			[
-				" or ",
-				"Logical operator. This tells to see for another match. When KQL reads a row it checks for both matches, at least one of them has to match to be sent further through any pipe or printed."
-			],
-			[
-				"FolderPath matches regex @\".*C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
-				"Everything is repeated once more for the other column of interest."
-			]
-		],
-		"category": [
-			"advanced",
-			"sentinel",
-			"union",
-			"regex"
-			
-		],
-		"author": "https://github.com/"
-	}
+    {
+        "name": "Onenote execution (embedded file abuse) <a target='_blank' href='https://blog.nvisio.eu/2023/02/27/onenote-embedded-file-abuse/'>Source </a>",
+        "code": [
+            [
+                "union DeviceProcessEvents, DeviceFileEvents",
+                "These two tables will be combined into the same output - no deduplication happens - everything spits out."
+            ],
+            [
+                "<br>| where ProcessCommandLine",
+                "Lets start with this column and then check to see if it contains whatever we specify next."
+            ],
+            [
+                " matches regex",
+                "These keywords are used to initiate a regex search. Sentinel uses RE2 regex engine."
+            ],
+            [
+                "@\"",
+                "... which also has to start with the @ symbol to treat it like regex."
+            ],
+            [
+                ".",
+                "A simple punctuation means that the value of this exact spot is set to be any character. "
+            ],
+            [
+                "*",
+                "The star * tells the regex enginve to treat the punctuation (or any other preceding operator)operator to be repeated. The start means to repeat it zero or more. These types of operators are called repetition operators and there are two others: + (one or more) and ? (zero or one). Translated into the query this means that whatever comes before C:\\\\ is anything in length as long as they are character (or to say, until anything else is met which is not a character)."
+            ],
+            [
+                "C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
+                "And as you can see, this is being repeated a few times inside this string. "
+            ],
+            [
+                " or ",
+                "Logical operator. This tells to see for another match. When KQL reads a row it checks for both matches, at least one of them has to match to be sent further through any pipe or printed."
+            ],
+            [
+                "FolderPath matches regex @\".*C:\\\\Users\\\\.*\\\\AppData\\\\Local\\\\Temp\\\\OneNote\\\\.*\\\\Exported\\\\.*\"",
+                "Everything is repeated once more for the other column of interest."
+            ]
+        ],
+        "category": [
+            "advanced",
+            "sentinel",
+            "union",
+            "regex"
+        ],
+        "author": "https://github.com/"
+    }
 ]
