@@ -772,18 +772,16 @@ function searchNestedSummaries(parentDetail, searchTerm) {
     const summaries = parentDetail.querySelectorAll("summary");
 
     for (let summary of summaries) {
-        if (summary.innerHTML.toLowerCase().includes(searchTerm)) {
-            openParentDetails(parentDetail);
-        } else {
-            const nestedDetail = summary.nextElementSibling;
-            if (nestedDetail && nestedDetail.tagName.toLowerCase() === "details") {
-                searchNestedSummaries(nestedDetail, searchTerm);
-            }
+        if (summary.textContent.toLowerCase().includes(searchTerm)) {
+            openParentDetails(summary.closest('details'));
+            highlightMatches(summary, searchTerm);
+        }
+        const nestedDetails = summary.parentElement.querySelectorAll("details");
+        for (let nestedDetail of nestedDetails) {
+            searchNestedSummaries(nestedDetail, searchTerm);
         }
     }
-    highlightMatches(searchTerm)
 }
-
 
 function openParentDetails(detail) {
     const parentDetails = getParents(detail, "details");
@@ -795,15 +793,17 @@ function openParentDetails(detail) {
 function getParents(element, parentTagName) {
     const parents = [];
     let parent = element.parentElement;
-    while (parent && parent.tagName.toLowerCase() !== parentTagName) {
+
+    while (parent) {
+        if (parent.tagName.toLowerCase() === parentTagName) {
+            parents.push(parent);
+        }
         parent = parent.parentElement;
     }
-    if (parent) {
-        parents.push(parent);
-        parents.push(...getParents(parent, parentTagName));
-    }
+
     return parents;
 }
+
 
 function collapseAllDetails() {
     const details = document.querySelectorAll("details");
