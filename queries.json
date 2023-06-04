@@ -1381,5 +1381,41 @@
             "extend"
         ],
         "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Method 1",
+        "code": [
+            [
+                "Consumption<br>",
+                ""
+            ],
+            [
+                "| summarize max_consumed = max(Consumed) by bin(Timestamp, 1d), MeterType, HouseholdId<br>",
+                "Let's take a look at the Households based on timestamps and MeterType where we focus on the max consumed for everyday. By looking for patterns on the dataset to figure out how to attack this challenge it became evident pretty early that each Household had more than one entry on the same metertype a day. We want to stick to one. Also a weird find was that there was a lot of negative entries."
+            ],
+            [
+                "| summarize TotalConsumed = sum(max_consumed) by MeterType, HouseholdId<br>",
+                "Lets sum() up the max_consumed for each MeterType by each HouseHoldId. This will make us see what a house has spent per metertype."
+            ],
+            [
+                "| lookup Costs on MeterType<br>",
+                "lookup is pretty similar to join, it joins a table on a given column. Here, we are looking up the Costs table on it self (since we are already working in that table) based on Metertype which we currently need to separate as they need to be calculated separately based on differing prices."
+            ],
+            [
+                "| extend TotalCost = TotalConsumed*Cost<br>",
+                "Now, let's do the calculation."
+            ],
+            [
+                "| summarize sum(TotalCost)",
+                "And then sum() it up!"
+            ]
+        ],
+        "category": [
+            "sum()",
+            "extent",
+            "lookup",
+            "summarize"
+        ],
+        "author": "bittib010"
     }
 ]
