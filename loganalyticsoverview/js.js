@@ -445,13 +445,15 @@ const data = {
         "Azure Data Lake Storage Gen1": "",
         "Azure DDoS Protection": "",
         "Azure Event Hub": "",
-        "Azure Information Protection": "",
+        "Azure Information Protection (Preview)": "",
         "Azure Key Vault": "",
         "Azure Kubernetes Service (AKS)": "",
         "Azure Logic Apps": "",
         "Azure Service Bus": "",
         "Azure Storage Account": "",
         "Azure Stream Analytics": "",
+        "Azure Firewall": "",
+        "Azure SQL Databases": "",
         "Azure Web Application Firewall (WAF)": "",
         "Common Event Format (CEF)": {
             "Activity":"Type: string. <br>A string that represents a human-readable and understandable description of the event.",
@@ -616,8 +618,8 @@ const data = {
             "Type":"Type: string. <br>The name of the table"
         },
         "Common Event Format (CEF) via AMA": "",
-        "DNS": "",
-        "Fortinet FortiWeb Web Application Firewall": "",
+        "DNS (Preview)": "",
+        "Dynamics365": "",
         "Microsoft 365 Defender (TF-Connector: MicrosoftThreatProtection)": {
             "SecurityIncident": "",
             "SecurityAlert": "",
@@ -643,7 +645,7 @@ const data = {
             "AlertInfo": "Information about alerts from Microsoft 365 Defender components",
             "AlertEvidence": "Information about various entities - files, IP addresses, URLs, users, devices - associated with alerts from Microsoft 365 Defender components"
         },
-        "Microsoft 365 Insider Risk Management": "",
+        "Microsoft 365 Insider Risk Management (Preview)": "",
         "Microsoft Defender for Cloud": "",
         "Microsoft Defender for Cloud Apps": {
             "CloudAppEvents": "Information about activities in various cloud apps and services covered by Microsoft Defender for Cloud Apps"
@@ -668,12 +670,14 @@ const data = {
 
         },
         "Microsoft Defender for IoT": "",
-        "Microsoft Defender for Office 365": {
+        "Microsoft Defender for Office 365 (Preview)": {
             "EmailEvents": "Microsoft 365 email events, including email delivery and blocking events",
             "EmailUrlInfo": "Information about URLs on emails",
             "EmailAttachmentInfo": "Information about files attached to emails",
             "EmailPostDeliveryEvents": "Security events that occur post-delivery, after Microsoft 365 has delivered the emails to the recipient mailbox"
         },
+        "Microsoft Defender Threat Intelligence (Preview)": "",
+        "Microsoft Sentinel for SAP": "",
         "Microsoft PowerBI": "",
         "Microsoft Project": "",
         "Microsoft Purview (Preview)": "",
@@ -684,28 +688,36 @@ const data = {
         "SentinelOne (using Azure Function)": "",
         "Syslog": "",
         "Threat intelligence - TAXII": "",
-        "Threat Intelligence Platforms": "",
+        "Threat Intelligence Platforms (Preview)": "",
         "Threat Intelligence Upload Indicators API (Preview)": "",
         "Windows DNS Events via AMA (Preview)": "",
         "Windows Firewall": "",
         "Windows Firewall Events via AMA (Preview)": "",
         "Windows Forwarded Events": "",
-        "Windows Security Events via AMA": ""
+        "Windows Security Events via AMA": {
+            "SecurityEvents": ""
+        }
     },
-    "Microsoft Corporation": {
-        "Azure Firewall": "",
-        "Dynamics 365": ""
+    "Google": {
+        "Google Workspace (G Suite) (Preview)": ""
     },
-    "Microsoft Corporation - sentinel4github": {
-        "GitHub (using Webhooks) (using Azure Function)": "",
-        "GitHub Enterprise Audit Log": ""
+    "Fortinet": {
+        "Fortinet": ""
     },
-    "Microsoft Sentinel Community, Microsoft Corporation": {
-        "Forcepoint CASB": "",
-        "Forcepoint CSG": "",
-        "Forcepoint DLP": "",
-        "Forcepoint NGFW": ""
+    "Cisco": {
+        "Cisco ASA": "",
+        "Cisco Firepower eStreamer (Preview)": "",
+        "Cisco Meraki (Preview)": "",
+        "Cisco UCS (Preview)": "",
+        "Cisco Umbrella (Preview)": ""
+    },
+    "Atlassian": {
+        "Atlassian Jira Audit (Preview)": "",
+        "Atlassian Confluence Audit (Preview)": ""
     }
+
+
+
 };
 function randID() {
     return Math.random().toString(36).substring(2, 8);
