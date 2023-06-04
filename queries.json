@@ -1288,5 +1288,97 @@
             "regex"
         ],
         "author": "https://github.com/"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Onboarding - Method 1",
+        "code": [
+            [
+                "DetectiveCases<br>",
+                "Get the whole table."
+            ],
+            [
+                "| summarize count() by DetectiveId<br>",
+                "Count all the cases each Detective has, this might indicate who earned the most. This would not yield an accurate answer if the one who has completed most cases also was one that earned the least for each case. A little luck here."
+            ],
+            [
+                "| where DetectiveId != ''<br>",
+                "Some results was blank, avoid these. You could also use the isnotempty() function. "
+            ],
+            [
+                "| top 1 by count_",
+                "The top keyword lets you organize the output in a given manner (<b>asc</b>ending or <b>desc</b>ending), where desc (highest number first) is the default. As we did not call our count() calculation anything, it defaults to a name of 'count_'. top 1, means to return only the top one in a descending order."
+            ]
+        ],
+        "category": [
+            "beginner",
+            "summarize",
+            "top",
+            "count()"
+        ],
+        "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Onboarding - Method 2",
+        "code": [
+            [
+                "let Bounties = DetectiveCases<br>",
+                "Starting a bit more advanced approach, which is also precise in comparison to the first approach. We start out by creating variables which we will use later. As the data set of this table is a mixup and duplicates, it does not state who has won the bounty. Therefore, we need to calculate that. We start of by finding all the entries that has "
+            ],
+            [
+                "| extend Bounty = toint(Properties.Bounty)<br>",
+                "The 'Properties' column, contains json values, and we can easily extract the value from it that we want by using dot-notation. The values we need are inside the 'Bounty' key. This needs to be wrapped into the toint() function to make it into an integer so that we can do maths on it."
+            ],
+            [
+                "| where isnotempty(Bounty)",
+                "This line only removes those lines with no Bounties. As mentioned, the data set is a mix of different stages of a bounty hunter from information on bounties available, completed cases, started and so on. This line is not necessary for the end result, but it made the query go faster. It is also worth mentioning that good hygiene in KQL is to put where-clauses as early as possible to reduce the dataset early. Adding this line made the whole query on avergae (calculated by 10 runs) aproximately 7 times faster."
+            ],
+            [
+                "| project CaseId, Bounty;<br>",
+                "For this variable we are only interested in the bounties and the cases the bounties will be or have been payed out for."
+            ],
+            [
+                "let firstSolvedBy = DetectiveCases<br>",
+                "After some initial pattern orientation on the dataset, it seemed natural to think that multiple detectives may have started an investigation, yet only one would be payed. Let's create a variable holding those detectives that first solved a case."
+            ],
+            [
+                "| where EventType == 'CaseSolved'<br>",
+                "Filtering on only cases that were solved."
+            ],
+            [
+                "| summarize arg_min(Timestamp, DetectiveId) by CaseId;<br>",
+                "arg_min() works in such a way that it finds the earliest (if timestamp) or the lowest/minimum of the first argument given, based on the second argument - DetectiveId. And since we are looking at cases solved, this translated into The first detective that has solved a case."
+            ],
+            [
+                "DetectiveCases<br>",
+                "Load the table once more."
+            ],
+            [
+                "| join kind=inner firstSolvedBy on CaseId<br>",
+                "Next, we'll combine the initial solvers based on the CaseId. Consequently, certain columns will have duplicate entries. However, KQL handles this situation by appending an iterated number to the duplicates, corresponding to the total number of duplicates. For example, if there are two duplicates of DetectiveId, the second one will be labeled as DetectiveId1, and so forth."
+            ],
+            [
+                "| join kind=inner Bounties on CaseId<br>",
+                "The same as for the previous line, we now have two more columns: CaseId2 and Bounties. Now they align with the correct detective and case ID. "
+            ],
+            [
+                "| summarize sum(Bounty) by DetectiveId1<br>",
+                "Let's sum() up the number of bounties by each DetectiveID to figure out who ACTUALLY earned the most."
+            ],
+            [
+                "| top 1 by sum_Bounty<br>",
+                "Tune it down to the one and only Detective. The winner!"
+            ]
+        ],
+        "category": [
+            "join",
+            "let",
+            "summarize",
+            "top",
+            "sum()",
+            "arg_min()",
+            "project",
+            "where",
+            "extend"
+        ]
     }
 ]
