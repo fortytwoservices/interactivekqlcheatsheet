@@ -1387,15 +1387,15 @@
         "code": [
             [
                 "Consumption<br>",
-                ""
+                "This first method is the method that made most sense to me. I is based on getting back all the positive, or the highest numbers, and uses those to calculate. Because the dataset is filled with duplicates, but a negative number."
             ],
             [
                 "| summarize max_consumed = max(Consumed) by bin(Timestamp, 1d), MeterType, HouseholdId<br>",
-                "Let's take a look at the Households based on timestamps and MeterType where we focus on the max consumed for everyday. By looking for patterns on the dataset to figure out how to attack this challenge it became evident pretty early that each Household had more than one entry on the same metertype a day. We want to stick to one. Also a weird find was that there was a lot of negative entries."
+                "Let's take a look at the Households based on timestamps and MeterType where we focus on the max consumed for everyday (therefore bin() by 1d). By looking for patterns on the dataset to figure out how to attack this challenge it became evident pretty early that each Household had more than one entry on the same metertype a day. We want to stick to one. Also a weird find was that there was a lot of negative entries."
             ],
             [
-                "| summarize TotalConsumed = sum(max_consumed) by MeterType, HouseholdId<br>",
-                "Lets sum() up the max_consumed for each MeterType by each HouseHoldId. This will make us see what a house has spent per metertype."
+                "| summarize TotalConsumed = sum(max_consumed) by MeterType<br>",
+                "Lets sum() up the max_consumed for each MeterType. This will make us see what each house will be billed for each metertype."
             ],
             [
                 "| lookup Costs on MeterType<br>",
@@ -1417,5 +1417,95 @@
             "summarize"
         ],
         "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Method 2",
+        "code": [
+            [
+                "Consumption<br>",
+                "This second method only has a fractional difference compared to method 1. Is this why they accept answers within a range?"
+            ],
+            [
+                "| distinct Timestamp, HouseholdId, MeterType, Consumed<br>",
+                "Let's take a look at the Households based on timestamps and MeterType where we focus on the max consumed for everyday (therefore bin() by 1d). By looking for patterns on the dataset to figure out how to attack this challenge it became evident pretty early that each Household had more than one entry on the same metertype a day. We want to stick to one. Also a weird find was that there was a lot of negative entries."
+            ],
+            [
+                "| summarize TotalConsumed = sum(Consumed) by MeterType<br>",
+                "Lets summarize up the Consumed for each MeterType. This will make us see what each house will be billed for each metertype."
+            ],
+            [
+                "| lookup Costs on MeterType<br>",
+                "lookup is pretty similar to join, it joins a table on a given column. Here, we are looking up the Costs table on it self (since we are already working in that table) based on Metertype which we currently need to separate as they need to be calculated separately based on differing prices."
+            ],
+            [
+                "| extend TotalCost = TotalConsumed*Cost<br>",
+                "Now, let's do the calculation."
+            ],
+            [
+                "| summarize sum(TotalCost)",
+                "And then sum() it up!"
+            ]
+        ],
+        "category": [
+            "sum()",
+            "extent",
+            "lookup",
+            "summarize"
+        ],
+        "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration",
+        "code": [
+            [
+                "Consumption<br>",
+                "Load the data. This query I made after realizing that there were negative numbers affecting the outcome, so I wanted to test if this happened on a special day that I could use as some kind of pivot point. What I realized was that it contained the "
+            ],
+            [
+                "| summarize max(Consumed), min(Consumed) by bin(Timestamp,1d), MeterType<br>",
+                "Prepare the data by aggregating it into what you'd like to output. What we are interested in, is to generate data that shows the difference between the highest and lowest numbers. This query makes it clear that somethings happened at the 7th of April. Move on to the next query to see if we can verify this."
+            ],
+            [
+                "| render timechart with(anomalycolumns=min_Consumed,max_Consumed)<br>",
+                "This syntax renders the a timechart that shows exaclty what we need. This query is however not fulfilling all questions. We are still wondering if there are any data left inbetween these values per Household and MeterType. Because we are only looking at min() and max(). Lets jump to the next query to see if we need to take this further."
+            ]
+        ],
+        "category": [
+            "sum()",
+            "extent",
+            "lookup",
+            "summarize"
+        ],
+        "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration 2",
+        "code": [
+            [
+                "Consumption<br>",
+                "Load the data."
+            ],
+            [
+                "| summarize count() by bin(Timestamp, 1d), HouseholdId, MeterType<br>",
+                "Count every instance of Costs-entry for each day per household and Metertype. That's a mouthfull. When you dont name your count() aggregation, KQL automatically names it 'count_'."
+            ],
+            [
+                "| where count_ > 1<br>",
+                "We are expecting 1 to be the normal entry per day for each metertype and household. If there are any more, this should be treated as out of the ordinary. We are looking to confirm if there are a maximum of two or if some houses have more than two entries."
+            ],
+            [
+                "| order by Timestamp desc<br>",
+                "Running the query, it seems like we are left with maximum of two. This means that we can easily use max() in our final query to filter out the noise. Also, note the date 7th of April. Something happened that day. Thats the first day of two entries per household and metertype."
+            ]
+        ],
+        "category": [
+            "order by",
+            "where",
+            "count_",
+            "summarize",
+            "bin()"
+        ],
+        "author": "bittib010"
     }
+
 ]
