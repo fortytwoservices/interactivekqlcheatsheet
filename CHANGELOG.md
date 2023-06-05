@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.1.0...v1.1.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* [#52](https://github.com/amestofortytwo/interactivekqlcheatsheet/issues/52) improved search function ([013d9fa](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/013d9fa5d166af83f6f2960806167e27fa5a10fa))
+* [#53](https://github.com/amestofortytwo/interactivekqlcheatsheet/issues/53) changed and updated with more corrct cons ([6d8ba65](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/6d8ba65c586d834f86cc8237c470b2f7fe2a742a))
+
 ## [1.1.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.0.2...v1.1.0) (2023-03-26)
 
 
