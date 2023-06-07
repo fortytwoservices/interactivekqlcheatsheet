@@ -1506,5 +1506,86 @@
             "bin()"
         ],
         "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration 2",
+        "code": [
+            [
+                "let called = PhoneCalls<br>",
+                ""
+            ],
+            [
+                "| where EventType == 'Connect'<br>",
+                ""
+            ],
+            [
+                "| project Connect_Time = Timestamp, CallConnectionId;<br>",
+                ""
+            ],
+            [
+                "let disc = PhoneCalls<br>",
+                ""
+            ],
+            [
+                "| where EventType == 'Disconnect'<br>",
+                ""
+            ],
+            [
+                "| project Disconnect_Time = Timestamp, CallConnectionId;<br>",
+                ""
+            ],
+            [
+                "let duration = called<br>",
+                ""
+            ],
+            [
+                "| join disc on CallConnectionId<br>",
+                ""
+            ],
+            [
+                "| extend call_duration = datetime_diff('second',Disconnect_Time, Connect_Time);<br>",
+                ""
+            ],
+            [
+                "PhoneCalls<br>",
+                ""
+            ],
+            [
+                "| join duration on CallConnectionId<br>",
+                ""
+            ],
+            [
+                "| extend propjson = parse_json(Properties)<br>",
+                ""
+            ],
+            [
+                "| extend Origin = propjson.Origin, Destination=propjson.Destination, visibility = propjson.<br>",
+                ""
+            ],
+            [
+                "IsHidden, DisconnectedBy = propjson.Disconnectedby<br>",
+                ""
+            ],
+            [
+                "| project Origin, call_duration, Connect_Time<br>",
+                ""
+            ],
+            [
+                "| summarize test = count() by call_duration, tostring(Origin)<br>"
+                ,""
+            ],
+            [
+                "| where Origin != ''<br>",
+                ""
+            ],
+            [
+                "| order by call_duration asc<br>",
+                ""
+            ]
+        ],
+        "category": [
+            ""
+        ],
+        "author": "bittib010"
     }
 ]
