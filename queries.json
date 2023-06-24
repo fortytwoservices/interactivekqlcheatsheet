@@ -1781,10 +1781,6 @@
             [
                 "mv-expand p",
                 "Create new rows for each value in the 'p' column"
-            ],
-            [
-                "<br>| ",
-                "pipe current data selection further into the next part of the query. Now you are left with a permutated version of each table and day for the given lookback."
             ]
         ],
         "author": "bittib010",
