@@ -1695,21 +1695,28 @@ function generateHTML(data, level = 0) {
         2: "<img src='icons/tables.svg' class='detail-icon'/>",
         3: "<img src='icons/adx-columns.svg' class='detail-icon'/>"
     };
-    for (let key in data) {
-        html += `<details id="${randID()}"><summary>`;
-        if (level in imgMap) {
-            html += imgMap[level];
+       // If level is less than or equal to 3, sort the keys
+       // Check if data is an object before getting keys
+    if (typeof data === 'object' && data !== null) {
+        const keys = level <= 3 ? Object.keys(data).sort() : Object.keys(data);
+        for (let i = 0; i < keys.length; i++) {
+            let key = keys[i];
+            html += `<details id="${randID()}"><summary>`;
+            if (level in imgMap) {
+                html += imgMap[level];
+            }
+            html += `${key}</summary>`;
+            if (typeof data[key] === 'string') {
+                html += `<div class="content">${data[key]}</div>`;
+            } else {
+                html += generateHTML(data[key], level + 1);
+            }
+            html += '</details>';
         }
-        html += `${key}</summary>`;
-        if (typeof data[key] === 'string') {
-            html += `<div class="content">${data[key]}</div>`;
-        } else {
-            html += generateHTML(data[key], level + 1);
-        }
-        html += '</details>';
     }
     return html;
 }
+
 
 
 
