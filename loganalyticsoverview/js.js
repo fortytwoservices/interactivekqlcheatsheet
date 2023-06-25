@@ -1421,19 +1421,32 @@ const data = {
 function randID() {
     return Math.random().toString(36).substring(2, 8);
 }
-function generateHTML(data) {
+
+
+function generateHTML(data, level = 0) {
     let html = '';
+    const imgMap = {
+        1: "<img src='icons/connector.svg' class='detail-icon' />",
+        2: "<img src='icons/tables.svg' class='detail-icon'/>",
+        3: "<img src='icons/adx-columns.svg' class='detail-icon'/>"
+    };
     for (let key in data) {
-        html += `<details id="${randID()}"><summary>${key}</summary>`;
+        html += `<details id="${randID()}"><summary>`;
+        if (level in imgMap) {
+            html += imgMap[level];
+        }
+        html += `${key}</summary>`;
         if (typeof data[key] === 'string') {
             html += `<div class="content">${data[key]}</div>`;
         } else {
-            html += generateHTML(data[key]);
+            html += generateHTML(data[key], level + 1);
         }
         html += '</details>';
     }
     return html;
 }
+
+
 
 const container = document.getElementById('jayson');
 container.innerHTML = generateHTML(data);
