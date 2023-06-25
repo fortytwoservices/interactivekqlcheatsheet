@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.1.1...v1.2.0) (2023-06-25)
+
+
+### Features
+
+* added azure sql, removed deprecated connector (AIP) ([e3cefe5](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/e3cefe57c3f945d0b8796553a319d8d29c76d50a))
+* added icons for lvl 1-3. Will fix json structure accordingly ([6e0f383](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/6e0f3834ffc817830f026783188cecf4ecf2aa32))
+* added lots of connectors with their tables, fixed some layouts as well.. WIP... ([cf2823f](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/cf2823ff38326ed577b62564a0807bf9492f4265))
+* added more rules and fixed typos all over ([f259fa6](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/f259fa6fc456565dedcc9e97289e941c8b3c4572))
+
+
+### Bug Fixes
+
+* removed a pipe at the end of a query ([7e4a351](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/7e4a3510b14eff6312dc4c3a181ef09b29b7adf3))
+
 ## [1.1.1](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.1.0...v1.1.1) (2023-06-05)
 
 
