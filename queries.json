@@ -7,10 +7,9 @@
                 "The table name and nothing else makes you see the whole table."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "table",
-            "Sentinel",
-            "beginner"
+            "table"
         ]
     },
     {
@@ -53,9 +52,13 @@
                 "Sort data in the output"
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "sentinel",
-            "beginner"
+            "where",
+            "project",
+            "order by",
+            "summarize",
+            "count()"
         ]
     },
     {
@@ -71,46 +74,22 @@
             ],
             [
                 "limit",
-                "'limit' will reduce the lines of output to 10 lines which makes the query a lot faster.. Note that 'limit' and 'take' are interchangeable. They do the same thing."
+                "'limit' will reduce the lines of output to 10 lines which makes the query a lot faster. Note that 'limit' and 'take' are interchangeable. They do the same thing."
             ],
             [
                 " 10",
                 "The number of output records to be shown - choose any number relevant to your intentions. It is recommended to keep a pretty low number if you are trying to gain some insight into the database for triage purposes."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "limit",
             "take",
-            "sentinel",
-            "beginner"
+            "sentinel"
         ]
     },
     {
-        "name": "Search the current table for content - far and wide",
-        "code": [
-            [
-                "SigninLogs",
-                "Query the whole table."
-            ],
-            [
-                "<br>| search \"50074\"",
-                "the search keyword searches through every column for the string '50074'. This far into the query, we are dealing with a time- and dataconsuming query, but very valuable. Note that 'search' is not case sensitive."
-            ],
-            [
-                "<br>| limit 10",
-                "'limit' will reduce the lines of output to 10 lines or records. Note that 'limit' and 'take' are interchangeable. They do the same thing."
-            ]
-        ],
-        "category": [
-            "limit",
-            "search",
-            "case-insensitive",
-            "take",
-            "beginner"
-        ]
-    },
-    {
-        "name": "Searching every table",
+        "name": "Search every table",
         "code": [
             [
                 "SigninLogs",
@@ -145,26 +124,12 @@
                 "The search operator is now case sensitive, we've toggled that to 'on' by setting case_sensitive to the 'kind' of search."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "case-sensitive",
             "search",
             "kind",
-            "sentinel",
-            "beginner"
-        ]
-    },
-    {
-        "name": "Search through all of the available tables in the current database",
-        "code": [
-            [
-                "search 'KeyWord'",
-                "By not specifying a table, we will be searching through every table that exists in the current database. It's a powerfull way to search for the needle in the haystack, but it is using a lot of data power to perform and it may render results at a slow pace."
-            ]
-        ],
-        "category": [
-            "search",
-            "sentinel",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -172,17 +137,17 @@
         "code": [
             [
                 "search in (SigninLogs, AzureActivity)",
-                "Case-insensitive search through thre different tables withing the current database. You choose how many."
+                "Case-insensitive search through the different tables withing the current database. You choose how many."
             ],
             [
                 " 'example@example.com'",
                 "The searchword string that you are looking for in those tables."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
-            "multiple tables",
-            "beginner",
+            "in",
             "sentinel"
         ]
     },
@@ -194,11 +159,11 @@
                 "Searches in all the tables that has a name starting with 'Device' and ends with anything. The star is a wildcard, which has a match with everything."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
             "wildcard",
-            "regex",
-            "beginner"
+            "regex"
         ]
     },
     {
@@ -217,14 +182,14 @@
                 "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType matches '50074' exactly!"
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
-            "beginner",
             "sentinel"
         ]
     },
     {
-        "name": "search for the value anywhere in the text in the specified column",
+        "name": "search for partial match of a value anywhere in the text in the specified column",
         "code": [
             [
                 "SigninLogs<br>",
@@ -239,10 +204,10 @@
                 "Set the columnname followed by the keyword you're looking for. The query is now looking for every record where the column ResultType has a partial match with '50074'."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
-            "sentinel",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -257,6 +222,7 @@
                 "The star '*' inbetween the two words signalises that between those words, anything goes. A usecase for this query is now to look for a full name in signinlogs, where the middlename could be anything."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
             "regex",
@@ -272,7 +238,7 @@
                 "Query the whole table"
             ],
             [
-                "| search 'Name'",
+                "| search 'John Doe'",
                 "we are now searching for two things to be true - both sides of the 'and' logical statement. 'Name' has to exist in the same record as either or both values in the preceeding 'or' logical statement."
             ],
             [
@@ -284,15 +250,12 @@
                 "At least one of these values inside the braces has to be true to make this exact statement return true. That is how the logical operator 'or' works - by making sure that at least one of the values exists beofre it returns its state. This is not an explicit or. Explicit or returns false if both values exists. "
             ]
         ],
+        "author": "bittib010",
         "category": [
             "search",
-            "logic",
             "or",
             "and",
-            "exclusive",
-            "xor",
-            "sentinel",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -307,11 +270,11 @@
                 "The syntax for initializing a regex search looks like this. Whatever is inside the quotes (no matter if you use single or double quotes) is the regex. Suggest doing some readup on regex, because regex is really powerfull for looking at patterns!"
             ]
         ],
+        "author": "bittib010",
         "category": [
             "regex",
             "matches",
-            "sentinel",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -326,38 +289,35 @@
                 "Now we are looking for data WHERE the TimeGenerated is newer or equal to 2 hours ago."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "where",
-            "limit",
-            "timegenerated",
-            "ago",
-            "sentinel",
-            "beginner"
+            "ago()",
+            "sentinel"
         ]
     },
     {
-        "name": "Logical where-clause with AND and OR.",
+        "name": "Logical where-clause with AND and OR and brace usage.",
         "code": [
             [
-                "SigninLogs<br>| where Identity == 'Poppy the Goldfish'",
+                "SigninLogs<br>| where (Identity == 'Poppy the Goldfish') ",
                 "Query the database where table row has value 'Poppy the Goldfish'."
             ],
             [
-                "<br>    and TimeGenerated <= ago(2d)",
+                "and (TimeGenerated <= ago(2d))",
                 "Now we're looking for the second thing basically on the same line"
             ],
             [
-                "<br>    and (AppDisplayName == 'Azure Portal'<br>    or<br>    AppDisplayName == 'Bing'<br>    )",
+                "<br>    and (AppDisplayName == 'Azure Portal' or AppDisplayName == 'Bing')",
                 "All sides of these connected 'and' statements needs to be true to get some output. The 'or' inside the braces, one of these has to be true to send a 'true' back to the 'and', because braces have precedence over non-braced statements - they will be evaluated first."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "where",
             "and",
             "or",
-            "logical",
-            "ago",
-            "beginner",
+            "ago()",
             "sentinel"
         ]
     },
@@ -381,6 +341,7 @@
                 "Asks where any(*) column contains the value 'OS X 10' anywhere in its content."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "where",
             "hassuffix",
@@ -388,26 +349,23 @@
             "contains",
             "search",
             "has",
-            "beginner",
             "sentinel"
         ]
     },
     {
-        "name": "Where-clause with regex",
+        "name": "Where-clause with regex - Finding IPv4's",
         "code": [
             [
                 "SigninLogs<br>| where Column matches regex '^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$'",
                 "Using this syntax you can leverage the power of regex! Syntax of this query is equal to generating such a query with search instead of where. The regex used here is looking for IPv4 IPs."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "where",
             "matches",
             "regex",
-            "ip",
-            "beginner",
-            "sentinel",
-            "intermediate"
+            "sentinel"
         ]
     },
     {
@@ -418,9 +376,10 @@
                 "The count keyword works by counting all of the rows in the current table/input and outputs a number."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "count",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -443,10 +402,11 @@
                 "Here you choose the column or columns you need to count by. This means that whenever data from this table is equal to one or more, the number will match the number. If you insert multiple columns, all of the values from each columns represent a whole unique 'state', and the state needs to be equal to another to make the counter increment."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "summarize",
-            "count() by",
-            "beginner"
+            "count()",
+            "sentinel"
         ]
     },
     {
@@ -457,10 +417,10 @@
                 "By including the 'myNewColumnName =' the result from the count() function will be added to a column you decide the name of."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "summarize",
-            "count()",
-            "beginner"
+            "count()"
         ]
     },
     {
@@ -483,10 +443,10 @@
                 "This is the column that will determine the outcome. Everything is calculated by this column."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "avg()",
             "count()",
-            "beginner",
             "summarize"
         ]
     },
@@ -506,23 +466,23 @@
                 "The bin function takes two parameters, the input timestamp (in this case, bin also works with other numerical values and not just time) and what value to use as a grouping size. Here, everything within 1 day is grouped together."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "bin()",
-            "summarize",
-            "beginner"
+            "summarize"
         ]
     },
     {
-        "name": "Extend",
+        "name": "Add columns - extend",
         "code": [
             [
                 "Table<br>| extend calculatedWin = Income * 10.2",
                 "Creates a new column based on a value from the current database and multiplies it with 10.2."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "extend",
-            "beginner"
+            "extend"
         ]
     },
     {
@@ -533,10 +493,10 @@
                 "strcat() makes you able to concatenate strings together, fusing them into a sentence."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "strcat()",
-            "extend",
-            "beginner"
+            "extend"
         ]
     },
     {
@@ -555,9 +515,9 @@
                 "Columns that are chosen to be piped further into the query. Notice the coding style here, which is very helpful when you need to remove an element. It makes it more clean to remove the comma at the same line."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "project",
-            "beginner"
+            "project"
         ]
     },
     {
@@ -569,12 +529,12 @@
             ],
             [
                 "| project myCalc = Column1 * 2",
-                "Calculates whatever value is in Columns1 with 2 and stores it in column named 'myCalc'"
+                "Calculates whatever value is in Columns1 with 2 and stores it in column named 'myCalc'."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "project",
-            "beginner"
+            "project"
         ]
     },
     {
@@ -593,9 +553,9 @@
                 "These two columns will not show up in the output now."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "project-away",
-            "beginner"
+            "project-away"
         ]
     },
     {
@@ -610,10 +570,9 @@
                 "Changing the name of Column1 to 'uniqueName'."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "project-rename",
-            "column",
-            "beginner"
+            "project-rename"
         ]
     },
     {
@@ -621,7 +580,7 @@
         "code": [
             [
                 "Table<br>",
-                ""
+                "Fetch the data."
             ],
             [
                 "| distinct ",
@@ -629,12 +588,12 @@
             ],
             [
                 "Column1, Column2",
-                "Now, every output row does not contain any duplicates"
+                "Now, every output row does not contain any duplicates."
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "distinct",
-            "beginner"
+            "distinct"
         ]
     },
     {
@@ -642,16 +601,17 @@
         "code": [
             [
                 "Table<br>",
-                ""
+                "Fetch the data."
             ],
             [
                 "| top 10 by Column1 asc",
                 "Sorts the Column1 ascending and outputs only the 10 from the top. Descending is achieved by 'desc'"
             ]
         ],
+        "author": "bittib010",
         "category": [
             "top",
-            "beginner"
+            "asc"
         ]
     },
     {
@@ -678,11 +638,11 @@
                 "Now we're mixing the sorting order up. For every duplicate values of the previous colun (ResultType), ResultDescription will be sorted ascending. You may mix this up as you want by adding 'asc' or 'desc' after your columns listing."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "sort by",
-            "scalar",
             "order by",
-            "beginner"
+            "sentinel"
         ]
     },
     {
@@ -709,12 +669,12 @@
                 "This is the string we are searching through with 'extract', it's the third parameter to the scalar function. Now, since this field in the Sentinel database is not a string, we need to convert it to a string using tostring() and putting the column inside the brackets."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "extract()",
             "project",
             "regex",
-            "tostring()",
-            "intermediate"
+            "tostring()"
         ]
     },
     {
@@ -779,29 +739,27 @@
             "extend",
             "project-away",
             "strcat()",
-            "with",
-            "intermediate"
+            "with"
         ],
         "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 (1) - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Onboarding. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency1/'>Full writeup</a>",
         "code": [
             [
                 "Onboarding<br>| summarize sum(Score)",
-                "Basic and simple query to sum up all numeric values."
+                "Basic and simple query to sum up all numeric values in the Score column."
             ]
         ],
         "category": [
             "kustodetectiveagency2022",
-            "beginner",
             "summarize",
             "sum()"
         ],
         "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2022 (2) - Rookie - The rarest book is missing. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency2/'>Full writeup</a>",
+        "name": "Kusto Detective Agency 2022 - Rookie - The rarest book is missing. <a target='_blank' href='https://blog.amestofortytwo.com/kusto-detective-agency2/'>Full writeup</a>",
         "code": [
             [
                 "Shelves<br>",
@@ -820,21 +778,20 @@
                 "Projecting these through the pipe to reduce amount of data and make it more accurate towards what we're aiming for."
             ],
             [
-                "summarize bookWeight = sum(weight_gram), claimedWeight = min(total_weight) by shelf<br>",
+                "| summarize bookWeight = sum(weight_gram), claimedWeight = min(total_weight) by shelf<br>",
                 "We now know what weight every book weighs and we know the total weight, here we do calculations by each shelf and sums up the weight_gram (the weight of each book) of the shelf. claimed_weight is self-explanatory knowing that there are some values that are slightly off, what makes the accuracy of the weight different."
             ],
             [
-                "extend difference = (claimedWeight - bookWeight)<br>",
+                "| extend difference = (claimedWeight - bookWeight)<br>",
                 "Working further on the previous calculations we now expect to see some output. Most of the books create differences due to the inaccuracy of the measurement, but if a whole book is missing the value will stand out."
             ],
             [
-                "order by difference desc",
+                "| order by difference desc",
                 "Ordering the output descending makes the largest number arise to the top - and thats out goal!"
             ]
         ],
         "category": [
             "kustodetectiveagency2022",
-            "rookie",
             "mv-expand",
             "typeof()",
             "sum()",
@@ -842,7 +799,7 @@
             "summarize",
             "extend",
             "order by",
-            "advanced"
+            "lookup"
         ],
         "author": "bittib010"
     },
@@ -887,7 +844,16 @@
             ]
         ],
         "category": [
-            "kustodetectiveagency2022"
+            "kustodetectiveagency2022",
+            "project",
+            "extend",
+            "hint.materialized",
+            "where",
+            "summarize",
+            "order by",
+            "summarize",
+            "count()",
+            "bin()"
         ],
         "author": "bittib010"
     },
@@ -931,12 +897,17 @@
                 "And now we're reducing the data to match our previous findings and we can see three cars that has stopped on the same avenue and street! Those are the robbers!"
             ]
         ],
+        "author": "bittib010",
         "category": [
-            "arg_max",
-            "arg_min",
+            "arg_max()",
+            "arg_min()",
             "kustodetectiveagency2022",
             "let",
-            "make_list"
+            "make_list()",
+            "where",
+            "between()",
+            "datetime()",
+            "summarize"
         ]
     },
     {
@@ -959,10 +930,14 @@
                 "This is rendering a scatterchart for vizualisation of data and for this task it proves to be really interesting, because it shows the exact path each driver has made before arriving at the hiding spot."
             ]
         ],
+        "author": "bittib010",
         "category": [
             "render",
             "scatterchart",
-            "summarize"
+            "summarize",
+            "make_list()",
+            "in",
+            "where"
         ]
     },
     {
@@ -1007,12 +982,15 @@
         ],
         "category": [
             "summarize",
-            "max",
-            "strcat",
+            "max()",
             "strcat()",
             "join",
             "kind",
-            "inner"
+            "inner",
+            "serialize",
+            "project",
+            "extend",
+            "next()"
         ],
         "author": "bittib010"
     },
@@ -1025,7 +1003,7 @@
             ],
             [
                 "| extend  h3Cell=geo_point_to_h3cell(longitude, latitude, 10);<br>",
-                "H3cells is a spatial grid system for geo location where the grid basically consist of hexagons. Hexagons share the same distance to all of its closest neighbours and they have the highest number of neighbours if you were to calculate only neighbours where there is an edge-share. Subdivision is also key, where squares are able to subdivide perfectly, hexagons are not. But the system Uber made, subdivide one hexagon into 7 and rotate them slightly. This way they are able to map out large areas in only a handfull of hexagons and also to make the shapes fit into most kind of lansdscape shapes. parameters are longitude, latitude and cellsize (10 aprox 66m)."
+                "H3cells is a spatial grid system for geo location where the grids basically consist of hexagons. Hexagons share the same distance to all of its closest neighbours and they have the highest number of neighbours if you were to calculate only neighbours where there is an edge-share. Subdivision is also key, where squares are able to subdivide perfectly, hexagons are not. But the system Uber made, subdivide one hexagon into 7 and rotate them slightly. This way they are able to map out large areas in only a handfull of hexagons and also to make the shapes fit into most kind of lansdscape shapes. parameters are longitude, latitude and cellsize (10 aprox 66m)."
             ],
             [
                 "let cells = h3Tree| where spc_common has_any ('Schubert', 'Turkish', 'American')<br>",
@@ -1057,23 +1035,29 @@
             ],
             [
                 "| summarize arg_min(tree_dbh, *)<br>",
-                ""
+                "Let's find the tree with smallest diameter."
             ],
             [
                 "| project latitude, longitude<br>",
-                ""
+                "We only want lat and long to find out where we want to go."
             ]
         ],
         "category": [
             "h3Cell",
-            "evaluate pivot()",
+            "evaluate",
+            "pivot()",
             "geo_point_to_h3cell()",
             "project",
             "summarize",
             "where",
             "join",
             "inner",
-            "advanced"
+            "arg_min()",
+            "kind",
+            "inner",
+            "where",
+            "and",
+            "has_any"
         ],
         "author": "bittib010"
     },
@@ -1082,87 +1066,51 @@
         "code": [
             [
                 "let logs = ChatLogs<br>",
-                ""
+                "Let's start by making a variable."
             ],
             [
                 "| extend user = tostring(split(Message, \"'\")[1]), target = tostring(split(Message, \"'\")[3])<br>",
-                ""
+                "By taking a look at the data we have available it's pretty evident that each value has been split up in such a way that we can divide the data and extend it into its own column. Let's split the data on every '. This makes it into a list and then we can use the wanted index is using square brackets. Usernames are at position 1 and target is at position 3 after it has been split on each '."
             ],
             [
                 "| extend activity = extract(@\"(joined|left|user|channel|logged in|logged out)\", 1, Message);<br>",
-                ""
+                "This line contains regex. extract() uses regex to retrieve matching input to give output from. Here we are looking for line that contains any of the words, and they are separated by a line, a pipe which means 'or'. joined or left or user or..."
             ],
             [
                 "let joiners = logs<br>",
-                ""
+                "Let's make our first assumption. Based on the data we have been delivered we have people joining, leaving, logging in/out etc. What this tells me is that the gang-members might have a policy on how long they are allowed to stay online, or that they need to log in and out each time, join/leave… Therefore, we need to make a list of joins."
             ],
             [
                 "| where activity == \"joined\"<br>",
-                ""
+                "Looking for activity is 'joined'."
             ],
             [
                 "| summarize ts = dcount(tostring(user)) by bin(Timestamp, 1m), target<br>",
-                ""
+                "We know that we are looking for a gang existing of 4 members, therefore we have to count distinct joiners on a short timegap (bin) based on target."
             ],
             [
                 "| where ts == 4<br>",
-                ""
+                "The gang has 4 members."
             ],
             [
                 "| distinct target<br>",
-                ""
+                "We don't want duplicates."
             ],
             [
                 "| summarize make_list(target);<br>",
-                ""
+                "Let's make targets into a list."
             ],
             [
-                "let crimChannel = logs<br>",
-                ""
+                "let crimChannel = logs<br>| summarize c = dcount(user) by target<br>| where c == 4 and target in (joiners)<br>| summarize make_list(target);<br>",
+                "Here we are counting distinct users by target, filtering out channels with only 4 members and where they are part of the list in joiners, before making it into a list."
             ],
             [
-                "| summarize c = dcount(user) by target<br>",
-                ""
+                "let crimUsers = logs<br>| where target in (crimChannel)<br>| distinct user<br>| summarize make_list(user);<br>",
+                "Here we are using the output of the previous to find the users who belongs to a channel. These users are currently the most suspected persons we know of, but we need to confirm our belief."
             ],
             [
-                "| where c == 4 and target in (joiners)<br>",
-                ""
-            ],
-            [
-                "| summarize make_list(target);<br>",
-                ""
-            ],
-            [
-                "let crimUsers = logs<br>",
-                ""
-            ],
-            [
-                "| where target in (crimChannel)<br>",
-                ""
-            ],
-            [
-                "| distinct user<br>",
-                ""
-            ],
-            [
-                "| summarize make_list(user);<br>",
-                ""
-            ],
-            [
-                "logs<br>",
-                ""
-            ],
-            [
-                "| where activity == \"logged in\" and user in (crimUsers)<br>",
-                ""
-            ],
-            [
-                "| distinct target<br>",
-                ""
-            ],
-            [
-                "| project strcat(\"https://sneakinto.z13.web.core.windows.net/\", target)",
-                ""
+                "logs<br>| where activity == \"logged in\" and user in (crimUsers)<br>| distinct target<br>| project strcat(\"https://sneakinto.z13.web.core.windows.net/\", target)",
+                "At last we will look at all the data where our suspected users have logged into."
             ]
         ],
         "category": [
@@ -1180,7 +1128,7 @@
             "extract()",
             "tostring()",
             "split()",
-            "advanced"
+            "where"
         ],
         "author": "bittib010"
     },
@@ -1189,12 +1137,12 @@
         "code": [
             [
                 "MyTable | where Field1 == 'value1'",
-                "Filter records from MyTable where Field1 is equal to 'value1'"
+                "Filter records from MyTable where Field1 is equal to 'value1'. 'filter' is the same as 'where' in KQL."
             ]
         ],
         "category": [
             "where",
-            "beginner"
+            "filter"
         ],
         "author": "remiks"
     },
@@ -1208,7 +1156,7 @@
         ],
         "category": [
             "summarize",
-            "beginner"
+            "count()"
         ],
         "author": "remiks"
     },
@@ -1223,7 +1171,7 @@
         "category": [
             "join",
             "inner",
-            "beginner"
+            "kind"
         ],
         "author": "remiks"
     },
@@ -1236,8 +1184,7 @@
             ]
         ],
         "category": [
-            "project",
-            "beginner"
+            "project"
         ],
         "author": "remiks"
     },
@@ -1282,12 +1229,14 @@
             ]
         ],
         "category": [
-            "advanced",
             "sentinel",
             "union",
-            "regex"
+            "regex",
+            "matches",
+            "or",
+            "where"
         ],
-        "author": "https://github.com/"
+        "author": "bittib010"
     },
     {
         "name": "Kusto Detective Agency 2023 - Onboarding - Method 1",
@@ -1412,9 +1361,11 @@
         ],
         "category": [
             "sum()",
-            "extent",
+            "extend",
             "lookup",
-            "summarize"
+            "summarize",
+            "max()",
+            "bin()"
         ],
         "author": "bittib010"
     },
@@ -1448,9 +1399,10 @@
         ],
         "category": [
             "sum()",
-            "extent",
+            "extend",
             "lookup",
-            "summarize"
+            "summarize",
+            "distinct"
         ],
         "author": "bittib010"
     },
@@ -1474,12 +1426,19 @@
             "sum()",
             "extent",
             "lookup",
-            "summarize"
+            "summarize",
+            "anomalycolumns",
+            "render",
+            "timechart",
+            "with",
+            "max()",
+            "min()",
+            "bin()"
         ],
         "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration 2",
+        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration 1",
         "code": [
             [
                 "Consumption<br>",
@@ -1503,89 +1462,458 @@
             "where",
             "count_",
             "summarize",
-            "bin()"
+            "bin()",
+            "count()"
         ],
         "author": "bittib010"
     },
     {
-        "name": "Kusto Detective Agency 2023 - Case 1 - To bill or not to bill? - Data pattern exploration 2",
+        "name": "Kusto Detective Agency 2023 - Case 2 - Catch the Phishermen",
         "code": [
             [
-                "let called = PhoneCalls<br>",
-                ""
+                "let called = PhoneCalls<br>| where EventType == 'Connect'<br>| project Connect_Time = Timestamp, CallConnectionId;<br>",
+                "For this challenge we have to make some kind of assumption. My assumption came to me after sifting through the data looking for patterns. I could not find any. And it led me to think into what we are looking at and what is the crime being committed. Let's assume that the phishermen had among the longest lasting calls. Let's start by creating a variable that stores both when every call started and the related CallConnectionId."
             ],
             [
-                "| where EventType == 'Connect'<br>",
-                ""
-            ],
-            [
-                "| project Connect_Time = Timestamp, CallConnectionId;<br>",
-                ""
-            ],
-            [
-                "let disc = PhoneCalls<br>",
-                ""
-            ],
-            [
-                "| where EventType == 'Disconnect'<br>",
-                ""
-            ],
-            [
-                "| project Disconnect_Time = Timestamp, CallConnectionId;<br>",
-                ""
+                "let disc = PhoneCalls<br>| where EventType == 'Disconnect'<br>| project Disconnect_Time = Timestamp, CallConnectionId;<br>",
+                "Now, let's do the same for disconnected calls based on CallConnectionId."
             ],
             [
                 "let duration = called<br>",
-                ""
-            ],
-            [
                 "| join disc on CallConnectionId<br>",
-                ""
+                "We now have to combine these two variables to calculate the duration of each call. We are joining on CallConnectionId as these are unique to each call made."
             ],
             [
                 "| extend call_duration = datetime_diff('second',Disconnect_Time, Connect_Time);<br>",
-                ""
+                "Adding a column for our calculation using datetime_diff. And we want to return the resulting difference or duration in seconds."
             ],
             [
-                "PhoneCalls<br>",
-                ""
-            ],
-            [
-                "| join duration on CallConnectionId<br>",
-                ""
+                "PhoneCalls<br>| join duration on CallConnectionId<br>",
+                "Putting things together."
             ],
             [
                 "| extend propjson = parse_json(Properties)<br>",
+                "As this is a json format we need to parse it as such. This is mostly a habit for me, sometimes you dont have to and can get the items you want directly, but sometimes you have to explicitly tell KQL that this should be treated as JSON. "
+            ],
+            [
+                "| extend Origin = propjson.Origin, Destination=propjson.Destination, visibility = propjson.IsHidden, DisconnectedBy = propjson.Disconnectedby<br>",
+                "Now we would like to get into the different values to consider going forward. It seems like a smart move to hide your tracks by calling with hidden visibility. Also, another assumption i made was that the phishers must have made their target upset which could be indicated by looking deeper into the DisconnectedBy value. There are lots of ways to go from here, and I'm sure there are many ways that would lead to the same answer, but i decided to investigate if I could reveal them based on call duration."
+            ],
+            [
+                "| project Origin, call_duration, Connect_Time<br>| summarize nums_of_calls = count() by , tostring(Origin)<br>| where Origin != \"\"<br>| order by nums_of_calls desc",
+                "And indeed I could. Hidden between the meaning of life, the universe, and everything is your answer. This way of solving it would probably be more difficult if this was naturally created numbers and not fictional. Or perhaps the phishers played a prerecorded audio that lasted this long for each phonecall."
+            ]
+        ],
+        "category": [
+            "kustodetectiveagency2023",
+            "adx",
+            "let",
+            "where",
+            "project",
+            "extend",
+            "order by",
+            "summarize",
+            "count()",
+            "dot notation",
+            "parse_json()",
+            "datetime_diff()",
+            "join"
+        ],
+        "author": "bittib010"
+    },
+    {
+        "name": "Kusto Detective Agency 2023 - Case 3 - Return Stolen Cars",
+        "code": [
+            [
+                "CarsTraffic<br>",
+                "Fetching the table..."
+            ],
+            [
+                "| where VIN in (StolenCars)<br>",
+                "Let's focus on the known stolen cars."
+            ],
+            [
+                "| where VIN in (StolenCars)<br>",
+                "Let's make the assumption that the cars were stolen, license plate was changed, and the car changed to did not move. With this line of KQL we are minimizing the data to only look for the stolen cars. 20 listed in the StolenCars set we were provided. This indicates there might be more."
+            ],
+            [
+                "// Assuming the last location of vehicles stolen is the last location they were sighted (arg_max)<br>| summarize arg_max(Timestamp, Ave, Street) by VIN<br>",
+                "Next up we are looking at where they stayed the last time they were observed. We do so with the arg_max function that. We want to retrive the last time of each unique combination for whatever columns we provide next. We will be looking at Ave and Street. And we are summarizing that on VIN. Remember this from last years KDA?"
+            ],
+            [
+                "| join CarsTraffic on Ave, Street<br>",
+                "After minimizing data, we will now maximize it based on our result. We now know where every stolen car were last seen. It also seems that we can draw a conclusion on knowing that they were stolen from pretty much the same areas. 2 different areas are repeating themselves. Now, we are joining that finding back on the full dataset to see all the cars that have been on these locations."
+            ],
+            [
+                "// Where they are not the same - in other words, changed license plates<br>| where VIN != VIN1<br>",
+                "... and we know that they changed the license, so we can easily remove those entries where the VINs are equal to each others."
+            ],
+            [
+                "| where Timestamp1 between (Timestamp .. 2m)<br>",
+                "Lets also assume that they did things pretty quick. One of the hints mentions a few minutes. And remember that the column names you don't set a different name for will be iterated like here. Now we are looking at Timestamp1 (the last table join) to be happening between when the car got parked and 2 minutes ahead. That's quick huh? Actually for the solution it works all the way up till 9 minutes for the top most result."
+            ],
+            [
+                "| project VIN1<br>",
+                "We only need the cars from now on. To reiterate, we are now with a set of cars that has the relation to the stolen cars in that they left the parking lot within 2 minutes of the stolen cars parking."
+            ],
+            [
+                "| join CarsTraffic on $left.VIN1 == $right.VIN<br>",
+                "Doing a join to focus only on those cars of interest."
+            ],
+            [
+                "| summarize arg_max(Timestamp, Ave, Street) by VIN<br>",
+                "Now we want to see where those cars were last spotted. Same technique as previous and last years KDA."
+            ],
+            [
+                "| summarize count() by Ave, Street<br>// Remove locations where cars were stolen from<br>| where Ave != 223 and Street != 86 and Ave != 122 and Street != 251<br>",
+                "Let's count them up and remove the location of where they were stolen from."
+            ],
+            [
+                "| join (CarsTraffic<br>    | summarize arg_max(Timestamp, Ave, Street) by VIN<br>) on Ave, Street<br>",
+                "Next up we want to highlight all the cars' last location and join that on our current set of interesting location."
+            ],
+            [
+                "| summarize count() by Ave, Street",
+                "Let's count it up and your answer is the one with most counts. top 1 also reveals that. You can also count how many cars were stolen based on the finding: <pre> CarsTraffic <br>| summarize arg_max(Timestamp, Ave, Street) by VIN <br>| where Ave == 156 and Street == 81 <br>| count</pre> "
+            ]
+        ],
+        "category": [
+            "kustodetectiveagency2023",
+            "adx",
+            "summarize",
+            "count()",
+            "arg_max()",
+            "project",
+            "where",
+            "join",
+            "in"
+        ],
+        "author": "bittib010"
+    },
+    {
+        "name": "Uncovering anomalies in time-series data - Changes over time <a href=\"https://www.opsman.co.za/uncovering-anomalies-in-time-series-data-with-kusto-query-language-kql/\"> Original Post</a>",
+        "code": [
+            [
+                "let window = 7d;<br>",
+                "Setting a loockback window as a variable is always a good start to make it easier to change and spot where to do the change."
+            ],
+            [
+                "Perf<br>",
+                "Fetching the table..."
+            ],
+            [
+                "| where ObjectName == \"Processor\" and CounterName == \"% Processor Time\"<br>",
                 ""
             ],
             [
-                "| extend Origin = propjson.Origin, Destination=propjson.Destination, visibility = propjson.<br>",
+                "| where TimeGenerated > ago(window)<br>",
                 ""
             ],
             [
-                "IsHidden, DisconnectedBy = propjson.Disconnectedby<br>",
+                "| summarize avg(CounterValue) by Computer, TimeGenerated = startofday(TimeGenerated)<br>",
                 ""
             ],
             [
-                "| project Origin, call_duration, Connect_Time<br>",
+                "| join (<br>",
                 ""
             ],
             [
-                "| summarize test = count() by call_duration, tostring(Origin)<br>"
-                ,""
-            ],
-            [
-                "| where Origin != ''<br>",
+                "Perf<br>",
                 ""
             ],
             [
-                "| order by call_duration asc<br>",
+                "| where ObjectName == \"Processor\" and CounterName == \"% Processor Time\"<br>",
+                ""
+            ],
+            [
+                "| where TimeGenerated > ago(window)<br>",
+                ""
+            ],
+            [
+                "| summarize arg_min(TimeGenerated, CounterValue) by Computer, TimeGenerated = startofday(TimeGenerated)<br>",
+                ""
+            ],
+            [
+                "| where TimeGenerated < TimeGenerated<br>",
+                ""
+            ],
+            [
+                "| project Computer, TimeGenerated, CounterValue<br>",
+                ""
+            ],
+            [
+                ") on Computer, TimeGenerated<br>",
+                ""
+            ],
+            [
+                "| extend diff = avg_CounterValue - CounterValue<br>",
+                ""
+            ],
+            [
+                "| where abs(diff) > 10<br>",
                 ""
             ]
         ],
         "category": [
             ""
         ],
+        "author": ""
+    },
+    {
+        "name": "Map UPN to UDN via watchlist",
+        "code": [
+            [
+                "let vips = _GetWatchlist('VIPs') // VIPS consists of UPNs",
+                "Lets create a variable that holds all the watchlist data..."
+            ],
+            [
+                "| summarize make_list(Description);",
+                "... and then reduce it to only the Description column - which is the column for the data we want: user@domain.com."
+            ],
+            [
+                "let mapped_vips = SigninLogs // Map UPNs to UserDisplayName<br>| where UserPrincipalName in (vips)<br>",
+                "Next up we want to fetch all the UserPrincipalName's that also exists inside the watchlist variable we created."
+            ],
+            [
+                "| distinct UserDisplayName",
+                "To avoid duplicates, we will be using distinct. Probably not necessary in many cases - consider this optional."
+            ],
+            [
+                "| summarize UDN = make_list(UserDisplayName);",
+                "Summarize to create a list is pretty handy, but also not necessary, depending on your end goal this might be handy or hard to read."
+            ]
+        ],
+        "category": [
+            "sentinel",
+            "_GetWatchlist()",
+            "let",
+            "summarize",
+            "make_list()",
+            "distinct"
+        ],
         "author": "bittib010"
+    },
+    {
+        "name": "union with kind=inner",
+        "code": [
+            [
+                "SigninLogs<br>",
+                "Fetch the data..."
+            ],
+            [
+                "| union kind=inner AADNonInteractiveUserSignInLogs<br>",
+                "According to MS docs: \"inner causes the result to have the subset of columns that are common to all of the input tables.\" By doing any filtering on the first table before this will not work on the joined table, if you want to filter out both, you need to union them first. union default to outer, therefore inner has to be explicitly set. Also note that a lot of cells will have the value of 'none', MS states that \"Cells that aren't defined by an input row are set to null.\""
+            ],
+            [
+                "| where UserPrincipalName contains \"John\"",
+                "Start filtering to find all you need in both tables. Keep in mind that columns from the right (second) table that do not exist in the left table (first) will not show."
+            ]
+        ],
+        "author": "BenAarvik",
+        "category": [
+            "union",
+            "with",
+            "kind",
+            "inner",
+            "where",
+            "contains"
+        ]
+    },
+    {
+        "name": "Permutation - combine a day range with all table-names from a given time period.",
+        "code": [
+            [
+                "let days = ",
+                "Defining a new variable 'days'"
+            ],
+            [
+                "range day_range ",
+                "Creating a range named 'day_range'"
+            ],
+            [
+                "from ago(7d) ",
+                "Starting the range from 7 days ago"
+            ],
+            [
+                "to now() ",
+                "Ending the range at the current time"
+            ],
+            [
+                "step 1d<br>",
+                "Setting the interval of the range to 1 day"
+            ],
+            [
+                "| summarize make_list(day_range);<br>",
+                "Aggregate the range of dates into a list"
+            ],
+            [
+                "search *",
+                "Search all data"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "where TimeGenerated >= ago(50d)",
+                "Filtering for data generated within the last 50 days"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "distinct $table",
+                "Get a distinct list of table names from the search results"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "extend p = toscalar(days)",
+                "Extend the result set with a new column 'p', using the 'test' variable values"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "mv-expand p",
+                "Create new rows for each value in the 'p' column"
+            ]
+        ],
+        "author": "bittib010",
+        "category": [
+            "summarize",
+            "mv-expand",
+            "extend",
+            "toscalar()",
+            "where",
+            "search",
+            "step",
+            "to now",
+            "let",
+            "range"
+        ]
+    },
+    {
+        "name": "Count continuous data entry days in each table",
+        "code": [
+            [
+                "let days= range day_range from ago(14d) to now() step 1d<br>",
+                "Defining a variable 'days' as a date range from 14 days ago to now, stepping in 1-day increments"
+            ],
+            [
+                "| summarize make_list(day_range);<br>",
+                "Aggregate the range of dates into a list"
+            ],
+            [
+                "let all_data = search *<br>",
+                "Defining a variable 'all_data' as a search of all data"
+            ],
+            [
+                "| where TimeGenerated >= ago(31d)<br>",
+                "Filtering for data generated within the last 31 days"
+            ],
+            [
+                "| summarize entries_this_day = count() by bin(TimeGenerated, 1d), $table<br>",
+                "Aggregating data to get a count of entries by day and table"
+            ],
+            [
+                "| extend format_datetime(TimeGenerated, 'yyyy-MM-dd');<br>",
+                "Formatting the 'TimeGenerated' field to 'yyyy-MM-dd'"
+            ],
+            [
+                "search *",
+                "Searching all data"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "where TimeGenerated >= ago(50d)",
+                "Filtering for data generated within the last 50 days"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "distinct $table",
+                "Get a distinct list of table names from the search results"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "extend generic_day_range = toscalar(days)",
+                "Extend the result set with a new column 'generic_day_range', using the 'days' variable values"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "mv-expand generic_day_range",
+                "Create new rows for each value in the 'generic_day_range' column"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "extend format_datetime(todatetime(generic_day_range), 'yyyy-MM-dd')",
+                "Convert 'generic_day_range' to datetime and format it to 'yyyy-MM-dd'"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "lookup all_data on $table, $left.generic_day_range == $right.TimeGenerated",
+                "Join the result set with 'all_data' based on table name and date"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "order by $table, generic_day_range asc",
+                "Order the result set by table name and 'generic_day_range' in ascending order"
+            ],
+            [
+                "<br>| ",
+                "pipe current data selection further into the next part of the query"
+            ],
+            [
+                "extend days_in_row_per_table = row_number(1, (not(entries_this_day == '') or prev($table) != $table))",
+                "Add a new column 'days_in_row_per_table' that counts the rows for each table"
+            ]
+        ],
+        "author": "bittib010",
+        "category": [
+            "let",
+            "range",
+            "summarize",
+            "make_list()",
+            "search",
+            "where",
+            "ago()",
+            "bin()",
+            "extend",
+            "format_datetime()",
+            "distinct",
+            "toscalar()",
+            "mv-expand",
+            "lookup",
+            "order by",
+            "row_number()",
+            "prev()",
+            "not()",
+            "sentinel"
+        ]
     }
 ]
