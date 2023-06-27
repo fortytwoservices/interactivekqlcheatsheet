@@ -1,6 +1,6 @@
 // These two lines prohibits the popup to show onload. Not sure why they want to...
 test = document.getElementById('popup');
-test.style.display='none';
+test.style.display = 'none';
 
 
 // Render search results and build table
@@ -101,43 +101,64 @@ function renderJSON(json) {
         container.appendChild(details);
     }
 
-// Handle search input and category select changes
-function searchHandler() {
-    let searchTerm = searchInput.value.toLowerCase();
-    let selectedCategory = categorySelect.value;
-    let details = document.querySelectorAll(".queryDetails");
-    details.forEach(detail => {
-        if ((detail.dataset.search.includes(searchTerm) || searchTerm === "") &&
-            (selectedCategory === "All categories" || detail.dataset.category.includes(selectedCategory))) {
-            detail.style.display = "block";
-        } else {
-            detail.style.display = "none";
-        }
-    });
+    // Handle search input and category select changes
+    function searchHandler() {
+        let searchTerm = searchInput.value.toLowerCase();
+        let selectedCategory = categorySelect.value;
+        let details = document.querySelectorAll(".queryDetails");
+        details.forEach(detail => {
+            if ((detail.dataset.search.includes(searchTerm) || searchTerm === "") &&
+                (selectedCategory === "All categories" || detail.dataset.category.includes(selectedCategory))) {
+                detail.style.display = "block";
+            } else {
+                detail.style.display = "none";
+            }
+        });
     }
-    
+
     return container;
 }
 
 
+// Sorting function
+function sortJSONByName(jsonData) {
+    jsonData.sort(function (a, b) {
+        var nameA = a.name.toLowerCase();
+        var nameB = b.name.toLowerCase();
+
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+
+        return 0;
+    });
+
+    return jsonData;
+}
+
 // Async function to fetch JSON data from newQueries.json file
 async function getJSONData() {
     try {
-      const response = await fetch('queries.json'); 
-      const data = await response.json();
-      return data;
+        const response = await fetch('queries.json');
+        const data = await response.json();
+        const sortedData = sortJSONByName(data);  // Sorting the fetched data
+        return sortedData;
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  }
-  
-  // Call the getJSONData function to fetch and load the JSON data to the search container
-  getJSONData().then((data) => {
+}
+
+// Call the getJSONData function to fetch, sort, and load the JSON data to the search container
+getJSONData().then((data) => {
     document.getElementById("searchContainer").appendChild(renderJSON(data));
-  });  
+});
+
 
 // Function to get the selected text from the input field
-function get_selected(){
+function get_selected() {
     const textarea = document.getElementById("input-field");
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
@@ -149,10 +170,10 @@ function get_selected(){
 var json_gen = [
     {
         "name": "",
-        "code": 
-        [
-            ["", ""]
-        ],
+        "code":
+            [
+                ["", ""]
+            ],
         "category": "",
         "author": ""
     }
@@ -166,42 +187,42 @@ function print_generated_json() {
     // Get selected text and replace newlines with <br> tags
     var selected = get_selected();
     selected = selected.replace(/\n/g, "<br>");
-  
+
     // Get name and popup input values from form
     var name = document.getElementById("query_name").value;
     var author = document.getElementById("query_author").value;
     var popup_input = prompt('Write description of selected text/element.');
-  
+
     // If this is the first generated code block, update existing array values
     if (gen_cnt == 0) {
-      json_gen[0].code[gen_cnt][0] = selected;
-      json_gen[0].code[gen_cnt][1] = popup_input;
-    } 
+        json_gen[0].code[gen_cnt][0] = selected;
+        json_gen[0].code[gen_cnt][1] = popup_input;
+    }
     // Otherwise, add a new array to the code property
     else {
-      json_gen[0].code.push([selected, popup_input]);
+        json_gen[0].code.push([selected, popup_input]);
     }
-  
+
     // Get selected categories
     var selectedCategories = [];
     var categorySelect = document.getElementById("category-select");
     for (var i = 0; i < categorySelect.options.length; i++) {
-      if (categorySelect.options[i].selected) {
-        selectedCategories.push(categorySelect.options[i].value);
-      }
+        if (categorySelect.options[i].selected) {
+            selectedCategories.push(categorySelect.options[i].value);
+        }
     }
-  
+
     // Update name, category, and author properties with form values
     json_gen[0].name = name;
     json_gen[0].category = selectedCategories;
     json_gen[0].author = "https://github.com/" + author;
-  
+
     // Update the output text with the generated JSON string
     document.getElementById("outputGenerated").textContent = JSON.stringify(json_gen, null, "\t");
-  
+
     // Increment the code block counter
     gen_cnt++;
-  }
+}
 
 
 // Load categories from newQueries.json and add them as options to the dropdown
@@ -229,25 +250,25 @@ function selectCategories() {
 
 
 // Function to display the popup window
-function open_generator(){
-    document.getElementById('overlay').style.display="block";
-    document.getElementById('popup').style.display='block';
+function open_generator() {
+    document.getElementById('overlay').style.display = "block";
+    document.getElementById('popup').style.display = 'block';
 }
 
 // Function to close the popup window
-function close_generator(){
-    document.getElementById('popup').style.display='none';
-    document.getElementById('overlay').style.display='none';                    
+function close_generator() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
 }
 
 // Copy json to clipboard when button is clicked.
 function copyOutputGenerated() {
     const outputGenerated = document.getElementById("outputGenerated").innerText;
-    navigator.clipboard.writeText(outputGenerated).then(function() {});
+    navigator.clipboard.writeText(outputGenerated).then(function () { });
 }
 
 document.getElementById("copyButton").addEventListener("click", copyOutputGenerated);
-    
+
 function clearInputs(className) {
     const inputs = document.getElementsByClassName(className);
     for (let i = 0; i < inputs.length; i++) {
