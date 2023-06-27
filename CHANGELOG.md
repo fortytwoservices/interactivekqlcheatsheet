@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.2.0...v1.3.0) (2023-06-27)
+
+
+### Features
+
+* sorting alphabetically all queries ([73be112](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/73be1121ed2e24f5be303881c276ca2bae7b652d))
+
+
+### Bug Fixes
+
+* ascending sort on connectors, tables and cols ([abae133](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/abae133f0247334849c13fddac685c58a7bbc5a7))
+
 ## [1.2.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.1.1...v1.2.0) (2023-06-25)
 
 
