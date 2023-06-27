@@ -1,6 +1,6 @@
 body {
     background-color: rgb(33, 37, 41);
-    
+
 }
 
 .top-bar {
@@ -8,13 +8,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .logo img {
+}
+
+.logo img {
     height: 90px;
     width: auto;
-  }
-  
+}
+
 
 details {
     border-radius: 10px 10px;
@@ -34,10 +34,11 @@ summary {
     background-color: rgba(38, 66, 73, 0.5);
     margin: 2px;
     color: #CCCCCC;
+    background: linear-gradient(to right, rgba(38, 66, 73, 0.5) 50%, rgba(29, 59, 80, 0.7) 53%);
 
 }
 
-.content{
+.content {
     margin-left: 10px;
     border: #ccc solid 1px;
     border-radius: 6px;
@@ -52,7 +53,7 @@ summary:hover {
     background-color: rgba(54, 38, 44, 0.9);
 }
 
-input{
+input {
     background-color: rgba(38, 66, 73, 0.5);
 }
 
@@ -69,8 +70,6 @@ button {
     margin-left: 10px;
 
 }
-
-
 
 #search-button:hover {
     background: linear-gradient(to bottom, rgb(125, 194, 255), rgb(167, 194, 240));
@@ -97,7 +96,13 @@ button {
 
 }
 
-.detail-icon{
+.detail-icon {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+}
+
+summary a {
+    display: inline-block;
+    position: absolute;
+    right: 2rem;
 }

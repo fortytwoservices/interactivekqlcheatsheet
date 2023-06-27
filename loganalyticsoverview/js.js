@@ -1,9 +1,9 @@
 const data = {
     "Microsoft": {
-        "Automated Logic WebCTRL (ID: AutomatedLogicWebCTRL)": {
+        "Automated Logic WebCTRL <a>AutomatedLogicWebCTRL</a>": {
             "Queries": { "All data:": "Event\n| where Source == \"ALCWebCTRL\"" }
         },
-        "Azure Active Directory (ID: AzureActiveDirectory)": {
+        "Azure Active Directory <a>AzureActiveDirectory</a>": {
             "SigninLogs": {
                 "TenantId": "",
                 "SourceSystem": "",
@@ -440,7 +440,7 @@ const data = {
                 "Type": ""
             }
         },
-        "Azure Active Directory Identity Protection (ID: AzureActiveDirectoryIdentityProtection)": {
+        "Azure Active Directory Identity Protection <a>AzureActiveDirectoryIdentityProtection</a>": {
             "SecurityAlert": {
                 "TenantId": "string",
                 "TimeGenerated": "datetime",
@@ -479,7 +479,7 @@ const data = {
 
             }
         },
-        "Azure Activity (ID: AzureActivity)": {
+        "Azure Activity <a>AzureActivity</a>": {
             "AzureActivity": {
                 "TenantId": "string",
                 "SourceSystem": "string",
@@ -517,35 +517,35 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Azure Batch Account (ID: AzureBatchAccount_CCP)": {
+        "Azure Batch Account <a>AzureBatchAccount_CCP)</a>": {
             "Queries": {
                 // https://github.com/Azure/Azure-Sentinel/blob/81cc5c26df0cf317b876d11fb2ea74c4f24a7ba5/Solutions/Azure%20Batch%20Account/Data%20Connectors/AzureBatchAccount_CCP.JSON
                 "All logs": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.BATCH\""
             }
         },
-        "Azure Cognitive Search (ID: AzureCognitiveSearch_CCP": {
+        "Azure Cognitive Search <a>AzureCognitiveSearch_CCP</a>": {
             //"https://github.com/Azure/Azure-Sentinel/blob/81cc5c26df0cf317b876d11fb2ea74c4f24a7ba5/Solutions/Azure%20Cognitive%20Search/Data%20Connectors/AzureCognitiveSearch_CCP.JSON": ""
             "Queries": {
                 "All logs": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.SEARCH\""
             }
         },
-        "Azure Data Lake Storage Gen1 (ID: AzureDataLakeStorageGen1_CCP)": {
+        "Azure Data Lake Storage Gen1 <a>AzureDataLakeStorageGen1_CCP</a>": {
             "Queries": {
                 "All logs": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.DATALAKESTORE\""
             }
         },
-        "Azure DDoS Protection (ID: DDOS)": {
+        "Azure DDoS Protection <a>DDOS</a>": {
             //"https://github.com/Azure/Azure-Sentinel/blob/81cc5c26df0cf317b876d11fb2ea74c4f24a7ba5/Solutions/Azure%20DDoS%20Protection/Data%20Connectors/DDOS.JSON",
             "Queries": {
                 "All logs": "AzureDiagnostics | where ResourceType == \"PUBLICIPADDRESSES\"\n"
             }
         },
-        "Azure Event Hub (ID: AzureEventHub_CCP)": {
+        "Azure Event Hub <a>AzureEventHub_CCP</a>": {
             "Queries": {
                 "All logs": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.EVENTHUB\" "
             }
         },
-        "Azure Key Vault (ID: AzureKeyVault)": {
+        "Azure Key Vault <a>AzureKeyVault</a>": {
             "Queries": {
                 "All logs": "AzureDiagnostics | where ResourceProvider == \"MICROSOFT.KEYVAULT\""
             },
@@ -666,7 +666,7 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Azure Kubernetes Service (AKS) (ID: AzureKubernetes)": {
+        "Azure Kubernetes Service (AKS) <a>AzureKubernetes</a>": {
             "ContainerInventory": {
                 "TenantId": "string",
                 "SourceSystem": "string",
@@ -713,7 +713,7 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Azure Logic Apps (ID: AzureLogicApps_CCP)": {
+        "Azure Logic Apps <a>AzureLogicApps_CCP</a>": {
             "Queries": {
                 "All logs": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.LOGIC\""
             },
@@ -834,8 +834,8 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Azure Service Bus (ID: AzureServiceBus_CCP)": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.SERVICEBUS\" ",
-        "Azure Storage Account (ID: AzureStorageAccount)": {
+        "Azure Service Bus <a>AzureServiceBus_CCP</a>": "AzureDiagnostics \n| where ResourceProvider == \"MICROSOFT.SERVICEBUS\" ",
+        "Azure Storage Account <a>AzureStorageAccount</a>": {
             "Query:": "AzureMetrics| where ResourceProvider == \"MICROSOFT.STORAGE\"",
             "StorageBlobLogs": {
                 "TenantId": "string",
@@ -1049,13 +1049,13 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Azure Stream Analytics (ID: AzureStreamAnalytics_CCP)": {
+        "Azure Stream Analytics <a>AzureStreamAnalytics_CCP</a>": {
             "Query: ": "AzureDiagnostics| where ResourceProvider == \"MICROSOFT.STREAMANALYTICS\""
         },
-        "Azure Firewall (ID: AzureFirewall)": {
+        "Azure Firewall <a>AzureFirewall</a>": {
             "Query: ": "AzureDiagnostics | where ResourceType == \"AZUREFIREWALLS\""
         },
-        "Azure SQL Databases (ID: AzureSql)": {
+        "Azure SQL Databases <a>AzureSql</a>": {
             // https://github.com/Azure/Azure-Sentinel/blob/dd17a03e4ef7072627454bdb7034a5e4f4b3ebd0/Solutions/Azure%20SQL%20Database%20solution%20for%20sentinel/Data%20Connectors/template_AzureSql.JSON#L2
             "Queries": {
                 "logs": ["AzureDiagnostics | where ResourceType == \"SERVERS/DATABASES\" | where ResourceProvider == \"MICROSOFT.SQL\" | where Category == \"SQLSecurityAuditEvents\"",
@@ -1191,10 +1191,10 @@ const data = {
 
 
         },
-        "Azure Web Application Firewall (ID: WAF)": {
+        "Azure Web Application Firewall <a>WAF</a>": {
             "Query: ": "AzureDiagnostics | where ResourceType == \"APPLICATIONGATEWAYS\""
         },
-        "Common Event Format (CEF) via AMA (Preview) or via Legacy Agent (ID: CommonSecurityLog)": {
+        "Common Event Format (CEF) via AMA (Preview) or via Legacy Agent <a>CommonSecurityLog</a>": {
             "Activity": "Type: string. <br>A string that represents a human-readable and understandable description of the event.",
             "AdditionalExtensions": "Type: string. <br>A placeholder for additional fields. Fields are logged as key-value pairs.",
             "ApplicationProtocol": "Type: string. <br>The protocol used in the application, such as HTTP, HTTPS, SSHv2, Telnet, POP, IMPA, IMAPS, and so on.",
@@ -1360,7 +1360,7 @@ const data = {
             "DnsEvents": "",
             "DnsInventory": ""
         },
-        "Dynamics365 (ID: Dynamics365)": {
+        "Dynamics365 <a>Dynamics365</a>": {
             "Dynamics365Activity": {
                 "SourceRecordId": "string",
                 "UserAgent": "string",
@@ -1396,7 +1396,7 @@ const data = {
                 "_ResourceId": "string"
             }
         },
-        "Microsoft 365 Defender (ID: MicrosoftThreatProtection)": {
+        "Microsoft 365 Defender <a>MicrosoftThreatProtection</a>": {
             "SecurityIncident": {
                 "TenantId": "string",
                 "TimeGenerated": "datetime",
@@ -2231,7 +2231,7 @@ const data = {
                 "Type": "string"
             }
         },
-        "Microsoft 365 Insider Risk Management (Preview) (ID: OfficeIRM)": {
+        "Microsoft 365 Insider Risk Management (Preview) <a>OfficeIRM</a>": {
             "Query: ": "SecurityAlert\n    | where ProductName == \"Microsoft 365 Insider Risk Management\""
         },
         "Microsoft Defender for Cloud": {
@@ -2305,7 +2305,7 @@ const data = {
                 "Type": "string"
             }
         },
-        "Microsoft Defender for Endpoint (ID: MicrosoftDefenderAdvancedThreatProtection)": {
+        "Microsoft Defender for Endpoint <a>MicrosoftDefenderAdvancedThreatProtection</a>": {
             "DeviceInfo": {
                 "TenantId": "string",
                 "AdditionalFields": "dynamic",
@@ -2795,7 +2795,7 @@ const data = {
         "Office 365": "",
         "Security Events via Legacy Agent": "",
         "SentinelOne (using Azure Function)": "",
-        "Syslog (ID: Syslog)": {
+        "Syslog <a>Syslog</a>": {
             "Syslog": {
                 "TenantId": "string",
                 "SourceSystem": "string",
