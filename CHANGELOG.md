@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.3.0...v1.4.0) (2023-06-28)
+
+
+### Features
+
+* added few IDs and a few tables ([7fc77bd](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/7fc77bd2d9d8552de2e6d91f1197c85603bed8d6))
+
 ## [1.3.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.2.0...v1.3.0) (2023-06-27)
 
 
