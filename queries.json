@@ -1591,6 +1591,69 @@
         "author": "bittib010"
     },
     {
+        "name": "Kusto Detective Agency 2023 - Case 4 - Triple Trouble",
+        "code": [
+            [
+                "let time_gap = 1d;<br>",
+                "Define a variable 'time_gap' set to 1 day. We are informed on the training section to use the series_decompose_anomalies() function, or at least, they hint towards this being the function to use. Based on this knowledge a solution jumps right into my thought on querying on the average amount of data. The information we have received also makes me believe that we are looking at anomalies in data, anomalies that may indeed be very different in relation to normal data flow, suggesting a probable hit with the \"top 1\" at the end of the query. NB! This query will run for 2.5 minute."],
+            [
+                "NetworkMetrics<br>",
+                "Selecting the 'NetworkMetrics' table"
+            ],
+            [
+                "| where NewConnections > 0<br>",
+                "Filtering the data where 'NewConnections' are greater than 0. Considering these are cyber attacks, looking for new connections was an easy way to reduce the amount of data to look through. I tried a few different queries beginning this quest where I never got the answer of my query. The dataset was too large for them to be run before timing out. If this ever happens to you, look for ways to reduce the amount of data."
+            ],
+            [
+                "| evaluate ipv4_lookup",
+                "This is the tabular function that is being invoked making us able to add the IP to a IP CIDR block to find it's owner. It matches a list of IPv4 addresses against a list of CIDR blocks."
+            ],
+            [
+                "(IpInfo, ClientIP, IpCidr)<br>",
+                "These are the arguments to the ipv4_lookup function. The function matches 'ClientIP' against 'IpCidr' in the 'IpInfo' table. Doing this, we are able to match an IP address to the company owner."
+            ],
+            [
+                "| make-series BytesSent=avg(BytesSent) on Timestamp step time_gap by Info<br>",
+                "Creating a time series of average 'BytesSent' on 'Timestamp' stepped by 'time_gap' (which is set to 1 day) and grouped by 'Info'. I decided on choosing average here as I initially though that would make the most sense to catch anomalies on. In hindsight on reading others' writeups, sum() can also be used."
+            ],
+            [
+                "| extend (BytesSentAnomaly, BytesSentAnomalyScore) = ",
+                "These are the new columns being added to the table. Putting them in braces makes it a list, as we only assign one variable a new value before the equal sign (=), putting them before the equal sign inside braces makes us able to assign more variables at the same time."
+            ],
+            [
+                "series_decompose_anomalies(BytesSent)<br>",
+                "This function decomposes the time series into its trend and residual components, and calculates anomaly scores. It returns a tuple that's assigned to the new columns."
+            ],
+            [
+                "| mv-expand BytesSentAnomalyScore to typeof(double)<br>",
+                "Expanding the list in 'BytesSentAnomalyScore' into multiple rows of type double"
+            ],
+            [
+                "| top 1 by BytesSentAnomalyScore <br>",
+                "Selecting the top 1 row by 'BytesSentAnomalyScore'"
+            ],
+            [
+                "| render anomalychart with(anomalycolumns=BytesSentAnomaly, BytesSentAnomalyScore)",
+                "Rendering an anomaly chart with 'BytesSentAnomaly' and 'BytesSentAnomalyScore' as anomaly columns. This visualization helps in identifying the anomalies in the data by plotting the data points (with their scores) that are considered anomalous"
+            ]
+        ],
+        "author": "bittib010",
+        "category": [
+            "let",
+            "where",
+            "evaluate",
+            "ipv4_lookup()",
+            "make-series()",
+            "extend",
+            "series_decompose_anomalies()",
+            "mv-expand",
+            "top",
+            "render",
+            "anomalychart",
+            "step"
+        ]
+    },    
+    {
         "name": "Uncovering anomalies in time-series data - Changes over time <a href=\"https://www.opsman.co.za/uncovering-anomalies-in-time-series-data-with-kusto-query-language-kql/\"> Original Post</a>",
         "code": [
             [
