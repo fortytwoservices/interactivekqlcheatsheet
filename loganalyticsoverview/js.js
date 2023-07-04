@@ -304,7 +304,7 @@ const data = {
                     "Details": "",
                     "ClientType": "",
                     "AdditionalInfo": { // Consider making this a  list instead
-                        "Successfully updated password on the device":""
+                        "Successfully updated password on the device": ""
                     },
                     "RoleDefinitionOriginId": "",
                     "User-Agent": "",
@@ -325,20 +325,20 @@ const data = {
                     },
                     "EventName": {
                         "EntryEscrowRetry": "",
-                        "EntryExportAdd":"",
-                        "EntryImportObjectNotFound":""
+                        "EntryExportAdd": "",
+                        "EntryImportObjectNotFound": ""
                     },
                     "ipaddr": {
                         "": "Might be set to null."
                     },
                     "OnPremisesAgent": {
-                        "None":""
+                        "None": ""
                     },
                     "JoiningProperty": {
                         "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx": ""
                     },
                     "oid": {
-                        "null":""
+                        "null": ""
                     },
                     "TargetAnchor": {
                         "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx": ""
@@ -357,32 +357,32 @@ const data = {
                         "AzureAd": ""
                     },
                     "Details": "Might contain lots of information. This may include: EscrowType, EntryType, EntryIdentifier, Matching value, Modification, Creation time, Count processed, Origin, Fault, Message, Web Response (schemas)...",
-                    "MethodsUsedForValidation":{
-                        "Mobile phone SMS,Mobile app notification":""
+                    "MethodsUsedForValidation": {
+                        "Mobile phone SMS,Mobile app notification": ""
                     }
 
 
                 },
                 "Id": {
-                    "AADERM_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_0123456":"",
-                    "Device Registration Service_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_0123456789":"",
-                    "Directory_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_012345678":"",
-                    "PIM_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_01234567":"",
-                    "SSPR_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_01234567":"",
-                    "Sync_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_012345678":"",
+                    "AADERM_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_0123456": "",
+                    "Device Registration Service_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_0123456789": "",
+                    "Directory_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_012345678": "",
+                    "PIM_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_01234567": "",
+                    "SSPR_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_01234567": "",
+                    "Sync_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_XXXXX_012345678": "",
                 },
                 "InitiatedBy": {
-                    "key:value":{
-                        "app":{
-                            "appid":"",
-                            "displayName":"",
-                            "servicePrincipalId":"",
-                            "servicePrincipalName":""
+                    "key:value": {
+                        "app": {
+                            "appid": "",
+                            "displayName": "",
+                            "servicePrincipalId": "",
+                            "servicePrincipalName": ""
                         },
-                        "user":{
-                            "displayName":"",
-                            "id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                            "userPrincipalName":"name@domain.xxx",
+                        "user": {
+                            "displayName": "",
+                            "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            "userPrincipalName": "name@domain.xxx",
                             "ipAddress": "IP Address"
                         }
                     }
@@ -1480,6 +1480,40 @@ const data = {
         },
         "Azure Web Application Firewall <a>WAF</a>": {
             "Query: ": "AzureDiagnostics | where ResourceType == \"APPLICATIONGATEWAYS\""
+        },
+        "UEBA <a>BehaviorAnalytics</a>": {
+            "BehaviorAnalytics": {
+                "TenantId": "string",
+                "SourceRecordId": "string",
+                "TimeGenerated": "datetime",
+                "TimeProcessed": "datetime",
+                "ActivityType": "string",
+                "ActionType": "string",
+                "UserName": "string",
+                "UserPrincipalName": "string",
+                "EventSource": "string",
+                "SourceIPAddress": "string",
+                "SourceIPLocation": "string",
+                "SourceDevice": "string",
+                "DestinationIPAddress": "string",
+                "DestinationIPLocation": "string",
+                "DestinationDevice": "string",
+                "EventVendor": "string",
+                "EventProductVersion": "string",
+                "ActorName": "string",
+                "ActorPrincipalName": "string",
+                "TargetName": "string",
+                "TargetPrincipalName": "string",
+                "Device": "string",
+                "UsersInsights": "dynamic",
+                "DevicesInsights": "dynamic",
+                "ActivityInsights": "dynamic",
+                "SourceSystem": "string",
+                "NativeTableName": "string",
+                "InvestigationPriority": "int",
+                "Type": "string",
+                "_ResourceId": "string"
+            }
         },
         "Common Event Format (CEF) via AMA (Preview) or via Legacy Agent <a>CommonSecurityLog</a>": {
             "Activity": "Type: string. <br>A string that represents a human-readable and understandable description of the event.",
