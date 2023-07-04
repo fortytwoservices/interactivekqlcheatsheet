@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.4.0...v1.5.0) (2023-07-03)
+
+
+### Features
+
+* KDA case 4 query ([48c8415](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/48c8415e541ac98d09cbdc374bb2a2b22717e783))
+* testing out depth of information. this might be tooooo much... updates will be added according to investigations and findings. ([5276b42](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/5276b42d58deb25a06b90b36a48bb40a5bed3fc0))
+
 ## [1.4.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.3.0...v1.4.0) (2023-06-28)
 
 
