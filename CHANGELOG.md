@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.5.0...v1.6.0) (2023-07-06)
+
+
+### Features
+
+* added UEBA connector and tables ([cadb18d](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/cadb18d51d1b61e10afdb29ea68bce31c3f042e1))
+
+
+### Bug Fixes
+
+* added deprecated values info in AADIP ([7bea367](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/7bea3671b1a0e4932493bb35abcddffd37390b97))
+
 ## [1.5.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.4.0...v1.5.0) (2023-07-03)
 
 
