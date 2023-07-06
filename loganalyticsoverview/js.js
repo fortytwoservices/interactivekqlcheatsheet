@@ -747,7 +747,11 @@ const data = {
                 "EndTime": "datetime",
                 "ProcessingEndTime": "datetime",
                 "RemediationSteps": "string",
-                "ExtendedProperties": "string",
+                "ExtendedProperties": {
+                    "type":"string",
+                    "ExtendedProperties[\"User Account\"]": "DEPRECATED: https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/azure-active-directory-identity-protection-user-account/ba-p/3695968?WT.mc_id=AZ-MVP-5004291",
+                    "ExtendedProperties[\"User Name\"]": "DEPRECATED: https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/azure-active-directory-identity-protection-user-account/ba-p/3695968?WT.mc_id=AZ-MVP-5004291"
+                },
                 "Entities": "string",
                 "SourceSystem": "string",
                 "WorkspaceSubscriptionId": "string",
@@ -757,7 +761,7 @@ const data = {
                 "ProductComponentName": "string",
                 "AlertLink": "string",
                 "Status": "string",
-                "CompromisedEntity": "string",
+                "CompromisedEntity": "DEPRECATED: https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/azure-active-directory-identity-protection-user-account/ba-p/3695968?WT.mc_id=AZ-MVP-5004291",
                 "Tactics": "string",
                 "Techniques": "string",
                 "Type": "string"
