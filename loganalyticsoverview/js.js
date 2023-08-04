@@ -374,10 +374,12 @@ const data = {
                 "InitiatedBy": {
                     "key:value": {
                         "app": {
-                            "appid": "",
-                            "displayName": "",
-                            "servicePrincipalId": "",
-                            "servicePrincipalName": ""
+                            "appid": "null",
+                            "displayName": {
+                                "Microsoft Substrate Management": "You can verify that this is a 1st party SP by issuing 'Get-AzureADServicePrincipal -Filter \"DisplayName eq 'Microsoft Substrate Management'\" | fl *'. Publisher name, should then be set to \"Microsoft Services\" as your verification of this belonging to actions performed by a 1st party SP. It might relate to Exchange Online during dual write operations to AAD. To better understand who initiated this, you should investigate Office 365 Unified Audit Log and set tiemframe to match your time of interest.<br>Resource: https://www.jasonfritts.me/2020/08/04/what-is-microsoft-substrate-management-and-why-is-it-creating-users-in-my-tenant/"
+                            },
+                            "servicePrincipalId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            "servicePrincipalName": "null"
                         },
                         "user": {
                             "displayName": "",
@@ -387,8 +389,12 @@ const data = {
                         }
                     }
                 },
-                "LoggedByService": "",
-                "Result": "",
+                "LoggedByService": {
+                    "Core Directory": ""
+                },
+                "Result": {
+                    "success": ""
+                },
                 "ResultReason": "",
                 "TargetResources": "",
                 "AADTenantId": "",
@@ -748,7 +754,7 @@ const data = {
                 "ProcessingEndTime": "datetime",
                 "RemediationSteps": "string",
                 "ExtendedProperties": {
-                    "type":"string",
+                    "type": "string",
                     "ExtendedProperties[\"User Account\"]": "DEPRECATED: https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/azure-active-directory-identity-protection-user-account/ba-p/3695968?WT.mc_id=AZ-MVP-5004291",
                     "ExtendedProperties[\"User Name\"]": "DEPRECATED: https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/azure-active-directory-identity-protection-user-account/ba-p/3695968?WT.mc_id=AZ-MVP-5004291"
                 },
