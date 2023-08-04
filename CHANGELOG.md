@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.6.0...v1.7.0) (2023-08-04)
+
+
+### Features
+
+* added more on InitiatedBy-app ([32f5a91](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/32f5a918793721fcc2a7c5a412113b9a2a823ba6))
+
 ## [1.6.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.5.0...v1.6.0) (2023-07-06)
 
 
