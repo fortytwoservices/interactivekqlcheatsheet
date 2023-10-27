@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Update with possibility to colorcode Key different than Value. Add square brackets at beginning if needed.-->
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Diffing Tool</title>
+    <style>
+        body {
+            background-color: rgb(33, 37, 41);
+            color: #ccc;
+
+        }
+
+        .added {
+            color: green;
+        }
+
+        .removed {
+            color: red;
+        }
+
+        .changed {
+            color: #01aafd;
+        }
+
+        .top-bar {
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 90px;
+            width: auto;
+        }
+
+        .content {
+            margin-left: 10px;
+            border: #ccc solid 1px;
+            border-radius: 6px;
+            padding: 4px;
+        }
+
+        summary:hover {
+            background-color: rgba(38, 66, 73, 0.5);
+        }
+
+        input {
+            background-color: rgba(38, 66, 73, 0.5);
+        }
+
+        input[type="text"],
+        button {
+            font-weight: bold;
+            color: #ccc;
+            background-color: rgba(38, 66, 73, 0.5);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin: 10px 0;
+            transition: box-shadow 0.3s ease;
+            margin-left: 10px;
+
+        }
+
+        /* New styles to enlarge the textarea and center titles */
+        textarea {
+            width: 100%;
+            height: 300px;
+            /* Set height to your preference */
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .tab {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .tab button {
+            background-color: #333;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            color: #ddd;
+        }
+
+        .tab button:hover {
+            background-color: #555;
+        }
+
+        .tab button.active {
+            background-color: #555;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border-top: none;
+        }
+    </style>
+</head>
+<!--TODO: add a list of different known UPNs to match it to them for automatically lookup?-->
+
+<body>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTool(event, 'JSONComparer1')" id="defaultOpen">JSON Comparer 1</button>
+        <button class="tablinks" onclick="openTool(event, 'JSONComparer2')">JSON Comparer 2</button>
+    </div>
+
+    <div id="JSONComparer1" class="tabcontent">
+
+        <div class="top-bar">
+            <div class="logo">
+                <h1>JSON investigator</h1>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Input JSON Data</h2>
+            <textarea id="jsonInput" rows="10" cols="50" placeholder='Paste your JSON data here'></textarea>
+            <br>
+            <button id="processBtn">Process</button>
+        </div>
+
+        <div class="content">
+            <h2>Diff Results</h2>
+            <ul id="resultList">
+            </ul>
+        </div>
+    </div>
+
+    <div id="JSONComparer2" class="tabcontent">
+        <h1>JSON Diffing Tool</h1>
+
+        <label for="old_value">Old Value:</label>
+        <textarea id="old_value" style="border: 1px solid #ccc; min-height: 100px;"></textarea>
+
+        <label for="new_value">New Value:</label>
+        <textarea id="new_value" style="border: 1px solid #ccc; min-height: 100px;"></textarea>
+
+        <button onclick="compareJSON()">Compare</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        // JavaScript to enable the tabs
+        function openTool(evt, toolName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(toolName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        let counter = 0;
+
+
+        function createListItem(type, displayName, oldValue, newValue) {
+            const listItem = document.createElement("li");
+            listItem.className = type;
+
+            const formatValue = (value) => {
+                if (typeof value === 'object') {
+                    return JSON.stringify(value, null, 2);
+                }
+                return value;
+            }
+
+            switch (type) {
+                case "added":
+                    listItem.innerHTML = `Added -> ${formatValue(newValue)}`;
+                    break;
+                case "removed":
+                    listItem.innerHTML = `Removed -> ${formatValue(oldValue)}`;
+                    break;
+                case "changed":
+                    listItem.innerHTML = `Changed -> ${formatValue(oldValue)} to ${formatValue(newValue)}`;
+                    break;
+                default:
+                    listItem.innerHTML = displayName;
+                    break;
+            }
+
+            return listItem;
+        }
+
+
+        function compareAndDisplayPair(oldValue, newValue, displayName, parentList) {
+            const listItem = createListItem("", displayName);
+            const sublist = document.createElement("ol");
+            let hasChanges = false;
+
+            if (Array.isArray(oldValue) && Array.isArray(newValue)) {
+                for (let i = 0; i < Math.max(oldValue.length, newValue.length); i++) {
+                    if (compareAndDisplayPair(oldValue[i], newValue[i], `${displayName}[${i}]`, sublist)) {
+                        hasChanges = true;
+                    }
+                }
+            } else if (typeof oldValue === 'object' && oldValue !== null && typeof newValue === 'object' && newValue !== null) {
+                for (const key in { ...oldValue, ...newValue }) {
+                    if (compareAndDisplayPair(oldValue[key], newValue[key], `${displayName}.${key}`, sublist)) {
+                        hasChanges = true;
+                    }
+                }
+            } else {
+                if (oldValue !== newValue) {
+                    if (oldValue == null && newValue !== null) {  // Using == to check for both null and undefined
+                        sublist.appendChild(createListItem("added", "", oldValue, newValue));
+                    } else if (oldValue !== null && newValue == null) {
+                        sublist.appendChild(createListItem("removed", "", oldValue, newValue));
+                    } else {
+                        sublist.appendChild(createListItem("changed", "", oldValue, newValue));
+                    }
+                    hasChanges = true;
+                }
+            }
+
+            if (hasChanges) {
+                listItem.appendChild(sublist);
+                parentList.appendChild(listItem);
+            }
+            return hasChanges;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Attach the processJSON function to the button click event
+            const processBtn = document.getElementById("processBtn");
+            if (processBtn) {
+                processBtn.addEventListener("click", processJSON);
+            }
+        });
+
+        function processJSON() {
+            const jsonText = document.getElementById("jsonInput").value;  // Corrected ID here
+            let parsedJSON;
+
+            try {
+                parsedJSON = JSON.parse(jsonText);
+            } catch (e) {
+                alert("Invalid JSON format");
+                return;
+            }
+
+            if (!Array.isArray(parsedJSON)) {
+                alert("Please provide a JSON array");
+                return;
+            }
+
+
+            const resultDiv = document.getElementById("resultList");
+            resultDiv.innerHTML = "";
+
+            const mainList = document.createElement("ol");
+            resultDiv.appendChild(mainList);
+
+            for (const mainObj of parsedJSON) {
+                const modifiedProps = mainObj.modifiedProperties;
+                if (modifiedProps && Array.isArray(modifiedProps)) {
+                    for (const obj of modifiedProps) {
+                        let oldVal, newVal;
+                        try {
+                            oldVal = JSON.parse(obj.oldValue);
+                            newVal = JSON.parse(obj.newValue);
+                        } catch (e) {
+                            oldVal = obj.oldValue;
+                            newVal = obj.newValue;
+                        }
+                        compareAndDisplayPair(oldVal, newVal, obj.displayName, mainList);
+                    }
+                }
+            }
+        }
+
+        function compareJSON() {
+            const oldJSONText = document.getElementById("old_value").value.trim();
+            const newJSONText = document.getElementById("new_value").value.trim();
+
+            let oldJSON, newJSON;
+
+            try {
+                oldJSON = JSON.parse(oldJSONText);
+                newJSON = JSON.parse(newJSONText);
+            } catch (e) {
+                alert("Invalid JSON format");
+                return;
+            }
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            diffJSON(oldJSON, newJSON, resultDiv, "");
+        }
+
+
+
+        function diffJSON(oldObj, newObj, resultDiv, path) {
+            // If either oldObj or newObj is null or undefined, handle it here
+            if (oldObj == null || newObj == null) {
+                const div = document.createElement("div");
+                div.className = oldObj == null ? "removed" : "added";
+                div.innerHTML = `${div.className.charAt(0).toUpperCase() + div.className.slice(1)}: ${path} -> ${oldObj || newObj}`;
+                resultDiv.appendChild(div);
+                return;
+            }
+
+            // If either oldObj or newObj is not an object (i.e., is a primitive or array), handle it here
+            if (typeof oldObj !== "object" || typeof newObj !== "object") {
+                if (oldObj !== newObj) {
+                    const div = document.createElement("div");
+                    div.className = "changed";
+                    div.innerHTML = `Changed: ${path} -> ${oldObj} to ${newObj}`;
+                    resultDiv.appendChild(div);
+                }
+                return;
+            }
+
+            // If both oldObj and newObj are objects, proceed with the comparison
+            for (let key in oldObj) {
+                const newPath = path ? `${path}.${key}` : key;
+
+                if (newObj.hasOwnProperty(key)) {
+                    diffJSON(oldObj[key], newObj[key], resultDiv, newPath);
+                } else {
+                    const div = document.createElement("div");
+                    div.className = "removed";
+                    div.innerHTML = `Removed: ${newPath} -> ${JSON.stringify(oldObj[key])}`;
+                    resultDiv.appendChild(div);
+                }
+            }
+
+            for (let key in newObj) {
+                const newPath = path ? `${path}.${key}` : key;
+
+                if (!oldObj.hasOwnProperty(key)) {
+                    const div = document.createElement("div");
+                    div.className = "added";
+                    div.innerHTML = `Added: ${newPath} -> ${JSON.stringify(newObj[key])}`;
+                    resultDiv.appendChild(div);
+                }
+            }
+        }
+
+
+        function highlightText(path, oldText, newText) {
+            const oldDiv = document.getElementById("old_value");
+            const newDiv = document.getElementById("new_value");
+
+            oldDiv.innerHTML = oldText.replaceAll(path, `<span class='highlight'>${path}</span>`);
+            newDiv.innerHTML = newText.replaceAll(path, `<span class='highlight'>${path}</span>`);
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+
+<!--Some values in JSON have a lot of escape characters like \\\\ and more. Take these into account somehow.-->
