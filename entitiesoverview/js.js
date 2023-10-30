@@ -3,26 +3,18 @@ const data = {
         "displayNameV3": "Account",
         "identifiersV3":
         {
-            "Name": "",
-            "FullName": "",
+            "<b>Name</b>": "This is required for this entity.",
+            "<b>FullName</b>": "This is required for this entity.",
             "NTDomain": "",
             "DnsDomain": "",
             "UPNSuffix": "",
-            "Sid": "",
+            "<b>Sid</b>": "This is required for this entity.",
             "AadTenantId": "",
-            "AadUserId": "",
-            "PUID": "",
+            "<b>AadUserId</b>": "This is required for this entity.",
+            "<b>PUID</b>": "This is required for this entity.",
             "IsDomainJoined": "",
             "DisplayName": "",
-            "ObjectGuid": ""
-        },
-        "requiredFieldsV3": {
-            "FullName": "",
-            "Sid": "",
-            "Name": "",
-            "AadUserId": "",
-            "PUID": "",
-            "ObjectGuid": ""
+            "<b>ObjectGuid</b>": "This is required for this entity."
         },
         "requiredInputFieldsSetsV3": {
             "Name": "",
@@ -73,21 +65,14 @@ const data = {
         "identifiersV3": {
             "DnsDomain": "",
             "NTDomain": "",
-            "HostName": "",
-            "FullName": "",
-            "NetBiosName": "",
-            "AzureID": "",
-            "OMSAgentID": "",
+            "<b>HostName</b>": "This is required for this entity.",
+            "<b>FullName</b>": "This is required for this entity.",
+            "<b>NetBiosName</b>": "This is required for this entity.",
+            "<b>AzureID</b>": "This is required for this entity.",
+            "<b>OMSAgentID</b>": "This is required for this entity.",
             "OSFamily": "",
             "OSVersion": "",
             "IsDomainJoined": ""
-        },
-        "requiredFieldsV3": {
-            "FullName": "",
-            "HostName": "",
-            "NetBiosName": "",
-            "AzureID": "",
-            "OMSAgentID": ""
         },
         "requiredInputFieldsSetsV3": {
             "HostName": "",
@@ -116,15 +101,10 @@ const data = {
     },
     "IP": {
         "displayNameV3": "IP",
-        "identifiersV3": [
-            "Address",
-            "AddressScope"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Address"
-            ]
-        ],
+        "identifiersV3": {
+            "<b>Address</b>": "This is required for this entity.",
+            "AddressScope": ""
+        },
         "armStrongIdentifiers": [
             [
                 "address"
@@ -133,152 +113,83 @@ const data = {
     },
     "Malware": {
         "displayNameV3": "Malware",
-        "identifiersV3": [
-            "Name",
-            "Category"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Name"
-            ]
-        ]
+        "identifiersV3": {
+            "Name": "This is required for this entity.",
+            "Category": ""
+        }
     },
     "File": {
         "displayNameV3": "File",
-        "identifiersV3": [
-            "Directory",
-            "Name"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Name"
-            ]
-        ]
+        "identifiersV3": {
+            "Directory": "",
+            "Name": "This is required for this entity."
+        }
     },
     "Process": {
         "displayNameV3": "Process",
-        "identifiersV3": [
-            "ProcessId",
-            "CommandLine",
-            "ElevationToken",
-            "CreationTimeUtc"
-        ],
-        "requiredFieldsV3": [
-            [
-                "CommandLine"
-            ],
-            [
-                "ProcessId"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>ProcessId</b>": "This is required for this entity.",
+            "<b>CommandLine</b>": "This is required for this entity.",
+            "ElevationToken": "",
+            "CreationTimeUtc": ""
+        }
     },
     "CloudApplication": {
         "displayNameV3": "Cloud application",
-        "identifiersV3": [
-            "AppId",
-            "Name",
-            "InstanceName"
-        ],
-        "requiredFieldsV3": [
-            [
-                "AppId"
-            ],
-            [
-                "Name"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>AppId</b>": "This is required for this entity.",
+            "<b>Name</b>": "This is required for this entity.",
+            "InstanceName": ""
+        }
     },
     "DNS": {
         "displayNameV3": "DNS",
-        "identifiersV3": [
-            "DomainName"
-        ],
-        "requiredFieldsV3": [
-            [
-                "DomainName"
-            ]
-        ]
+        "identifiersV3": {
+            "DomainName": "This is required for this entity."
+        },
     },
     "AzureResource": {
         "displayNameV3": "Azure resource",
-        "identifiersV3": [
-            "ResourceId"
-        ],
-        "requiredFieldsV3": [
-            [
-                "ResourceId"
-            ]
-        ]
+        "identifiersV3": {
+            "ResourceId": "This is required for this entity."
+        }
     },
     "FileHash": {
         "displayNameV3": "File hash",
-        "identifiersV3": [
-            "Algorithm",
-            "Value"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Value"
-            ]
-        ]
+        "identifiersV3": {
+            "Algorithm": "",
+            "Value": "This is required for this entity."
+        }
     },
     "RegistryKey": {
         "displayNameV3": "Registry key",
-        "identifiersV3": [
-            "Hive",
-            "Key"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Hive"
-            ],
-            [
-                "Key"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>Hive</b>": "This is required for this entity.",
+            "<b>Key</b>": "This is required for this entity."
+        }
     },
     "RegistryValue": {
         "displayNameV3": "Registry value",
-        "identifiersV3": [
-            "Name",
-            "Value",
-            "ValueType"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Name"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>Name</b>": "This is required for this entity.",
+            "Value": "",
+            "ValueType": ""
+        }
     },
     "SecurityGroup": {
         "displayNameV3": "Security group",
-        "identifiersV3": [
-            "DistinguishedName",
-            "SID",
-            "ObjectGuid"
-        ],
-        "requiredFieldsV3": [
-            [
-                "DistinguishedName"
-            ],
-            [
-                "SID"
-            ],
-            [
-                "ObjectGuid"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>DistinguishedName</b>": "This is required for this entity.",
+            "<b>SID</b>": "This is required for this entity.",
+            "<b>ObjectGuid</b>": "This is required for this entity."
+        }
     },
     "URL": {
         "displayNameV3": "URL",
-        "identifiersV3": [
-            "Url"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Url"
-            ]
-        ]
+        "identifiersV3":
+        {
+            "Url": "Url is required for this as it is the only value possible for this Entity."
+        }
     },
     "IoTDevice": {
         "displayNameV3": "IoT device",
@@ -296,21 +207,20 @@ const data = {
             "IoTSecurityAgentId",
             "DeviceType"
         ],
-        "requiredFieldsV3": [
-            [
-                "DeviceId"
-            ]
-        ]
+        "requiredFieldsV3":
+        {
+            "DeviceId": "Is the only value that is required for this Entity."
+        }
     },
     "Mailbox": {
         "displayNameV3": "Mailbox",
-        "identifiersV3": [
-            "MailboxPrimaryAddress",
-            "DisplayName",
-            "Upn",
-            "ExternalDirectoryObjectId",
-            "RiskLevel"
-        ],
+        "identifiersV3": {
+            "MailboxPrimaryAddress": "This is the only value required for this Entity",
+            "DisplayName": "",
+            "Upn": " ",
+            "ExternalDirectoryObjectId": "",
+            "RiskLevel": ""
+        },
         "requiredFieldsV3": [
             [
                 "MailboxPrimaryAddress"
@@ -319,98 +229,68 @@ const data = {
     },
     "MailCluster": {
         "displayNameV3": "Mail cluster",
-        "identifiersV3": [
-            "NetworkMessageIds",
-            "CountByDeliveryStatus",
-            "CountByThreatType",
-            "CountByProtectionStatus",
-            "Threats",
-            "Query",
-            "QueryTime",
-            "MailCount",
-            "IsVolumeAnomaly",
-            "Source",
-            "ClusterSourceIdentifier",
-            "ClusterSourceType",
-            "ClusterQueryStartTime",
-            "ClusterQueryEndTime",
-            "ClusterGroup"
-        ],
-        "requiredFieldsV3": [
-            [
-                "Query"
-            ],
-            [
-                "Source"
-            ]
-        ]
+        "identifiersV3": {
+            "NetworkMessageIds": "",
+            "CountByDeliveryStatus": "",
+            "CountByThreatType": "",
+            "CountByProtectionStatus": "",
+            "Threats": "",
+            "<b>Query</b>": "This is required for this entity",
+            "QueryTime": "",
+            "MailCount": "",
+            "IsVolumeAnomaly": "",
+            "<b>Source</b>": "This is required for this entity",
+            "ClusterSourceIdentifier": "",
+            "ClusterSourceType": "",
+            "ClusterQueryStartTime": "",
+            "ClusterQueryEndTime": "",
+            "ClusterGroup": ""
+        },
     },
     "MailMessage": {
         "displayNameV3": "Mail message",
-        "identifiersV3": [
-            "Recipient",
-            "Urls",
-            "Threats",
-            "Sender",
-            "P1Sender",
-            "P1SenderDisplayName",
-            "P1SenderDomain",
-            "SenderIP",
-            "P2Sender",
-            "P2SenderDisplayName",
-            "P2SenderDomain",
-            "ReceivedDate",
-            "NetworkMessageId",
-            "InternetMessageId",
-            "Subject",
-            "BodyFingerprintBin1",
-            "BodyFingerprintBin2",
-            "BodyFingerprintBin3",
-            "BodyFingerprintBin4",
-            "BodyFingerprintBin5",
-            "AntispamDirection",
-            "DeliveryAction",
-            "DeliveryLocation",
-            "Language",
-            "ThreatDetectionMethods"
-        ],
-        "requiredFieldsV3": [
-            [
-                "NetworkMessageId"
-            ],
-            [
-                "Recipient"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>Recipient</b>": "This is required for this entity.",
+            "Urls": "",
+            "Threats": "",
+            "Sender": "",
+            "P1Sender": "",
+            "P1SenderDisplayName": "",
+            "P1SenderDomain": "",
+            "SenderIP": "",
+            "P2Sender": "",
+            "P2SenderDisplayName": "",
+            "P2SenderDomain": "",
+            "ReceivedDate": "",
+            "<b>NetworkMessageId</b>": "This is required for this entity.",
+            "InternetMessageId": "",
+            "Subject": "",
+            "BodyFingerprintBin1": "",
+            "BodyFingerprintBin2": "",
+            "BodyFingerprintBin3": "",
+            "BodyFingerprintBin4": "",
+            "BodyFingerprintBin5": "",
+            "AntispamDirection": "",
+            "DeliveryAction": "",
+            "DeliveryLocation": "",
+            "Language": "",
+            "ThreatDetectionMethods": ""
+        },
     },
     "SubmissionMail": {
         "displayNameV3": "Submission mail",
-        "identifiersV3": [
-            "NetworkMessageId",
-            "Timestamp",
-            "Recipient",
-            "Sender",
-            "SenderIp",
-            "Subject",
-            "ReportType",
-            "SubmissionId",
-            "SubmissionDate",
-            "Submitter"
-        ],
-        "requiredFieldsV3": [
-            [
-                "SubmissionId"
-            ],
-            [
-                "NetworkMessageId"
-            ],
-            [
-                "Recipient"
-            ],
-            [
-                "Submitter"
-            ]
-        ]
+        "identifiersV3": {
+            "<b>NetworkMessageId</b>": "This is required for this entity.",
+            "Timestamp": "",
+            "<b>Recipient</b>": "This is required for this entity.",
+            "Sender": "",
+            "SenderIp": "",
+            "Subject": "",
+            "ReportType": "",
+            "<b>SubmissionId</b>": "This is required for this entity.",
+            "SubmissionDate": "",
+            "<b>Submitter</b>": "This is required for this entity."
+        },
     }
 };
 
