@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.7.0...v1.8.0) (2023-10-30)
+
+
+### Features
+
+* added josn comparer and entity lookup ([982d409](https://github.com/amestofortytwo/interactivekqlcheatsheet/commit/982d4099c2e57e32952adf041c29ae7b6494a8dd))
+
 ## [1.7.0](https://github.com/amestofortytwo/interactivekqlcheatsheet/compare/v1.6.0...v1.7.0) (2023-08-04)
 
 
